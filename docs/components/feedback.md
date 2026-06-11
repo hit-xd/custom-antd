@@ -10,7 +10,7 @@ order: 50
 ## Alert 与 Modal
 
 ```tsx
-import { Alert, Button, ConfigProvider, Modal, Space } from 'wrap-antd';
+import { Alert, Button, ConfigProvider, Modal, Space } from 'pb-antd';
 import { useState } from 'react';
 
 export default () => {

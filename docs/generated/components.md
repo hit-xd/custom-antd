@@ -9,13 +9,13 @@ order: 110
 
 | 组件 | 用法 |
 | --- | --- |
-| Button | `import { Button } from 'wrap-antd'` |
-| Form | `import { Form } from 'wrap-antd'` |
-| Table | `import { Table } from 'wrap-antd'` |
-| Input | `import { Input } from 'wrap-antd'` |
-| Select | `import { Select } from 'wrap-antd'` |
-| DatePicker | `import { DatePicker } from 'wrap-antd'` |
-| Modal | `import { Modal } from 'wrap-antd'` |
-| Alert | `import { Alert } from 'wrap-antd'` |
-| Card | `import { Card } from 'wrap-antd'` |
-| Layout | `import { Layout } from 'wrap-antd'` |
+| Button | `import { Button } from 'pb-antd'` |
+| Form | `import { Form } from 'pb-antd'` |
+| Table | `import { Table } from 'pb-antd'` |
+| Input | `import { Input } from 'pb-antd'` |
+| Select | `import { Select } from 'pb-antd'` |
+| DatePicker | `import { DatePicker } from 'pb-antd'` |
+| Modal | `import { Modal } from 'pb-antd'` |
+| Alert | `import { Alert } from 'pb-antd'` |
+| Card | `import { Card } from 'pb-antd'` |
+| Layout | `import { Layout } from 'pb-antd'` |

@@ -4,8 +4,8 @@ import path from 'node:path';
 export default defineConfig({
   outputPath: 'docs-dist',
   alias: {
-    'wrap-antd': path.resolve(process.cwd(), 'src/index.ts'),
-    'wrap-antd/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
+    'pb-antd': path.resolve(process.cwd(), 'src/index.ts'),
+    'pb-antd/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
   },
   resolve: {
     atomDirs: [
@@ -20,7 +20,7 @@ export default defineConfig({
     ],
   },
   themeConfig: {
-    name: 'wrap-antd',
+    name: 'pb-antd',
     nav: [
       { title: '指南', link: '/guide' },
       { title: '主题', link: '/theme' },

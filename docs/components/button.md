@@ -5,12 +5,12 @@ order: 10
 
 # Button 按钮
 
-`wrap-antd` 透传 antd `Button` API，并通过企业主题将主按钮颜色切换为品牌金。业务代码只需要从 `wrap-antd` 导入。
+`pb-antd` 透传 antd `Button` API，并通过企业主题将主按钮颜色切换为品牌金。业务代码只需要从 `pb-antd` 导入。
 
 ## 基础用法
 
 ```tsx
-import { Button, ConfigProvider, Space } from 'wrap-antd';
+import { Button, ConfigProvider, Space } from 'pb-antd';
 
 export default () => (
   <ConfigProvider>
@@ -27,7 +27,7 @@ export default () => (
 ## 常用状态
 
 ```tsx
-import { Button, ConfigProvider, Space } from 'wrap-antd';
+import { Button, ConfigProvider, Space } from 'pb-antd';
 
 export default () => (
   <ConfigProvider>

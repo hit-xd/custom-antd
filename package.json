@@ -1,5 +1,5 @@
 {
-  "name": "wrap-antd",
+  "name": "pb-antd",
   "version": "0.1.0",
   "description": "Enterprise UI wrapper and business component library based on Ant Design v5.",
   "type": "module",

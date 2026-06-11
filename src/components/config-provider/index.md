@@ -12,7 +12,7 @@ group:
 ## 基础用法
 
 ```tsx
-import { Button, ConfigProvider } from 'wrap-antd';
+import { Button, ConfigProvider } from 'pb-antd';
 
 export default () => (
   <ConfigProvider>
@@ -24,7 +24,7 @@ export default () => (
 ## 覆盖主题
 
 ```tsx
-import { Button, ConfigProvider } from 'wrap-antd';
+import { Button, ConfigProvider } from 'pb-antd';
 
 export default () => (
   <ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>

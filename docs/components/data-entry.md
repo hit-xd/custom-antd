@@ -10,7 +10,7 @@ order: 40
 ## 常用录入控件
 
 ```tsx
-import { ConfigProvider, DatePicker, Input, InputNumber, Select, Space, Switch } from 'wrap-antd';
+import { ConfigProvider, DatePicker, Input, InputNumber, Select, Space, Switch } from 'pb-antd';
 
 export default () => (
   <ConfigProvider>

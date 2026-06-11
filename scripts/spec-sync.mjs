@@ -264,7 +264,7 @@ addFile(
 
 addFile(
   'docs/generated/components.md',
-  `---\ntitle: 自动生成组件\norder: 110\n---\n\n# 自动生成组件\n\n以下组件由 \`ui-spec/\` 的高频 antd 组件名单生成导出，API 与 antd 保持一致，并通过 \`ConfigProvider\` 接收企业主题。\n\n| 组件 | 用法 |\n| --- | --- |\n${componentNames.map((name) => `| ${name} | \`import { ${name} } from 'wrap-antd'\` |`).join('\n')}\n`,
+  `---\ntitle: 自动生成组件\norder: 110\n---\n\n# 自动生成组件\n\n以下组件由 \`ui-spec/\` 的高频 antd 组件名单生成导出，API 与 antd 保持一致，并通过 \`ConfigProvider\` 接收企业主题。\n\n| 组件 | 用法 |\n| --- | --- |\n${componentNames.map((name) => `| ${name} | \`import { ${name} } from 'pb-antd'\` |`).join('\n')}\n`,
 );
 
 addFile(

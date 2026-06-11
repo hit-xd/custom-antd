@@ -5,7 +5,7 @@ order: 2
 
 # 主题定制
 
-`wrap-antd` 通过 `enterpriseTheme` 统一维护企业 token，并在包装版 `ConfigProvider` 中默认合并。
+`pb-antd` 通过 `enterpriseTheme` 统一维护企业 token，并在包装版 `ConfigProvider` 中默认合并。
 
 当前主题已从 `ui-spec/` 提取以下设计规范：
 
@@ -21,7 +21,7 @@ order: 2
 ## 内置 token
 
 ```tsx
-import { Button, ConfigProvider, globalDesignTokens } from 'wrap-antd';
+import { Button, ConfigProvider, globalDesignTokens } from 'pb-antd';
 
 export default () => (
   <ConfigProvider>
@@ -33,7 +33,7 @@ export default () => (
 ## 覆盖主题
 
 ```tsx
-import { Button, ConfigProvider, createEnterpriseTheme } from 'wrap-antd';
+import { Button, ConfigProvider, createEnterpriseTheme } from 'pb-antd';
 
 const theme = createEnterpriseTheme({
   primaryColor: '#0052d9',
@@ -51,7 +51,7 @@ export default () => (
 
 ## CSS 变量
 
-引入 `wrap-antd/reset.css` 后可使用基础 CSS 变量：
+引入 `pb-antd/reset.css` 后可使用基础 CSS 变量：
 
 ```css
 .page {
