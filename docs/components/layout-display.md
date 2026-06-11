@@ -1,0 +1,60 @@
+---
+title: Layout 展示布局
+order: 60
+---
+
+# Layout 展示布局
+
+布局和展示类组件用于搭建企业后台页面。布局尺寸可从 `globalDesignTokens.layout` 获取，也可使用 `--wrap-layout-*` CSS 变量。
+
+## 卡片与栅格
+
+```tsx
+import { Card, Col, ConfigProvider, Row, Statistic, globalDesignTokens } from 'wrap-antd';
+
+export default () => (
+  <ConfigProvider>
+    <Row gutter={[globalDesignTokens.space.gridGutter, globalDesignTokens.space.gridGutter]}>
+      <Col span={8}>
+        <Card>
+          <Statistic title="今日访问" value={1280} />
+        </Card>
+      </Col>
+      <Col span={8}>
+        <Card>
+          <Statistic title="转化率" value={36.8} suffix="%" />
+        </Card>
+      </Col>
+      <Col span={8}>
+        <Card>
+          <Statistic title="待处理" value={18} />
+        </Card>
+      </Col>
+    </Row>
+  </ConfigProvider>
+);
+```
+
+## 图片比例
+
+```tsx
+import { Card, ConfigProvider, globalDesignTokens } from 'wrap-antd';
+
+export default () => (
+  <ConfigProvider>
+    <Card style={{ maxWidth: 420 }}>
+      <div
+        style={{
+          aspectRatio: globalDesignTokens.imageRatio.widescreen,
+          background: 'var(--wrap-color-bg-muted)',
+          borderRadius: 'var(--wrap-radius-md)',
+        }}
+      />
+    </Card>
+  </ConfigProvider>
+);
+```
+
+## 使用建议
+
+后台页面优先使用 12 栅格，列间距采用 `20px`。同一组卡片的封面比例应保持一致。

@@ -1,0 +1,80 @@
+{
+  "name": "wrap-antd",
+  "version": "0.1.0",
+  "description": "Enterprise UI wrapper and business component library based on Ant Design v5.",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./theme": {
+      "types": "./dist/theme/index.d.ts",
+      "import": "./dist/theme/index.js",
+      "require": "./dist/theme/index.cjs"
+    },
+    "./business": {
+      "types": "./dist/business/index.d.ts",
+      "import": "./dist/business/index.js",
+      "require": "./dist/business/index.cjs"
+    },
+    "./reset.css": "./src/reset.css"
+  },
+  "files": [
+    "dist",
+    "src/reset.css",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "docs:dev": "dumi dev",
+    "docs:build": "dumi build",
+    "docs:preview": "dumi preview",
+    "spec:sync": "node scripts/spec-sync.mjs",
+    "spec:check": "node scripts/spec-sync.mjs --check",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "antd",
+    "ant-design",
+    "react",
+    "enterprise-ui"
+  ],
+  "peerDependencies": {
+    "antd": "^5.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "antd": "^5.0.0",
+    "dumi": "^2.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "jsdom": "^25.0.0",
+    "prettier": "^3.0.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
