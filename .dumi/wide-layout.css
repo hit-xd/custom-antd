@@ -1,0 +1,35 @@
+@media (min-width: 1200px) {
+  .dumi-default-header-content,
+  .dumi-default-hero,
+  .dumi-default-features {
+    max-width: 1680px;
+  }
+
+  .dumi-default-doc-layout > main {
+    max-width: 1680px;
+  }
+
+  .dumi-default-doc-layout > main > article {
+    max-width: 1280px;
+  }
+
+  .dumi-default-content {
+    max-width: 1280px;
+  }
+
+  .dumi-default-content .dumi-default-previewer,
+  .dumi-default-content .dumi-default-source-code,
+  .dumi-default-content table {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dumi-default-doc-layout > main {
+    padding-inline: 48px;
+  }
+
+  .dumi-default-content .dumi-default-previewer {
+    margin-block: 28px;
+  }
+}

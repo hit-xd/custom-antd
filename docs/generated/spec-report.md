@@ -18,7 +18,10 @@ order: 120
 - 间距：7 项
 - 字体层级：9 项
 - 图片比例：5 项
-- 自动导出组件：43 个
+- 自动导出组件：42 个
+- 独立组件文档：44 个
+- CSS 覆盖：Modal、Drawer、Alert、Popconfirm、Popover、Collapse、Descriptions、Tabs、Pagination、Upload 等
+- 业务组件：ErrorBlock、Status、DetailPageHeader、ApprovalProgressSteps
 
 ## 低置信度项
 
@@ -27,4 +30,5 @@ order: 120
 ## 处理原则
 
 - 能稳定映射到 Ant Design v5 token 的规则进入 `ThemeConfig`。
-- 详细状态、图标热区、复合布局等暂不强行生成脆弱样式，保留在规范文档中供后续组件封装使用。
+- antd token 无法表达的 DOM 级细节进入生成 CSS 覆盖。
+- 非 antd 直接导出的业务规范通过业务组件承载。

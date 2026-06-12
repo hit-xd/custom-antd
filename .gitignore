@@ -33,5 +33,8 @@ Thumbs.db
 *.dylib
 *.log
 *.cache
-.dumi
+.dumi/tmp
+.dumi/tmp-production
+.dumi/tsconfig.json
+.pack-check
 *.tgz

@@ -1,0 +1,279 @@
+.pb-error-block {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+  line-height: 22px;
+  text-align: center;
+}
+
+.pb-error-block-table {
+  min-height: 160px;
+}
+
+.pb-error-block-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+  background: #f4f6f8;
+}
+
+.pb-error-block-table .pb-error-block-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.pb-error-block-business .pb-error-block-icon {
+  width: 160px;
+  height: 120px;
+}
+
+.pb-error-block-title {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.pb-error-block-description {
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.pb-error-block-action {
+  margin-top: 16px;
+}
+
+.pb-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.pb-status-success .pb-status-dot {
+  background: #00c078;
+}
+
+.pb-status-processing .pb-status-dot {
+  background: #1874ff;
+}
+
+.pb-status-warning .pb-status-dot {
+  background: #ffa000;
+}
+
+.pb-status-error .pb-status-dot {
+  background: #ff4d4f;
+}
+
+.pb-detail-page-header {
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+}
+
+.pb-detail-page-header-breadcrumb {
+  margin-bottom: 12px;
+  line-height: 22px;
+}
+
+.pb-detail-page-header-main {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.pb-detail-page-header-title-group {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pb-detail-page-header-title {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.pb-detail-page-header-subtitle {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pb-detail-page-header-actions {
+  flex: none;
+}
+
+.pb-detail-page-header-descriptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 280px);
+  row-gap: 8px;
+  margin: 16px 0 0;
+}
+
+.pb-detail-page-header-description {
+  display: flex;
+  min-width: 0;
+  height: 22px;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-detail-page-header-description dt {
+  flex: none;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 400;
+}
+
+.pb-detail-page-header-description dd {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: rgba(0, 0, 0, 0.85);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pb-approval-steps {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pb-approval-step {
+  position: relative;
+  min-height: 62px;
+  padding: 0 0 24px 24px;
+}
+
+.pb-approval-step-line {
+  position: absolute;
+  top: 14px;
+  bottom: 0;
+  left: 7px;
+  width: 2px;
+  background: #dadcde;
+}
+
+.pb-approval-step-finished .pb-approval-step-line {
+  background: #00c078;
+}
+
+.pb-approval-step-line-end {
+  position: absolute;
+  bottom: 0;
+  left: 7px;
+  width: 2px;
+  height: 100%;
+  background: #fff;
+}
+
+.pb-approval-step-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #dadcde;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.pb-approval-step-finished .pb-approval-step-node {
+  border-color: #00c078;
+  background: #00c078;
+}
+
+.pb-approval-step-processing .pb-approval-step-node {
+  border-color: #1874ff;
+  background: #1874ff;
+}
+
+.pb-approval-step-rejected .pb-approval-step-node,
+.pb-approval-step-returned .pb-approval-step-node {
+  border-color: #ff4d4f;
+  background: #ff4d4f;
+}
+
+.pb-approval-step-content {
+  min-width: 0;
+}
+
+.pb-approval-step-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 22px;
+}
+
+.pb-approval-step-title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-approval-step-description {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-approval-step-status {
+  flex: none;
+  color: #1874ff;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-approval-step-rejected .pb-approval-step-status,
+.pb-approval-step-returned .pb-approval-step-status {
+  color: #ff4d4f;
+}
+
+.pb-approval-step-card {
+  min-height: 38px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 2px;
+  background: #f4f6f8;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.pb-approval-step-reason {
+  padding: 10px 12px;
+  color: #ff4d4f;
+}
+
+.pb-approval-step-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin-top: 4px;
+  color: rgba(0, 0, 0, 0.65);
+}

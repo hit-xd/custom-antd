@@ -1,2 +1,3 @@
 @import 'antd/dist/reset.css';
 @import './theme/css-vars.generated.css';
+@import './theme/component-overrides.generated.css';

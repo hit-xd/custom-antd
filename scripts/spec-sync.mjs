@@ -1,6 +1,8 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import prettier from 'prettier';
+import { componentDocs, renderComponentDoc } from './component-docs.mjs';
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const specDir = path.join(rootDir, 'ui-spec');
@@ -46,8 +48,25 @@ const normalizeShadow = (value) => value.replace(/\s+/g, ' ').trim();
 
 const toTs = (value) => JSON.stringify(value, null, 2).replace(/"([a-zA-Z_$][\w$]*)":/g, '$1:');
 
-const addFile = (relativePath, content) => {
-  generatedFiles.set(path.join(rootDir, relativePath), content);
+const parserByExtension = {
+  '.css': 'css',
+  '.md': 'markdown',
+  '.ts': 'typescript',
+};
+
+const formatGeneratedContent = async (relativePath, content) => {
+  const parser = parserByExtension[path.extname(relativePath)];
+  if (!parser) return content;
+  const filepath = path.join(rootDir, relativePath);
+  const config = (await prettier.resolveConfig(filepath)) ?? {};
+  return prettier.format(content, { ...config, filepath, parser });
+};
+
+const addFile = async (relativePath, content) => {
+  generatedFiles.set(
+    path.join(rootDir, relativePath),
+    await formatGeneratedContent(relativePath, content),
+  );
 };
 
 const expectSpec = (label, content) => {
@@ -316,7 +335,6 @@ const componentNames = [
   'Switch',
   'Slider',
   'Upload',
-  'Modal',
   'Drawer',
   'Alert',
   'Popconfirm',
@@ -346,6 +364,65 @@ const componentNames = [
   'Tour',
 ];
 
+const componentTypeNames = [
+  'ButtonProps',
+  'FormProps',
+  'TableProps',
+  'InputProps',
+  'InputNumberProps',
+  'SelectProps',
+  'DatePickerProps',
+  'TimePickerProps',
+  'CascaderProps',
+  'TreeSelectProps',
+  'CheckboxProps',
+  'RadioProps',
+  'SwitchProps',
+  'SliderSingleProps',
+  'UploadProps',
+  'ModalProps',
+  'DrawerProps',
+  'AlertProps',
+  'PopconfirmProps',
+  'ProgressProps',
+  'ResultProps',
+  'SkeletonProps',
+  'SpinProps',
+  'CardProps',
+  'PaginationProps',
+  'TabsProps',
+  'StepsProps',
+  'BreadcrumbProps',
+  'AnchorProps',
+  'FloatButtonProps',
+  'AvatarProps',
+  'BadgeProps',
+  'CarouselProps',
+  'CollapseProps',
+  'DescriptionsProps',
+  'ImageProps',
+  'ListProps',
+  'PopoverProps',
+  'StatisticProps',
+  'TagProps',
+  'TooltipProps',
+  'TourProps',
+];
+
+const toSlug = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+
+const componentCategories = ['数据录入', '数据展示', '反馈', '导航'];
+
+const componentSidebar = componentCategories.map((category) => ({
+  title: category,
+  children: componentDocs
+    .filter((doc) => doc.category === category)
+    .map((doc) => ({
+      title: doc.title,
+      link: `/components/${toSlug(doc.name)}`,
+    })),
+}));
+
 if (brandEntries.length < 10) lowConfidence.push('Color.style.md: 品牌色少于 10 项。');
 if (dataColors.length < 10) lowConfidence.push('Color.style.md: 数据色少于 10 项。');
 if (gradientColors.length < 3) lowConfidence.push('Color.style.md: 渐变色少于 3 项。');
@@ -355,12 +432,12 @@ if (spacingValues.length < 7) lowConfidence.push('AntdSpace.md: 间距体系少�
 if (ratios.length < 5) lowConfidence.push('ImageRatio.style.md: 图片比例少于 5 项。');
 if (!typeScale.length) lowConfidence.push('Typography.style.md: 未识别字号/行高映射。');
 
-addFile(
+await addFile(
   'src/theme/tokens.generated.ts',
   `${fileHeader}export const globalDesignTokens = ${toTs(tokens)} as const;\n\nexport type GlobalDesignTokens = typeof globalDesignTokens;\n`,
 );
 
-addFile(
+await addFile(
   'src/theme/antd-theme.generated.ts',
   `${fileHeader}import type { ThemeConfig } from 'antd';\nimport type { GlobalDesignTokens } from './tokens.generated';\n\nexport const createGeneratedAntdTheme = (tokens: GlobalDesignTokens): ThemeConfig => ({\n  token: {\n    colorPrimary: tokens.color.brand[7],\n    colorPrimaryHover: tokens.color.brand[6],\n    colorPrimaryActive: tokens.color.brand[8],\n    colorInfo: tokens.color.functional.info,\n    colorLink: tokens.color.functional.info,\n    colorSuccess: tokens.color.functional.success,\n    colorWarning: tokens.color.functional.warning,\n    colorError: tokens.color.functional.error,\n    colorText: tokens.color.text.primary,\n    colorTextSecondary: tokens.color.text.secondary,\n    colorTextTertiary: tokens.color.text.tertiary,\n    colorTextQuaternary: tokens.color.text.disabled,\n    colorBorder: tokens.color.border.strong,\n    colorBorderSecondary: tokens.color.border.base,\n    colorBgContainer: tokens.color.fill.white,\n    colorBgElevated: tokens.color.fill.white,\n    colorBgLayout: tokens.color.fill.layout,\n    colorFillSecondary: tokens.color.fill.background,\n    borderRadius: tokens.radius.sm,\n    borderRadiusXS: tokens.radius.xs,\n    borderRadiusSM: tokens.radius.sm,\n    borderRadiusLG: tokens.radius.lg,\n    fontFamily: tokens.typography.fontFamily,\n    fontSize: tokens.typography.body.fontSize,\n    fontSizeSM: 12,\n    fontSizeLG: 16,\n    fontSizeXL: tokens.typography.title.fontSize,\n    lineHeight: tokens.typography.body.lineHeight,\n    lineHeightSM: 20 / 12,\n    lineHeightLG: 24 / 16,\n    controlHeight: tokens.component.input.height,\n    controlHeightSM: tokens.component.button.smallHeight,\n    controlHeightLG: tokens.component.input.largeHeight,\n    paddingXXS: tokens.space.xxs,\n    paddingXS: tokens.space.xs,\n    paddingSM: tokens.space.sm,\n    paddingMD: tokens.space.md,\n    paddingLG: tokens.space.lg,\n    paddingXL: tokens.space.xl,\n    marginXXS: tokens.space.xxs,\n    marginXS: tokens.space.xs,\n    marginSM: tokens.space.sm,\n    marginMD: tokens.space.md,\n    marginLG: tokens.space.lg,\n    marginXL: tokens.space.xl,\n    marginXXL: tokens.space.xxl,\n    boxShadow: tokens.shadow.default,\n    boxShadowSecondary: tokens.shadow.hover,\n    boxShadowTertiary: tokens.shadow.tooltip,\n  },\n  components: {\n    Button: {\n      borderRadius: tokens.component.button.borderRadius,\n      controlHeight: tokens.component.button.height,\n      controlHeightSM: tokens.component.button.smallHeight,\n      paddingInline: tokens.component.button.paddingInline,\n      paddingInlineSM: tokens.component.button.smallPaddingInline,\n      primaryShadow: 'none',\n      defaultShadow: 'none',\n      dangerShadow: 'none',\n    },\n    Input: {\n      borderRadius: tokens.component.input.borderRadius,\n      controlHeight: tokens.component.input.height,\n      controlHeightLG: tokens.component.input.largeHeight,\n      paddingInline: tokens.component.input.paddingInline,\n      hoverBorderColor: tokens.color.brand[7],\n      activeBorderColor: tokens.color.brand[7],\n      activeShadow: 'none',\n    },\n    InputNumber: {\n      borderRadius: tokens.component.input.borderRadius,\n      controlHeight: tokens.component.input.height,\n      controlHeightLG: tokens.component.input.largeHeight,\n      hoverBorderColor: tokens.color.brand[7],\n      activeBorderColor: tokens.color.brand[7],\n      activeShadow: 'none',\n    },\n    Select: {\n      borderRadius: tokens.component.input.borderRadius,\n      controlHeight: tokens.component.input.height,\n      controlHeightLG: tokens.component.input.largeHeight,\n      optionSelectedBg: tokens.color.brand[1],\n      optionSelectedColor: tokens.color.brand[7],\n    },\n    DatePicker: {\n      borderRadius: tokens.component.input.borderRadius,\n      controlHeight: tokens.component.input.height,\n      controlHeightLG: tokens.component.input.largeHeight,\n      activeBorderColor: tokens.color.brand[7],\n      activeShadow: 'none',\n    },\n    Table: {\n      headerBg: tokens.color.fill.tableHeader,\n      headerColor: tokens.color.text.primary,\n      headerSplitColor: tokens.color.border.defaultSolid,\n      borderColor: tokens.color.border.defaultSolid,\n      rowHoverBg: tokens.color.fill.tableHover,\n      cellPaddingInline: tokens.component.table.cellPaddingInline,\n      cellPaddingBlock: 6,\n      selectionColumnWidth: tokens.component.table.checkboxColumnWidth,\n    },\n    Form: {\n      itemMarginBottom: tokens.space.lg,\n      labelColor: tokens.color.text.primary,\n    },\n    Card: {\n      borderRadiusLG: tokens.radius.md,\n      boxShadow: tokens.shadow.default,\n    },\n    Modal: {\n      borderRadiusLG: tokens.radius.lg,\n      boxShadow: tokens.shadow.modal,\n    },\n    Drawer: {\n      zIndexPopup: 1000,\n    },\n    Alert: {\n      borderRadiusLG: tokens.radius.md,\n    },\n    Tooltip: {\n      colorBgSpotlight: tokens.color.fill.tooltip,\n      boxShadowSecondary: tokens.shadow.tooltip,\n    },\n    Layout: {\n      headerBg: tokens.layout.globalBarBg,\n      headerHeight: tokens.layout.headerHeight,\n      siderBg: tokens.color.fill.white,\n      triggerBg: tokens.color.fill.white,\n      triggerColor: tokens.color.text.secondary,\n    },\n    Pagination: {\n      itemActiveBg: tokens.color.fill.white,\n    },\n    Tabs: {\n      inkBarColor: tokens.layout.tabsActive,\n      itemSelectedColor: tokens.layout.tabsActive,\n      itemHoverColor: tokens.layout.tabsActive,\n      itemActiveColor: tokens.layout.tabsActive,\n    },\n    Steps: {\n      colorPrimary: tokens.color.brand[7],\n    },\n  },\n});\n`,
 );
@@ -400,19 +477,172 @@ const cssVars = [
   ['--wrap-image-ratio-ultra-wide', tokens.imageRatio.ultraWide],
 ];
 
-addFile(
+await addFile(
   'src/theme/css-vars.generated.css',
   `/* This file is generated by pnpm spec:sync. Do not edit manually. */\n:root {\n${cssVars
     .map(([name, value]) => `  ${name}: ${value};`)
     .join('\n')}\n}\n`,
 );
 
-addFile(
-  'src/components/generated/index.ts',
-  `${fileHeader}export { ${componentNames.join(', ')} } from 'antd';\nexport type { ButtonProps, FormProps, TableProps, InputProps, InputNumberProps, SelectProps, DatePickerProps, TimePickerProps, CascaderProps, TreeSelectProps, CheckboxProps, RadioProps, SwitchProps, SliderSingleProps, UploadProps, ModalProps, DrawerProps, AlertProps, ProgressProps, ResultProps, SkeletonProps, SpinProps, CardProps, PaginationProps, TabsProps, StepsProps, BreadcrumbProps, AnchorProps, AvatarProps, BadgeProps, CollapseProps, DescriptionsProps, ImageProps, ListProps, PopoverProps, StatisticProps, TagProps, TooltipProps, TourProps } from 'antd';\n`,
+await addFile(
+  'src/theme/component-overrides.generated.css',
+  `/* This file is generated by pnpm spec:sync. Do not edit manually. */
+.ant-modal-root .ant-modal {
+  top: 0;
+}
+
+.ant-modal-root .ant-modal-content {
+  overflow: hidden;
+  padding: 0;
+  border-radius: 2px;
+  box-shadow: ${tokens.shadow.modal};
+}
+
+.ant-modal-root .ant-modal-header {
+  min-height: 56px;
+  margin: 0;
+  padding: 16px 20px;
+  border-bottom: 1px solid ${tokens.color.border.subtle};
+  background: ${tokens.color.fill.white};
+}
+
+.ant-modal-root .ant-modal-title {
+  color: ${tokens.color.text.primary};
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.ant-modal-root .ant-modal-close {
+  top: 16px;
+  color: ${tokens.color.text.tertiary};
+}
+
+.ant-modal-root .ant-modal-body {
+  padding: 32px 20px;
+  color: ${tokens.color.text.secondary};
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ant-modal-root .ant-modal-footer {
+  min-height: 52px;
+  margin: 0;
+  padding: 10px 20px;
+  border-top: 1px solid ${tokens.color.border.subtle};
+}
+
+.ant-modal-root .ant-modal-footer .ant-btn + .ant-btn {
+  margin-inline-start: 12px;
+}
+
+.ant-modal-root .ant-modal-confirm .ant-modal-content {
+  border-radius: 4px;
+}
+
+.ant-modal-root .ant-modal-confirm .ant-modal-body {
+  padding: 20px;
+}
+
+.ant-drawer .ant-drawer-header {
+  min-height: 56px;
+  padding: 16px 20px;
+  border-bottom: 0;
+}
+
+.ant-drawer .ant-drawer-title {
+  color: ${tokens.color.text.primary};
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.ant-drawer .ant-drawer-close {
+  color: ${tokens.color.text.secondary};
+}
+
+.ant-drawer .ant-drawer-body {
+  padding: 20px;
+  color: ${tokens.color.text.secondary};
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.ant-drawer .ant-drawer-footer {
+  padding: 10px 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.ant-alert {
+  border-radius: 2px;
+}
+
+.ant-popover .ant-popover-inner {
+  border-radius: 4px;
+  box-shadow: ${tokens.shadow.tooltip};
+}
+
+.ant-popover .ant-popover-title {
+  border-bottom: 1px solid ${tokens.color.border.base};
+}
+
+.ant-collapse {
+  border-color: #e5e6eb;
+  border-radius: 2px;
+}
+
+.ant-collapse > .ant-collapse-item {
+  border-bottom-color: #e5e6eb;
+}
+
+.ant-descriptions .ant-descriptions-item-label {
+  color: ${tokens.color.text.secondary};
+}
+
+.ant-descriptions .ant-descriptions-item-content {
+  color: ${tokens.color.text.primary};
+}
+
+.ant-tabs .ant-tabs-nav::before {
+  border-bottom-color: ${tokens.color.border.base};
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border-color: ${tokens.color.brand[7]};
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: ${tokens.color.brand[7]};
+}
+
+.ant-time-picker-panel,
+.ant-picker-time-panel {
+  color: ${tokens.color.text.primary};
+}
+
+.ant-upload-wrapper .ant-upload-drag {
+  border-color: ${tokens.color.border.strong};
+  border-radius: 2px;
+  background: ${tokens.color.fill.white};
+}
+`,
 );
 
-addFile(
+await addFile(
+  'src/components/generated/index.ts',
+  `${fileHeader}export { ${componentNames.join(', ')} } from 'antd';\nexport type { ${componentTypeNames.join(', ')} } from 'antd';\n`,
+);
+
+await addFile(
+  'src/components/generated/sidebar.generated.ts',
+  `${fileHeader}export const generatedComponentSidebar = ${toTs(componentSidebar)};\n`,
+);
+
+for (const [index, doc] of componentDocs.entries()) {
+  await addFile(`docs/components/${toSlug(doc.name)}.md`, renderComponentDoc(doc, 100 + index));
+}
+
+await addFile(
   'docs/generated/design-tokens.md',
   `---\ntitle: 设计 Token\norder: 100\n---\n\n# 设计 Token\n\n本页由 \`pnpm spec:sync\` 根据新版 \`ui-spec/\` 自动生成。\n\n## 品牌色\n\n| Token | Value |\n| --- | --- |\n${Object.entries(
     tokens.color.brand,
@@ -433,17 +663,17 @@ addFile(
     .join('\n')}\n`,
 );
 
-addFile(
+await addFile(
   'docs/generated/components.md',
   `---\ntitle: 自动生成组件\norder: 110\n---\n\n# 自动生成组件\n\n以下组件由新版 \`ui-spec/\` 的高频 antd 组件规范生成导出清单，API 与 antd 保持一致，并通过 \`ConfigProvider\` 接收企业主题。\n\n| 组件 | 用法 |\n| --- | --- |\n${componentNames.map((name) => `| ${name} | \`import { ${name} } from 'pb-antd'\` |`).join('\n')}\n`,
 );
 
-addFile(
+await addFile(
   'docs/generated/spec-report.md',
-  `---\ntitle: 规范解析报告\norder: 120\n---\n\n# 规范解析报告\n\n本页由 \`pnpm spec:sync\` 自动生成，用于检查新版 Markdown 规范解析结果。\n\n## 已识别\n\n- 规范文件：${newSpecFiles.length} 个\n- 品牌色：${brandEntries.length} 项\n- 数据色：${dataColors.length} 项\n- 渐变色：${gradientColors.length} 项\n- 投影：${Object.keys(boxShadows).length} 项\n- 圆角：${Object.keys(radii).length} 项\n- 间距：${spacingValues.length} 项\n- 字体层级：${typeScale.length} 项\n- 图片比例：${ratios.length} 项\n- 自动导出组件：${componentNames.length} 个\n\n## 低置信度项\n\n${lowConfidence.length ? lowConfidence.map((item) => `- ${item}`).join('\n') : '- 无'}\n\n## 处理原则\n\n- 能稳定映射到 Ant Design v5 token 的规则进入 \`ThemeConfig\`。\n- 详细状态、图标热区、复合布局等暂不强行生成脆弱样式，保留在规范文档中供后续组件封装使用。\n`,
+  `---\ntitle: 规范解析报告\norder: 120\n---\n\n# 规范解析报告\n\n本页由 \`pnpm spec:sync\` 自动生成，用于检查新版 Markdown 规范解析结果。\n\n## 已识别\n\n- 规范文件：${newSpecFiles.length} 个\n- 品牌色：${brandEntries.length} 项\n- 数据色：${dataColors.length} 项\n- 渐变色：${gradientColors.length} 项\n- 投影：${Object.keys(boxShadows).length} 项\n- 圆角：${Object.keys(radii).length} 项\n- 间距：${spacingValues.length} 项\n- 字体层级：${typeScale.length} 项\n- 图片比例：${ratios.length} 项\n- 自动导出组件：${componentNames.length} 个\n- 独立组件文档：${componentDocs.length + 4} 个\n- CSS 覆盖：Modal、Drawer、Alert、Popconfirm、Popover、Collapse、Descriptions、Tabs、Pagination、Upload 等\n- 业务组件：ErrorBlock、Status、DetailPageHeader、ApprovalProgressSteps\n\n## 低置信度项\n\n${lowConfidence.length ? lowConfidence.map((item) => `- ${item}`).join('\n') : '- 无'}\n\n## 处理原则\n\n- 能稳定映射到 Ant Design v5 token 的规则进入 \`ThemeConfig\`。\n- antd token 无法表达的 DOM 级细节进入生成 CSS 覆盖。\n- 非 antd 直接导出的业务规范通过业务组件承载。\n`,
 );
 
-addFile(
+await addFile(
   'docs/theme.md',
   `---\ntitle: 主题定制\norder: 2\n---\n\n# 主题定制\n\n\`pb-antd\` 通过 \`enterpriseTheme\` 统一维护企业 token，并在包装版 \`ConfigProvider\` 中默认合并。\n\n当前主题已从新版 \`ui-spec/\` 提取以下设计规范：\n\n| 规范目录                                       | 落地方式                               |\n| ---------------------------------------------- | -------------------------------------- |\n| \`全局规范/Color.style.md\`                      | 品牌色、中性色、功能色、数据色、渐变色 |\n| \`全局规范/Container.style.md\`                  | 圆角、阴影、容器边框与背景             |\n| \`全局规范/AntdSpace.md\`                        | 4px 间距体系、12 列栅格、Space 预设    |\n| \`全局规范/Typography.style.md\`                 | 字体族、字号、行高、字重               |\n| \`全局规范/AntdLayout.md\`                       | Header、Sider、内容区、导航尺寸 token  |\n| \`全局规范/ImageRatio.style.md\`                 | 常用图片比例 token 与 CSS 变量         |\n| \`数据录入/\`、\`样式规范/\`、\`反馈/\`、\`导航组件/\` | 可稳定映射的组件级 antd 主题 token     |\n\n## 内置 token\n\n\`\`\`tsx\nimport { Button, ConfigProvider, globalDesignTokens } from 'pb-antd';\n\nexport default () => (\n  <ConfigProvider>\n    <Button type="primary">{globalDesignTokens.color.brand[7]}</Button>\n  </ConfigProvider>\n);\n\`\`\`\n\n## 覆盖主题\n\n\`\`\`tsx\nimport { Button, ConfigProvider, createEnterpriseTheme } from 'pb-antd';\n\nconst theme = createEnterpriseTheme({\n  primaryColor: '#0052d9',\n  borderRadius: 6,\n});\n\nexport default () => (\n  <ConfigProvider theme={theme}>\n    <Button type="primary">企业主按钮</Button>\n  </ConfigProvider>\n);\n\`\`\`\n\n组件级细节优先通过 antd token 落地；无法稳定映射的交互、热区和组合布局保留在规范文档中，后续通过包装组件或业务组件沉淀。\n\n## CSS 变量\n\n引入 \`pb-antd/reset.css\` 后可使用基础 CSS 变量：\n\n\`\`\`css\n.page {\n  background: var(--wrap-color-bg-page);\n  padding: var(--wrap-layout-content-padding);\n}\n\n.cover {\n  aspect-ratio: var(--wrap-image-ratio-widescreen);\n  border-radius: var(--wrap-radius-md);\n}\n\`\`\`\n`,
 );

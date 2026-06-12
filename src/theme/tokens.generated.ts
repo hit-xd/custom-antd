@@ -2,77 +2,81 @@
 export const globalDesignTokens = {
   color: {
     brand: {
-      "1": "#FFFCF0",
-      "2": "#F7F4E9",
-      "3": "#DFCFB4",
-      "4": "#DED3BA",
-      "5": "#D1BB8E",
-      "6": "#B0915C",
-      "7": "#9B7235",
-      "8": "#785A32",
-      "9": "#523A1E",
-      "10": "#2B1D10"
+      '1': '#FFFCF0',
+      '2': '#F7F4E9',
+      '3': '#DFCFB4',
+      '4': '#DED3BA',
+      '5': '#D1BB8E',
+      '6': '#B0915C',
+      '7': '#9B7235',
+      '8': '#785A32',
+      '9': '#523A1E',
+      '10': '#2B1D10',
     },
     text: {
-      primary: "rgba(0,0,0,0.85)",
-      secondary: "rgba(0,0,0,0.65)",
-      tertiary: "rgba(0,0,0,0.45)",
-      placeholder: "rgba(0,0,0,0.45)",
-      disabled: "rgba(0,0,0,0.25)",
-      inverse: "rgba(255,255,255,1)",
-      inverseSecondary: "rgba(255,255,255,0.65)"
+      primary: 'rgba(0,0,0,0.85)',
+      secondary: 'rgba(0,0,0,0.65)',
+      tertiary: 'rgba(0,0,0,0.45)',
+      placeholder: 'rgba(0,0,0,0.45)',
+      disabled: 'rgba(0,0,0,0.25)',
+      inverse: 'rgba(255,255,255,1)',
+      inverseSecondary: 'rgba(255,255,255,0.65)',
     },
     border: {
-      base: "rgba(0,0,0,0.15)",
-      strong: "rgba(0,0,0,0.25)",
-      subtle: "rgba(0,0,0,0.12)",
-      defaultSolid: "#D9D9D9"
+      base: 'rgba(0,0,0,0.15)',
+      strong: 'rgba(0,0,0,0.25)',
+      subtle: 'rgba(0,0,0,0.12)',
+      defaultSolid: '#D9D9D9',
     },
     fill: {
-      white: "#FFFFFF",
-      background: "#F4F6F8",
-      layout: "#E9EBF3",
-      tableHeader: "#F1F2F7",
-      tableHover: "#FAFAFA",
-      overlay: "rgba(0,0,0,0.30)",
-      tooltip: "rgba(0,0,0,0.75)"
+      white: '#FFFFFF',
+      background: '#F4F6F8',
+      layout: '#E9EBF3',
+      tableHeader: '#F1F2F7',
+      tableHover: '#FAFAFA',
+      overlay: 'rgba(0,0,0,0.30)',
+      tooltip: 'rgba(0,0,0,0.75)',
     },
     functional: {
-      success: "#00C078",
-      error: "#FF4D4F",
-      warning: "#FFA000",
-      info: "#1874FF"
+      success: '#00C078',
+      error: '#FF4D4F',
+      warning: '#FFA000',
+      info: '#1874FF',
     },
     data: [
-      "#5B8FF9",
-      "#61DDAA",
-      "#65789D",
-      "#F6BD16",
-      "#7262FD",
-      "#78D3F8",
-      "#9661BC",
-      "#F6903D",
-      "#008685",
-      "#F08BB4"
+      '#5B8FF9',
+      '#61DDAA',
+      '#65789D',
+      '#F6BD16',
+      '#7262FD',
+      '#78D3F8',
+      '#9661BC',
+      '#F6903D',
+      '#008685',
+      '#F08BB4',
     ],
     gradient: [
-      "linear-gradient(90deg, #E9BC89 0%, #FFCD40 100%)",
-      "linear-gradient(90deg, #3EF17D 0%, #A5FFB6 100%)",
-      "linear-gradient(90deg, #5A72E6 0%, #73AFFF 100%)"
-    ]
+      'linear-gradient(90deg, #E9BC89 0%, #FFCD40 100%)',
+      'linear-gradient(90deg, #3EF17D 0%, #A5FFB6 100%)',
+      'linear-gradient(90deg, #5A72E6 0%, #73AFFF 100%)',
+    ],
   },
   radius: {
     xs: 2,
     sm: 2,
     md: 4,
     lg: 8,
-    round: 100
+    round: 100,
   },
   shadow: {
-    hover: "0px 3px 6px 0px rgba(0,0,0,0.12), 0px 1px 2px -2px rgba(0,0,0,0.16), 0px 5px 12px 4px rgba(0,0,0,0.09)",
-    default: "0px 9px 28px 8px rgba(0,0,0,0.05), 0px 6px 16px 0px rgba(0,0,0,0.08), 0px 3px 6px -4px rgba(0,0,0,0.12)",
-    modal: "0px 12px 48px 16px rgba(0,0,0,0.03), 0px 9px 28px 0px rgba(0,0,0,0.05), 0px 6px 16px -8px rgba(0,0,0,0.08)",
-    tooltip: "0px 9px 28px 8px rgba(0,0,0,0.05), 0px 6px 16px 0px rgba(0,0,0,0.08), 0px 3px 7px -4px rgba(0,0,0,0.12)"
+    hover:
+      '0px 3px 6px 0px rgba(0,0,0,0.12), 0px 1px 2px -2px rgba(0,0,0,0.16), 0px 5px 12px 4px rgba(0,0,0,0.09)',
+    default:
+      '0px 9px 28px 8px rgba(0,0,0,0.05), 0px 6px 16px 0px rgba(0,0,0,0.08), 0px 3px 6px -4px rgba(0,0,0,0.12)',
+    modal:
+      '0px 12px 48px 16px rgba(0,0,0,0.03), 0px 9px 28px 0px rgba(0,0,0,0.05), 0px 6px 16px -8px rgba(0,0,0,0.08)',
+    tooltip:
+      '0px 9px 28px 8px rgba(0,0,0,0.05), 0px 6px 16px 0px rgba(0,0,0,0.08), 0px 3px 7px -4px rgba(0,0,0,0.12)',
   },
   space: {
     xxs: 4,
@@ -83,91 +87,92 @@ export const globalDesignTokens = {
     xl: 24,
     xxl: 32,
     gridColumns: 12,
-    gridGutter: 20
+    gridGutter: 20,
   },
   typography: {
-    fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    fontFamily:
+      '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif',
     scale: [
       {
         fontSize: 32,
         lineHeight: 1.25,
-        label: "重要数字",
-        fontWeight: 500
+        label: '重要数字',
+        fontWeight: 500,
       },
       {
         fontSize: 28,
         lineHeight: 1.2857142857142858,
-        label: "强调数字",
-        fontWeight: 500
+        label: '强调数字',
+        fontWeight: 500,
       },
       {
         fontSize: 24,
         lineHeight: 1.3333333333333333,
-        label: "核心数字",
-        fontWeight: 500
+        label: '核心数字',
+        fontWeight: 500,
       },
       {
         fontSize: 20,
         lineHeight: 1.4,
-        label: "重点文字",
-        fontWeight: 500
+        label: '重点文字',
+        fontWeight: 500,
       },
       {
         fontSize: 18,
         lineHeight: 1.4444444444444444,
-        label: "页面标题",
-        fontWeight: 500
+        label: '页面标题',
+        fontWeight: 500,
       },
       {
         fontSize: 16,
         lineHeight: 1.5,
-        label: "次级标题",
-        fontWeight: 500
+        label: '次级标题',
+        fontWeight: 500,
       },
       {
         fontSize: 15,
         lineHeight: 1.8666666666666667,
-        label: "资产配置正文",
-        fontWeight: 500
+        label: '资产配置正文',
+        fontWeight: 500,
       },
       {
         fontSize: 14,
         lineHeight: 1.5714285714285714,
-        label: "正文",
-        fontWeight: 400
+        label: '正文',
+        fontWeight: 400,
       },
       {
         fontSize: 12,
         lineHeight: 1.6666666666666667,
-        label: "辅助文字",
-        fontWeight: 400
-      }
+        label: '辅助文字',
+        fontWeight: 400,
+      },
     ],
     body: {
       fontSize: 14,
       lineHeight: 1.5714285714285714,
-      fontWeight: 400
+      fontWeight: 400,
     },
     title: {
       fontSize: 20,
       lineHeight: 1.4,
-      fontWeight: 500
-    }
+      fontWeight: 500,
+    },
   },
   layout: {
     headerHeight: 64,
     siderExpandedWidth: 208,
     siderCollapsedWidth: 48,
-    contentPadding: "20px 16px 20px 16px",
+    contentPadding: '20px 16px 20px 16px',
     pageMarginXl: 261,
     pageMarginLg: 120,
     pageMarginBase: 24,
     subNavHeight: 48,
     tertiaryNavHeight: 40,
-    globalBarBg: "#090a15",
-    sidebarSelectedBg: "#FFFCF0",
-    tabsActive: "#9B7235",
-    tabsFill: "#C5A267"
+    globalBarBg: '#090a15',
+    sidebarSelectedBg: '#FFFCF0',
+    tabsActive: '#9B7235',
+    tabsFill: '#C5A267',
   },
   component: {
     button: {
@@ -178,7 +183,7 @@ export const globalDesignTokens = {
       smallPaddingInline: 8,
       iconSize: 16,
       gap: 8,
-      groupGap: 12
+      groupGap: 12,
     },
     input: {
       height: 32,
@@ -186,22 +191,22 @@ export const globalDesignTokens = {
       paddingInline: 12,
       borderRadius: 2,
       iconSize: 16,
-      addonPaddingInline: 16
+      addonPaddingInline: 16,
     },
     table: {
       headerHeight: 34,
       rowHeight: 34,
       cellPaddingInline: 16,
-      checkboxColumnWidth: 48
-    }
+      checkboxColumnWidth: 48,
+    },
   },
   imageRatio: {
-    square: "1 / 1",
-    classic: "4 / 3",
-    golden: "3 / 2",
-    widescreen: "16 / 9",
-    ultraWide: "2 / 1"
-  }
+    square: '1 / 1',
+    classic: '4 / 3',
+    golden: '3 / 2',
+    widescreen: '16 / 9',
+    ultraWide: '2 / 1',
+  },
 } as const;
 
 export type GlobalDesignTokens = typeof globalDesignTokens;
