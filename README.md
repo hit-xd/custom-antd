@@ -84,7 +84,11 @@ const theme = createEnterpriseTheme({
 也可以从主题子入口导入：
 
 ```ts
-import { createEnterpriseTheme, enterpriseTheme, globalDesignTokens } from 'privatebank-design/theme';
+import {
+  createEnterpriseTheme,
+  enterpriseTheme,
+  globalDesignTokens,
+} from 'privatebank-design/theme';
 ```
 
 `ConfigProvider` 会默认使用 `enterpriseTheme`，并合并业务侧传入的 antd `theme`：
@@ -130,12 +134,12 @@ import { Status } from 'privatebank-design/business';
 
 ## 导出入口
 
-| 入口 | 说明 |
-| --- | --- |
-| `privatebank-design` | 主入口，透传 antd 导出，并导出企业包装组件、业务组件和主题能力。 |
-| `privatebank-design/theme` | 主题 token、主题工厂和企业主题配置。 |
-| `privatebank-design/business` | 可复用业务组件。 |
-| `privatebank-design/reset.css` | 基础 reset 样式。 |
+| 入口                           | 说明                                                             |
+| ------------------------------ | ---------------------------------------------------------------- |
+| `privatebank-design`           | 主入口，透传 antd 导出，并导出企业包装组件、业务组件和主题能力。 |
+| `privatebank-design/theme`     | 主题 token、主题工厂和企业主题配置。                             |
+| `privatebank-design/business`  | 可复用业务组件。                                                 |
+| `privatebank-design/reset.css` | 基础 reset 样式。                                                |
 
 ## 本地开发
 
