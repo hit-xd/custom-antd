@@ -5,7 +5,7 @@ order: 100
 
 # 设计 Token
 
-本页由 `pnpm spec:sync` 根据 `ui-spec/` 自动生成。
+本页由 `pnpm spec:sync` 根据新版 `ui-spec/` 自动生成。
 
 ## 品牌色
 
@@ -36,10 +36,21 @@ order: 100
 | Token | Value |
 | --- | --- |
 | xs | `2px` |
-| sm | `4px` |
-| md | `6px` |
+| sm | `2px` |
+| md | `4px` |
 | lg | `8px` |
 | round | `100px` |
+
+## 组件摘要
+
+| Component | Token | Value |
+| --- | --- | --- |
+| Button | height | `32px` |
+| Button | borderRadius | `2px` |
+| Input | height | `32px` |
+| Input | largeHeight | `40px` |
+| Table | headerHeight | `34px` |
+| Table | rowHeight | `34px` |
 
 ## 图片比例
 

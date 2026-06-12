@@ -21,5 +21,11 @@ describe('ConfigProvider', () => {
     expect(theme.token?.colorPrimary).toBe(globalDesignTokens.color.brand[7]);
     expect(theme.token?.colorLink).toBe(globalDesignTokens.color.functional.info);
     expect(theme.token?.borderRadiusLG).toBe(globalDesignTokens.radius.lg);
+    expect(theme.components?.Button?.borderRadius).toBe(
+      globalDesignTokens.component.button.borderRadius,
+    );
+    expect(theme.components?.Input?.controlHeight).toBe(globalDesignTokens.component.input.height);
+    expect(theme.components?.Table?.headerBg).toBe(globalDesignTokens.color.fill.tableHeader);
+    expect(theme.components?.Table?.rowHoverBg).toBe(globalDesignTokens.color.fill.tableHover);
   });
 });

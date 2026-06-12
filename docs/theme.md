@@ -7,16 +7,17 @@ order: 2
 
 `pb-antd` 通过 `enterpriseTheme` 统一维护企业 token，并在包装版 `ConfigProvider` 中默认合并。
 
-当前主题已从 `ui-spec/` 提取以下设计规范：
+当前主题已从新版 `ui-spec/` 提取以下设计规范：
 
-| 规范文件           | 落地方式                        |
-| ------------------ | ------------------------------- |
-| `color.md`         | 品牌金、中性色、功能色、数据色  |
-| `ContainerSpec.md` | 圆角、阴影、容器边框与背景      |
-| `Space.md`         | 4px 间距体系、20px 栅格 gutter  |
-| `Typography.md`    | 字体族、正文字号、行高、字重    |
-| `Layout.md`        | Header、Sider、内容区尺寸 token |
-| `ImageRatio.md`    | 常用图片比例 token 与 CSS 变量  |
+| 规范目录                                       | 落地方式                               |
+| ---------------------------------------------- | -------------------------------------- |
+| `全局规范/Color.style.md`                      | 品牌色、中性色、功能色、数据色、渐变色 |
+| `全局规范/Container.style.md`                  | 圆角、阴影、容器边框与背景             |
+| `全局规范/AntdSpace.md`                        | 4px 间距体系、12 列栅格、Space 预设    |
+| `全局规范/Typography.style.md`                 | 字体族、字号、行高、字重               |
+| `全局规范/AntdLayout.md`                       | Header、Sider、内容区、导航尺寸 token  |
+| `全局规范/ImageRatio.style.md`                 | 常用图片比例 token 与 CSS 变量         |
+| `数据录入/`、`样式规范/`、`反馈/`、`导航组件/` | 可稳定映射的组件级 antd 主题 token     |
 
 ## 内置 token
 
@@ -47,7 +48,7 @@ export default () => (
 );
 ```
 
-后续新增品牌色、表格密度、表单间距等规范时，优先沉淀在 `src/theme/`，避免业务项目分散覆盖。
+组件级细节优先通过 antd token 落地；无法稳定映射的交互、热区和组合布局保留在规范文档中，后续通过包装组件或业务组件沉淀。
 
 ## CSS 变量
 
