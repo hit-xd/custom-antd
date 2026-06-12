@@ -7,8 +7,8 @@ order: 110
 
 以下组件由新版 `ui-spec/` 的高频 antd 组件规范生成导出清单，API 与 antd 保持一致，并通过 `ConfigProvider` 接收企业主题。
 
-| 组件         | 用法                                     |
-| ------------ | ---------------------------------------- |
+| 组件         | 用法                                                |
+| ------------ | --------------------------------------------------- |
 | Button       | `import { Button } from 'privatebank-design'`       |
 | Form         | `import { Form } from 'privatebank-design'`         |
 | Table        | `import { Table } from 'privatebank-design'`        |
