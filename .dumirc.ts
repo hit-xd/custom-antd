@@ -5,8 +5,8 @@ import { generatedComponentSidebar } from './src/components/generated/sidebar.ge
 export default defineConfig({
   outputPath: 'docs-dist',
   alias: {
-    'pb-antd': path.resolve(process.cwd(), 'src/index.ts'),
-    'pb-antd/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
+    'privatebank-design': path.resolve(process.cwd(), 'src/index.ts'),
+    'privatebank-design/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
   },
   resolve: {
     atomDirs: [
@@ -21,7 +21,7 @@ export default defineConfig({
     ],
   },
   themeConfig: {
-    name: 'pb-antd',
+    name: 'privatebank-design',
     nav: [
       { title: '指南', link: '/guide' },
       { title: '主题', link: '/theme' },

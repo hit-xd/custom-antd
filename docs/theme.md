@@ -5,7 +5,7 @@ order: 2
 
 # 主题定制
 
-`pb-antd` 通过 `enterpriseTheme` 统一维护企业 token，并在包装版 `ConfigProvider` 中默认合并。
+`privatebank-design` 通过 `enterpriseTheme` 统一维护企业 token，并在包装版 `ConfigProvider` 中默认合并。
 
 当前主题已从新版 `ui-spec/` 提取以下设计规范：
 
@@ -22,7 +22,7 @@ order: 2
 ## 内置 token
 
 ```tsx
-import { Button, ConfigProvider, globalDesignTokens } from 'pb-antd';
+import { Button, ConfigProvider, globalDesignTokens } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -34,7 +34,7 @@ export default () => (
 ## 覆盖主题
 
 ```tsx
-import { Button, ConfigProvider, createEnterpriseTheme } from 'pb-antd';
+import { Button, ConfigProvider, createEnterpriseTheme } from 'privatebank-design';
 
 const theme = createEnterpriseTheme({
   primaryColor: '#0052d9',
@@ -52,7 +52,7 @@ export default () => (
 
 ## CSS 变量
 
-引入 `pb-antd/reset.css` 后可使用基础 CSS 变量：
+引入 `privatebank-design/reset.css` 后可使用基础 CSS 变量：
 
 ```css
 .page {

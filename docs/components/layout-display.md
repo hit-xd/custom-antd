@@ -10,7 +10,7 @@ order: 60
 ## 卡片与栅格
 
 ```tsx
-import { Card, Col, ConfigProvider, Row, Statistic, globalDesignTokens } from 'pb-antd';
+import { Card, Col, ConfigProvider, Row, Statistic, globalDesignTokens } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -38,7 +38,7 @@ export default () => (
 ## 图片比例
 
 ```tsx
-import { Card, ConfigProvider, globalDesignTokens } from 'pb-antd';
+import { Card, ConfigProvider, globalDesignTokens } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

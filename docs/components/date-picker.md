@@ -21,7 +21,7 @@ order: 103
 ## 基础用法
 
 ```tsx
-import { ConfigProvider, DatePicker, Space } from 'pb-antd';
+import { ConfigProvider, DatePicker, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -33,7 +33,7 @@ export default () => (
 ## 常用类型与状态
 
 ```tsx
-import { ConfigProvider, DatePicker, Space } from 'pb-antd';
+import { ConfigProvider, DatePicker, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -51,10 +51,10 @@ export default () => (
 
 ## API 与类型
 
-组件 Props 完全继承 antd，可直接从 `pb-antd` 导入：
+组件 Props 完全继承 antd，可直接从 `privatebank-design` 导入：
 
 ```tsx | pure
-import type { DatePickerProps } from 'pb-antd';
+import type { DatePickerProps } from 'privatebank-design';
 ```
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

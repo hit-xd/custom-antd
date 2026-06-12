@@ -9,7 +9,7 @@ title: Status 状态
 ## 基础示例
 
 ```tsx
-import { ConfigProvider, Space, Status } from 'pb-antd';
+import { ConfigProvider, Space, Status } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -27,7 +27,7 @@ export default () => (
 ## 配置示例
 
 ```tsx
-import { ConfigProvider, Status } from 'pb-antd';
+import { ConfigProvider, Status } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

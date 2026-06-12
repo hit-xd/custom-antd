@@ -5,12 +5,12 @@ order: 10
 
 # Button 按钮
 
-`pb-antd` 透传 antd `Button` API，并通过企业主题将主按钮颜色切换为品牌金。业务代码只需要从 `pb-antd` 导入。
+`privatebank-design` 透传 antd `Button` API，并通过企业主题将主按钮颜色切换为品牌金。业务代码只需要从 `privatebank-design` 导入。
 
 ## 基础用法
 
 ```tsx
-import { Button, ConfigProvider, Space } from 'pb-antd';
+import { Button, ConfigProvider, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -27,7 +27,7 @@ export default () => (
 ## 常用状态
 
 ```tsx
-import { Button, ConfigProvider, Space } from 'pb-antd';
+import { Button, ConfigProvider, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

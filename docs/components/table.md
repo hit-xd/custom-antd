@@ -10,7 +10,7 @@ order: 30
 ## 基础表格
 
 ```tsx
-import { ConfigProvider, Table, Tag } from 'pb-antd';
+import { ConfigProvider, Table, Tag } from 'privatebank-design';
 
 const columns = [
   { title: '名称', dataIndex: 'name' },

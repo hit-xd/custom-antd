@@ -1,6 +1,6 @@
-# pb-antd
+# privatebank-design
 
-`pb-antd` is an enterprise UI wrapper based on Ant Design v5. Existing consumers can replace:
+`privatebank-design` is an enterprise UI wrapper based on Ant Design v5. Existing consumers can replace:
 
 ```ts
 import * as antd from 'antd';
@@ -9,7 +9,7 @@ import * as antd from 'antd';
 with:
 
 ```ts
-import * as antd from 'pb-antd';
+import * as antd from 'privatebank-design';
 ```
 
 Most Ant Design components are re-exported unchanged. The package adds an enterprise theme extracted from `global-spec/`, a themed `ConfigProvider`, and a place to collect business components.
@@ -17,14 +17,14 @@ Most Ant Design components are re-exported unchanged. The package adds an enterp
 ## Install
 
 ```bash
-pnpm add pb-antd antd react react-dom
+pnpm add privatebank-design antd react react-dom
 ```
 
 ## Usage
 
 ```tsx
-import { Button, ConfigProvider } from 'pb-antd';
-import 'pb-antd/reset.css';
+import { Button, ConfigProvider } from 'privatebank-design';
+import 'privatebank-design/reset.css';
 
 export function App() {
   return (
@@ -60,7 +60,7 @@ This project uses dumi for an Ant Design-style documentation site.
 `globalDesignTokens` exposes the extracted color, radius, shadow, space, typography, layout, and image-ratio specs:
 
 ```ts
-import { globalDesignTokens } from 'pb-antd';
+import { globalDesignTokens } from 'privatebank-design';
 
 globalDesignTokens.color.brand[7]; // #9B7235
 ```

@@ -9,7 +9,7 @@ title: ApprovalProgressSteps 审批进度
 ## 基础示例
 
 ```tsx
-import { ApprovalProgressSteps, ConfigProvider } from 'pb-antd';
+import { ApprovalProgressSteps, ConfigProvider } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -42,7 +42,7 @@ export default () => (
 ## 状态示例
 
 ```tsx
-import { ApprovalProgressSteps, ConfigProvider } from 'pb-antd';
+import { ApprovalProgressSteps, ConfigProvider } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

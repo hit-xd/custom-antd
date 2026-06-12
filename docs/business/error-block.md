@@ -9,7 +9,7 @@ title: ErrorBlock 空状态
 ## 基础示例
 
 ```tsx
-import { ConfigProvider, ErrorBlock } from 'pb-antd';
+import { ConfigProvider, ErrorBlock } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -25,7 +25,7 @@ export default () => (
 ## 状态示例
 
 ```tsx
-import { ConfigProvider, ErrorBlock, Space } from 'pb-antd';
+import { ConfigProvider, ErrorBlock, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

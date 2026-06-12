@@ -9,7 +9,7 @@ title: DetailPageHeader 详情页头
 ## 基础示例
 
 ```tsx
-import { ConfigProvider, DetailPageHeader } from 'pb-antd';
+import { ConfigProvider, DetailPageHeader } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -29,7 +29,7 @@ export default () => (
 ## 配置示例
 
 ```tsx
-import { ConfigProvider, DetailPageHeader } from 'pb-antd';
+import { ConfigProvider, DetailPageHeader } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

@@ -10,7 +10,7 @@ order: 20
 ## 基础表单
 
 ```tsx
-import { Button, ConfigProvider, Form, Input, Select, Space } from 'pb-antd';
+import { Button, ConfigProvider, Form, Input, Select, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
