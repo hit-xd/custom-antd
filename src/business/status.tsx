@@ -3,10 +3,10 @@ import type { CSSProperties, ReactNode } from 'react';
 export type StatusType = 'success' | 'processing' | 'warning' | 'error' | 'default';
 
 export interface StatusProps {
-  type?: StatusType;
-  text?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
+  readonly type?: StatusType;
+  readonly text?: ReactNode;
+  readonly className?: string;
+  readonly style?: CSSProperties;
 }
 
 export function Status({ type = 'default', text, className, style }: StatusProps) {
