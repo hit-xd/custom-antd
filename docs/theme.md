@@ -56,12 +56,12 @@ export default () => (
 
 ```css
 .page {
-  background: var(--wrap-color-bg-page);
-  padding: var(--wrap-layout-content-padding);
+  background: var(--wplus-color-bg-page);
+  padding: var(--wplus-layout-content-padding);
 }
 
 .cover {
-  aspect-ratio: var(--wrap-image-ratio-widescreen);
-  border-radius: var(--wrap-radius-md);
+  aspect-ratio: var(--wplus-image-ratio-widescreen);
+  border-radius: var(--wplus-radius-md);
 }
 ```

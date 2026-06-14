@@ -1,7 +1,7 @@
 ---
 title: privatebank-design
 hero:
-  title: privatebank-design
+  title: privatebank
   description: 基于 Ant Design v5 的企业级 UI 二次封装与业务组件库。
   actions:
     - text: 快速开始

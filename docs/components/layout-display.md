@@ -5,7 +5,7 @@ order: 60
 
 # Layout 展示布局
 
-布局和展示类组件用于搭建企业后台页面。布局尺寸可从 `globalDesignTokens.layout` 获取，也可使用 `--wrap-layout-*` CSS 变量。
+布局和展示类组件用于搭建企业后台页面。布局尺寸可从 `globalDesignTokens.layout` 获取，也可使用 `--wplus-layout-*` CSS 变量。
 
 ## 卡片与栅格
 
@@ -46,8 +46,8 @@ export default () => (
       <div
         style={{
           aspectRatio: globalDesignTokens.imageRatio.widescreen,
-          background: 'var(--wrap-color-bg-muted)',
-          borderRadius: 'var(--wrap-radius-md)',
+          background: 'var(--wplus-color-bg-muted)',
+          borderRadius: 'var(--wplus-radius-md)',
         }}
       />
     </Card>
