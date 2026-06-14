@@ -1,6 +1,6 @@
 import { defineConfig } from 'dumi';
 import path from 'node:path';
-import { generatedComponentSidebar } from './src/components/generated/sidebar.generated';
+import { ComponentSidebar } from './dumi.sidebar';
 
 export default defineConfig({
   outputPath: 'docs-dist',
@@ -40,7 +40,7 @@ export default defineConfig({
             { title: 'Table 表格', link: '/components/table' },
           ],
         },
-        ...generatedComponentSidebar,
+        ...ComponentSidebar,
       ],
       '/business': [
         {

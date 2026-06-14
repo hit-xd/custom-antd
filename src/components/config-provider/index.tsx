@@ -1,22 +1,19 @@
 import { ConfigProvider as AntdConfigProvider, theme as antdTheme } from 'antd';
 import type { ConfigProviderProps as AntdConfigProviderProps, ThemeConfig } from 'antd';
 import type { PropsWithChildren } from 'react';
-import { enterpriseTheme } from '../../theme';
+import { wplusTheme } from '../../theme';
 
 export interface ConfigProviderProps extends AntdConfigProviderProps {
   theme?: ThemeConfig;
 }
 
 const mergeTheme = (theme?: ThemeConfig): ThemeConfig => ({
-  ...enterpriseTheme,
   ...theme,
   token: {
-    ...enterpriseTheme.token,
-    ...theme?.token,
+    ...wplusTheme.token,
   },
   components: {
-    ...enterpriseTheme.components,
-    ...theme?.components,
+    ...wplusTheme.components,
   },
 });
 

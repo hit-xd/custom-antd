@@ -43,6 +43,9 @@ export {
   Tooltip,
   Tour,
 } from 'antd';
+
+export { Modal } from './modal';
+
 export type {
   ButtonProps,
   FormProps,

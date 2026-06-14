@@ -18,5 +18,5 @@
     "declarationMap": true,
     "noEmit": true
   },
-  "include": ["src", "docs", ".dumirc.ts", "tsup.config.ts", "vitest.config.ts"]
+  "include": ["src", "docs", ".dumirc.ts", "tsup.config.ts", "vitest.config.ts", "dumi.sidebar.ts"]
 }
