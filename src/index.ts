@@ -34,5 +34,8 @@ export type { BreadcrumbProps } from './components/breadcrumb';
 export { ConfigProvider } from './components/config-provider';
 export type { ConfigProviderProps } from './components/config-provider';
 
+// 主题
+export { wplusTheme, privateBankingPrimitiveTokens, privateBankingSemanticTokens } from './theme';
+
 // 业务组件
 export * from './business';

@@ -5,7 +5,7 @@ import { ComponentSidebar } from './dumi.sidebar';
 export default defineConfig({
   outputPath: 'docs-dist',
   alias: {
-    'privatebank-design': path.resolve(process.cwd(), 'src/index.ts'),
+    'privatebank-design': path.resolve(process.cwd(), 'src'),
     'privatebank-design/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
   },
   resolve: {
