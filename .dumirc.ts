@@ -27,7 +27,7 @@ export default defineConfig({
       { title: '主题', link: '/theme' },
       { title: '基础组件', link: '/components/config-provider' },
       { title: '业务组件', link: '/business/error-block' },
-      { title: '设计规范', link: '/generated/components' },
+      { title: '设计规范', link: '/design/components' },
     ],
     sidebar: {
       '/components': [
@@ -56,13 +56,13 @@ export default defineConfig({
           ],
         },
       ],
-      '/generated': [
+      '/design': [
         {
           title: '设计规范',
           children: [
-            { title: '组件总览', link: '/generated/components' },
-            { title: '设计 Token', link: '/generated/design-tokens' },
-            { title: '解析报告', link: '/generated/spec-report' },
+            { title: '组件总览', link: '/design/components' },
+            { title: '设计 Token', link: '/design/design-tokens' },
+            { title: '解析报告', link: '/design/spec-report' },
           ],
         },
       ],
