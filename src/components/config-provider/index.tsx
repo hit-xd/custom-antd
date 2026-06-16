@@ -11,9 +11,11 @@ const mergeTheme = (theme?: ThemeConfig): ThemeConfig => ({
   ...theme,
   token: {
     ...wplusTheme.token,
+    ...theme?.token,
   },
   components: {
     ...wplusTheme.components,
+    ...theme?.components,
   },
 });
 
