@@ -27,17 +27,14 @@ export default defineConfig({
       { title: '主题', link: '/theme' },
       { title: '基础组件', link: '/components/config-provider' },
       { title: '业务组件', link: '/business/error-block' },
-      { title: '设计规范', link: '/design/components' },
+      { title: '设计规范', link: '/generated/components' },
     ],
     sidebar: {
       '/components': [
         {
-          title: '基础能力',
+          title: '全局配置',
           children: [
             { title: 'ConfigProvider', link: '/components/config-provider' },
-            { title: 'Button 按钮', link: '/components/button' },
-            { title: 'Form 表单', link: '/components/form' },
-            { title: 'Table 表格', link: '/components/table' },
           ],
         },
         ...ComponentSidebar,
@@ -56,13 +53,13 @@ export default defineConfig({
           ],
         },
       ],
-      '/design': [
+      '/generated': [
         {
           title: '设计规范',
           children: [
-            { title: '组件总览', link: '/design/components' },
-            { title: '设计 Token', link: '/design/design-tokens' },
-            { title: '解析报告', link: '/design/spec-report' },
+            { title: '组件总览', link: '/generated/components' },
+            { title: '设计 Token', link: '/generated/design-tokens' },
+            { title: '解析报告', link: '/generated/spec-report' },
           ],
         },
       ],

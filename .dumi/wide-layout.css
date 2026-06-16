@@ -2,11 +2,11 @@
   .dumi-default-header-content,
   .dumi-default-hero,
   .dumi-default-features {
-    max-width: 1680px;
+    max-width: 1820px;
   }
 
   .dumi-default-doc-layout > main {
-    max-width: 1680px;
+    max-width: 1820px;
   }
 
   .dumi-default-doc-layout > main > article {
@@ -32,4 +32,12 @@
   .dumi-default-content .dumi-default-previewer {
     margin-block: 28px;
   }
+}
+
+.dumi-default-header-left {
+  width: 240px;
+}
+
+.dumi-default-sidebar {
+  width: 240px;
 }

@@ -24,9 +24,12 @@ import { ConfigProvider, FloatButton } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <div style={{ height: 120, overflow: 'auto' }}>
-      <div style={{ height: 360 }}>滚动区域示例</div>
-      <FloatButton.BackTop />
+    <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+      <div style={{ height: 360, padding: 16 }}>滚动区域示例</div>
+      <FloatButton.BackTop
+        visibilityHeight={0}
+        style={{ position: 'absolute', right: 24, bottom: 24 }}
+      />
     </div>
   </ConfigProvider>
 );
@@ -41,7 +44,13 @@ import { ConfigProvider, FloatButton } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <FloatButton.BackTop visibilityHeight={100} />
+    <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+      <div style={{ height: 360, padding: 16 }}>向下滚动后可返回顶部</div>
+      <FloatButton.BackTop
+        visibilityHeight={0}
+        style={{ position: 'absolute', right: 24, bottom: 24 }}
+      />
+    </div>
   </ConfigProvider>
 );
 ```
@@ -51,15 +60,18 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, FloatButton, Card, Space, Typography } from 'privatebank-design';
+import { ConfigProvider, FloatButton, Card, Typography, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Card title="客户经营概览" style={{ maxWidth: 520 }}>
       <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <div style={{ height: 120, overflow: 'auto' }}>
-          <div style={{ height: 360 }}>滚动区域示例</div>
-          <FloatButton.BackTop />
+        <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+          <div style={{ height: 360, padding: 16 }}>滚动区域示例</div>
+          <FloatButton.BackTop
+            visibilityHeight={0}
+            style={{ position: 'absolute', right: 24, bottom: 24 }}
+          />
         </div>
         <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
       </Space>
@@ -78,7 +90,13 @@ import { ConfigProvider, FloatButton, Card } from 'privatebank-design';
 export default () => (
   <ConfigProvider>
     <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <FloatButton.BackTop visibilityHeight={100} />
+      <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+        <div style={{ height: 360, padding: 16 }}>向下滚动后可返回顶部</div>
+        <FloatButton.BackTop
+          visibilityHeight={0}
+          style={{ position: 'absolute', right: 24, bottom: 24 }}
+        />
+      </div>
     </Card>
   </ConfigProvider>
 );
@@ -94,9 +112,12 @@ import { ConfigProvider, FloatButton, Card } from 'privatebank-design';
 export default () => (
   <ConfigProvider>
     <Card title="页面导航" style={{ maxWidth: 640 }}>
-      <div style={{ height: 120, overflow: 'auto' }}>
-        <div style={{ height: 360 }}>滚动区域示例</div>
-        <FloatButton.BackTop />
+      <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+        <div style={{ height: 360, padding: 16 }}>滚动区域示例</div>
+        <FloatButton.BackTop
+          visibilityHeight={0}
+          style={{ position: 'absolute', right: 24, bottom: 24 }}
+        />
       </div>
     </Card>
   </ConfigProvider>

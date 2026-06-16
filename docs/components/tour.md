@@ -21,7 +21,7 @@ order: 127
 最小可用示例，适合快速确认组件默认样式和主题效果。
 
 ```tsx
-import { ConfigProvider, Tour, Button } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Tour } from 'privatebank-design';
 import { useRef, useState } from 'react';
 
 export default () => (
@@ -31,7 +31,7 @@ export default () => (
       const ref = useRef(null);
       return (
         <>
-          <Button ref={ref} onClick={() => setOpen(true)}>
+          <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
             开始引导
           </Button>
           <Tour
@@ -57,12 +57,31 @@ export default () => (
 展示业务里最常见的类型、状态或组合形态。
 
 ```tsx
-import { ConfigProvider, Tour, Button } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Tour } from 'privatebank-design';
 import { useRef, useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Tour open={false} steps={[]} />
+    {(() => {
+      const [open, setOpen] = useState(false);
+      const ref = useRef(null);
+      return (
+        <Space>
+          <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
+            开始引导
+          </Button>
+          <Button>辅助操作</Button>
+          <Tour
+            open={open}
+            onClose={() => setOpen(false)}
+            steps={[
+              { title: '步骤一', description: '先确认关键入口。', target: () => ref.current },
+              { title: '步骤二', description: '继续查看后续流程。', target: () => ref.current },
+            ]}
+          />
+        </Space>
+      );
+    })()}
   </ConfigProvider>
 );
 ```
@@ -72,7 +91,7 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, Tour, Button, Space, Card, Typography } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Tour, Card, Typography } from 'privatebank-design';
 import { useRef, useState } from 'react';
 
 export default () => (
@@ -84,7 +103,7 @@ export default () => (
           const ref = useRef(null);
           return (
             <>
-              <Button ref={ref} onClick={() => setOpen(true)}>
+              <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
                 开始引导
               </Button>
               <Tour
@@ -113,13 +132,32 @@ export default () => (
 在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
 
 ```tsx
-import { ConfigProvider, Tour, Button, Card } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Tour, Card } from 'privatebank-design';
 import { useRef, useState } from 'react';
 
 export default () => (
   <ConfigProvider>
     <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Tour open={false} steps={[]} />
+      {(() => {
+        const [open, setOpen] = useState(false);
+        const ref = useRef(null);
+        return (
+          <Space>
+            <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
+              开始引导
+            </Button>
+            <Button>辅助操作</Button>
+            <Tour
+              open={open}
+              onClose={() => setOpen(false)}
+              steps={[
+                { title: '步骤一', description: '先确认关键入口。', target: () => ref.current },
+                { title: '步骤二', description: '继续查看后续流程。', target: () => ref.current },
+              ]}
+            />
+          </Space>
+        );
+      })()}
     </Card>
   </ConfigProvider>
 );
@@ -130,7 +168,7 @@ export default () => (
 在列表或详情内容区中使用组件，适合检查只读信息展示场景。
 
 ```tsx
-import { ConfigProvider, Tour, Button, Space, List } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Tour, List } from 'privatebank-design';
 import { useRef, useState } from 'react';
 
 export default () => (
@@ -147,7 +185,7 @@ export default () => (
               const ref = useRef(null);
               return (
                 <>
-                  <Button ref={ref} onClick={() => setOpen(true)}>
+                  <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
                     开始引导
                   </Button>
                   <Tour

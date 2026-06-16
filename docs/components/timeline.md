@@ -1,33 +1,30 @@
 ---
-title: Card 卡片
-order: 115
+title: Timeline 时间轴
+order: 152
 ---
 
-# Card 卡片
+# Timeline 时间轴
 
-用于承载一组相关信息和操作。
-
-`Card` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：`全局规范/Container.style.md`。
+Timeline 时间轴 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
 
 ## 组件类型
 
-- 基础卡片
-- 带标题
-- 带操作
-- 加载状态
+- 基础用法
+- 常用配置
+- 组合场景
 
 ## 基础用法
 
 最小可用示例，适合快速确认组件默认样式和主题效果。
 
 ```tsx
-import { ConfigProvider, Card, Button } from 'privatebank-design';
+import { ConfigProvider, Timeline } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户概览" style={{ width: 360 }}>
-      当前客户资产规模为 1,280 万元。
-    </Card>
+    <Timeline
+      items={[{ children: '提交申请' }, { children: '部门复核' }, { children: '审批完成' }]}
+    />
   </ConfigProvider>
 );
 ```
@@ -37,18 +34,17 @@ export default () => (
 展示业务里最常见的类型、状态或组合形态。
 
 ```tsx
-import { ConfigProvider, Card, Button } from 'privatebank-design';
+import { ConfigProvider, Timeline } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <Card
-      title="审批任务"
-      extra={<Button type="link">查看全部</Button>}
-      style={{ width: 360 }}
-      loading={false}
-    >
-      待处理任务 18 项
-    </Card>
+    <Timeline
+      mode="left"
+      items={[
+        { label: '09:00', children: '提交申请' },
+        { label: '10:30', children: '审批处理中' },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
@@ -58,15 +54,15 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, Card, Button, Typography, Space } from 'privatebank-design';
+import { ConfigProvider, Timeline, Card, Typography, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Card title="客户经营概览" style={{ maxWidth: 520 }}>
       <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Card title="客户概览" style={{ width: 360 }}>
-          当前客户资产规模为 1,280 万元。
-        </Card>
+        <Timeline
+          items={[{ children: '提交申请' }, { children: '部门复核' }, { children: '审批完成' }]}
+        />
         <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
       </Space>
     </Card>
@@ -79,19 +75,18 @@ export default () => (
 在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
 
 ```tsx
-import { ConfigProvider, Card, Button } from 'privatebank-design';
+import { ConfigProvider, Timeline, Card } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Card
-        title="审批任务"
-        extra={<Button type="link">查看全部</Button>}
-        style={{ width: 360 }}
-        loading={false}
-      >
-        待处理任务 18 项
-      </Card>
+      <Timeline
+        mode="left"
+        items={[
+          { label: '09:00', children: '提交申请' },
+          { label: '10:30', children: '审批处理中' },
+        ]}
+      />
     </Card>
   </ConfigProvider>
 );
@@ -102,7 +97,7 @@ export default () => (
 在列表或详情内容区中使用组件，适合检查只读信息展示场景。
 
 ```tsx
-import { ConfigProvider, Card, Button, List, Space } from 'privatebank-design';
+import { ConfigProvider, Timeline, List, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -113,9 +108,9 @@ export default () => (
         <List.Item>
           <Space direction="vertical" style={{ width: '100%' }}>
             <strong>{item}</strong>
-            <Card title="客户概览" style={{ width: 360 }}>
-              当前客户资产规模为 1,280 万元。
-            </Card>
+            <Timeline
+              items={[{ children: '提交申请' }, { children: '部门复核' }, { children: '审批完成' }]}
+            />
           </Space>
         </List.Item>
       )}
@@ -129,7 +124,7 @@ export default () => (
 组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
 
 ```tsx | pure
-import type { CardProps } from 'privatebank-design';
+import type { TimelineProps } from 'privatebank-design';
 ```
 
 ## API 与类型
@@ -137,7 +132,7 @@ import type { CardProps } from 'privatebank-design';
 组件 Props 完全继承 antd，可直接从 `privatebank-design` 导入：
 
 ```tsx | pure
-import type { CardProps } from 'privatebank-design';
+import type { TimelineProps } from 'privatebank-design';
 ```
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

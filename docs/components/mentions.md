@@ -1,33 +1,34 @@
 ---
-title: Upload 上传
-order: 114
+title: Mentions 提及
+order: 126
 ---
 
-# Upload 上传
+# Mentions 提及
 
-用于上传文件、图片和附件。
-
-`Upload` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：`数据录入/Upload.dev.md`。
+Mentions 提及 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
 
 ## 组件类型
 
-- 按钮上传
-- 拖拽上传
-- 图片列表
-- 上传状态
+- 基础用法
+- 常用配置
+- 组合场景
 
 ## 基础用法
 
 最小可用示例，适合快速确认组件默认样式和主题效果。
 
 ```tsx
-import { ConfigProvider, Upload, Button } from 'privatebank-design';
+import { ConfigProvider, Mentions } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <Upload>
-      <Button>选择文件</Button>
-    </Upload>
+    <Mentions
+      style={{ width: 320 }}
+      options={[
+        { value: 'risk', label: 'risk' },
+        { value: 'ops', label: 'ops' },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
@@ -37,14 +38,15 @@ export default () => (
 展示业务里最常见的类型、状态或组合形态。
 
 ```tsx
-import { ConfigProvider, Upload, Button } from 'privatebank-design';
+import { ConfigProvider, Mentions } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
-    <Upload.Dragger style={{ width: 420 }}>
-      <p>点击或拖拽文件到此区域上传</p>
-      <p>支持单个或批量上传</p>
-    </Upload.Dragger>
+    <Mentions
+      rows={3}
+      placeholder="输入 @ 提及团队"
+      options={[{ value: 'reviewer', label: 'reviewer' }]}
+    />
   </ConfigProvider>
 );
 ```
@@ -54,15 +56,19 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, Upload, Button, Card, Typography, Space } from 'privatebank-design';
+import { ConfigProvider, Mentions, Card, Typography, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Card title="客户经营概览" style={{ maxWidth: 520 }}>
       <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Upload>
-          <Button>选择文件</Button>
-        </Upload>
+        <Mentions
+          style={{ width: 320 }}
+          options={[
+            { value: 'risk', label: 'risk' },
+            { value: 'ops', label: 'ops' },
+          ]}
+        />
         <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
       </Space>
     </Card>
@@ -75,15 +81,16 @@ export default () => (
 在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
 
 ```tsx
-import { ConfigProvider, Upload, Button, Card } from 'privatebank-design';
+import { ConfigProvider, Mentions, Card } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Upload.Dragger style={{ width: 420 }}>
-        <p>点击或拖拽文件到此区域上传</p>
-        <p>支持单个或批量上传</p>
-      </Upload.Dragger>
+      <Mentions
+        rows={3}
+        placeholder="输入 @ 提及团队"
+        options={[{ value: 'reviewer', label: 'reviewer' }]}
+      />
     </Card>
   </ConfigProvider>
 );
@@ -94,15 +101,19 @@ export default () => (
 放入查询条件区域，体现与表单标签、按钮的组合方式。
 
 ```tsx
-import { ConfigProvider, Upload, Button, Form } from 'privatebank-design';
+import { ConfigProvider, Mentions, Button, Form } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
     <Form layout="inline">
       <Form.Item label="查询条件">
-        <Upload>
-          <Button>选择文件</Button>
-        </Upload>
+        <Mentions
+          style={{ width: 320 }}
+          options={[
+            { value: 'risk', label: 'risk' },
+            { value: 'ops', label: 'ops' },
+          ]}
+        />
       </Form.Item>
       <Form.Item>
         <Button type="primary">查询</Button>
@@ -117,7 +128,7 @@ export default () => (
 组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
 
 ```tsx | pure
-import type { UploadProps } from 'privatebank-design';
+import type { MentionsProps } from 'privatebank-design';
 ```
 
 ## API 与类型
@@ -125,7 +136,7 @@ import type { UploadProps } from 'privatebank-design';
 组件 Props 完全继承 antd，可直接从 `privatebank-design` 导入：
 
 ```tsx | pure
-import type { UploadProps } from 'privatebank-design';
+import type { MentionsProps } from 'privatebank-design';
 ```
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

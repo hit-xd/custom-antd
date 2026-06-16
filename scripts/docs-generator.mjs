@@ -98,9 +98,19 @@ const primaryComponentDocs = [
 
 export const componentDocs = [...primaryComponentDocs, ...baseComponentDocs];
 
-const renderVariants = (variants) => variants.map((item) => `- ${item}`).join('\n');
+const renderVariants = (variants = ['基础用法', '常用配置', '组合场景']) =>
+  variants.map((item) => `- ${item}`).join('\n');
 const unique = (values) => [...new Set(values.filter(Boolean))];
 const mergeImports = (...groups) => unique(groups.flat());
+const extractComponents = (code) => {
+  const names = new Set();
+  const regex = /<([A-Z][A-Za-z0-9]*)(?:\.| |>|\/ ?>)/g;
+  let match;
+  while ((match = regex.exec(code)) !== null) {
+    names.add(match[1]);
+  }
+  return [...names];
+};
 
 const demo = ({ title, description, imports = [], extraImports, code, pure = false }) => ({
   title,
@@ -240,7 +250,8 @@ ${item.code}
 \`\`\``;
   }
 
-  const imports = mergeImports(['ConfigProvider'], item.imports);
+  const autoImports = extractComponents(item.code);
+  const imports = mergeImports(['ConfigProvider'], item.imports, autoImports);
   const extraImports = item.extraImports ? `${item.extraImports}\n` : '';
 
   return `\`\`\`tsx
@@ -265,6 +276,12 @@ ${item.description ? `${item.description}\n\n` : ''}${renderCodeBlock(item)}`,
 
 export const renderComponentDoc = (doc, order) => {
   const propsType = doc.typeName ?? `${doc.name}Props`;
+  const specLine =
+    doc.spec && doc.spec !== 'antd'
+      ? `
+
+\`${doc.name}\` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：\`${doc.spec}\`。`
+      : '';
 
   return `---
 title: ${doc.title}
@@ -273,9 +290,7 @@ order: ${order}
 
 # ${doc.title}
 
-${doc.summary}
-
-\`${doc.name}\` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：\`${doc.spec}\`。
+${doc.summary}${specLine}
 
 ## 组件类型
 

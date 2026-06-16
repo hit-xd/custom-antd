@@ -51,12 +51,25 @@ import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Drawer
-      title="编辑资料"
-      open={false}
-      width={560}
-      extra={<Button type="primary">保存</Button>}
-    />
+    {(() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <Button type="primary" onClick={() => setOpen(true)}>
+            编辑资料
+          </Button>
+          <Drawer
+            title="编辑资料"
+            open={open}
+            width={560}
+            extra={<Button type="primary">保存</Button>}
+            onClose={() => setOpen(false)}
+          >
+            客户资料编辑区。
+          </Drawer>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
 ```
@@ -66,7 +79,7 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, Drawer, Button, Card, Space, Typography } from 'privatebank-design';
+import { ConfigProvider, Drawer, Button, Card, Typography, Space } from 'privatebank-design';
 import { useState } from 'react';
 
 export default () => (
@@ -102,12 +115,25 @@ import { useState } from 'react';
 export default () => (
   <ConfigProvider>
     <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Drawer
-        title="编辑资料"
-        open={false}
-        width={560}
-        extra={<Button type="primary">保存</Button>}
-      />
+      {(() => {
+        const [open, setOpen] = useState(false);
+        return (
+          <>
+            <Button type="primary" onClick={() => setOpen(true)}>
+              编辑资料
+            </Button>
+            <Drawer
+              title="编辑资料"
+              open={open}
+              width={560}
+              extra={<Button type="primary">保存</Button>}
+              onClose={() => setOpen(false)}
+            >
+              客户资料编辑区。
+            </Drawer>
+          </>
+        );
+      })()}
     </Card>
   </ConfigProvider>
 );

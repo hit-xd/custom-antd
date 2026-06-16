@@ -290,15 +290,19 @@ export const componentDocs = [
     category: '数据展示',
     spec: '样式规范/Tour  漫游式引导样式.md',
     summary: '用于分步骤引导用户了解关键功能。',
-    imports: ['Tour', 'Button'],
+    imports: ['Button', 'Space', 'Tour'],
     extraImports: `import { useRef, useState } from 'react';`,
     variants: ['基础引导', '步骤切换', '遮罩', '非模态引导'],
     basic: `{(() => {
       const [open, setOpen] = useState(false);
       const ref = useRef(null);
-      return <><Button ref={ref} onClick={() => setOpen(true)}>开始引导</Button><Tour open={open} onClose={() => setOpen(false)} steps={[{ title: '客户检索', description: '通过条件快速查找客户。', target: () => ref.current }]} /></>;
+      return <><Button ref={ref} type="primary" onClick={() => setOpen(true)}>开始引导</Button><Tour open={open} onClose={() => setOpen(false)} steps={[{ title: '客户检索', description: '通过条件快速查找客户。', target: () => ref.current }]} /></>;
     })()}`,
-    advanced: `<Tour open={false} steps={[]} />`,
+    advanced: `{(() => {
+      const [open, setOpen] = useState(false);
+      const ref = useRef(null);
+      return <Space><Button ref={ref} type="primary" onClick={() => setOpen(true)}>开始引导</Button><Button>辅助操作</Button><Tour open={open} onClose={() => setOpen(false)} steps={[{ title: '步骤一', description: '先确认关键入口。', target: () => ref.current }, { title: '步骤二', description: '继续查看后续流程。', target: () => ref.current }]} /></Space>;
+    })()}`,
   },
   {
     name: 'Alert',
@@ -338,7 +342,10 @@ export const componentDocs = [
       const [open, setOpen] = useState(false);
       return <><Button onClick={() => setOpen(true)}>查看客户详情</Button><Drawer title="客户详情" open={open} onClose={() => setOpen(false)}>客户资产和持仓信息。</Drawer></>;
     })()}`,
-    advanced: `<Drawer title="编辑资料" open={false} width={560} extra={<Button type="primary">保存</Button>} />`,
+    advanced: `{(() => {
+      const [open, setOpen] = useState(false);
+      return <><Button type="primary" onClick={() => setOpen(true)}>编辑资料</Button><Drawer title="编辑资料" open={open} width={560} extra={<Button type="primary">保存</Button>} onClose={() => setOpen(false)}>客户资料编辑区。</Drawer></>;
+    })()}`,
   },
   {
     name: 'Popconfirm',
@@ -461,8 +468,74 @@ export const componentDocs = [
     imports: ['FloatButton'],
     typeName: 'FloatButtonProps',
     variants: ['基础回顶', '自定义可见高度', '自定义位置'],
-    basic: `<div style={{ height: 120, overflow: 'auto' }}><div style={{ height: 360 }}>滚动区域示例</div><FloatButton.BackTop /></div>`,
-    advanced: `<FloatButton.BackTop visibilityHeight={100} />`,
+    basic: `<div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}><div style={{ height: 360, padding: 16 }}>滚动区域示例</div><FloatButton.BackTop visibilityHeight={0} style={{ position: 'absolute', right: 24, bottom: 24 }} /></div>`,
+    advanced: `<div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}><div style={{ height: 360, padding: 16 }}>向下滚动后可返回顶部</div><FloatButton.BackTop visibilityHeight={0} style={{ position: 'absolute', right: 24, bottom: 24 }} /></div>`,
+  },
+  {
+    name: 'FloatButton',
+    title: 'FloatButton 悬浮按钮',
+    category: '通用',
+    spec: 'antd',
+    summary: '用于承载固定在页面角落的快捷操作入口。',
+    imports: ['FloatButton'],
+    typeName: 'FloatButtonProps',
+    variants: ['基础按钮', '组合按钮', '提示文案', '自定义位置'],
+    demos: [
+      {
+        title: '基础用法',
+        description: '在固定高度容器中展示悬浮按钮，方便在文档预览区直接观察位置。',
+        imports: ['FloatButton'],
+        code: `<div style={{ position: 'relative', height: 160, background: '#f4f6f8' }}>
+      <FloatButton tooltip="快捷操作" style={{ position: 'absolute', right: 24, bottom: 24 }} />
+    </div>`,
+      },
+      {
+        title: '常用类型与状态',
+        description: '展示组合按钮和回到顶部入口。',
+        imports: ['FloatButton'],
+        code: `<div style={{ position: 'relative', height: 180, background: '#f4f6f8' }}>
+      <FloatButton.Group trigger="click" style={{ position: 'absolute', right: 24, bottom: 24 }}>
+        <FloatButton tooltip="编辑" />
+        <FloatButton tooltip="刷新" />
+        <FloatButton.BackTop visibilityHeight={0} />
+      </FloatButton.Group>
+    </div>`,
+      },
+      {
+        title: '类型导入',
+        description: '组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。',
+        code: `import type { FloatButtonProps } from 'privatebank-design';`,
+        pure: true,
+      },
+    ],
+  },
+  {
+    name: 'Transfer',
+    title: 'Transfer 穿梭框',
+    category: '数据录入',
+    spec: 'antd',
+    summary: '用于在两个列表之间移动选项。',
+    basic: `<Transfer dataSource={[{ key: '1', title: '客户资料' }, { key: '2', title: '资产信息' }]} targetKeys={['2']} render={(item) => item.title ?? ''} />`,
+    advanced: `<Transfer oneWay dataSource={[{ key: '1', title: '待分配客户' }, { key: '2', title: '重点客户' }]} targetKeys={['2']} render={(item) => item.title ?? ''} />`,
+  },
+  {
+    name: 'Affix',
+    title: 'Affix 固钉',
+    category: '其他',
+    spec: 'antd',
+    summary: '用于将操作入口固定在滚动容器内的指定位置。',
+    imports: ['Affix', 'Button'],
+    basic: `<div style={{ height: 160, overflow: 'auto', background: '#f4f6f8', padding: 16 }}><Affix offsetTop={16}><Button>固定操作</Button></Affix><div style={{ height: 320 }} /></div>`,
+    advanced: `<div style={{ height: 160, overflow: 'auto', background: '#f4f6f8', padding: 16 }}><Affix offsetBottom={24}><Button type="primary">提交审批</Button></Affix><div style={{ height: 320 }} /></div>`,
+  },
+  {
+    name: 'Watermark',
+    title: 'Watermark 水印',
+    category: '其他',
+    spec: 'antd',
+    summary: '用于在敏感内容区域添加背景水印。',
+    basic: `<Watermark content="privatebank-design"><div style={{ height: 160 }}>水印内容区域</div></Watermark>`,
+    advanced: `<Watermark content={['Private Bank', 'Confidential']}><div style={{ height: 160 }}>敏感信息区域</div></Watermark>`,
   },
 ];
 
