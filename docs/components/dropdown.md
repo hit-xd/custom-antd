@@ -1,11 +1,11 @@
 ---
 title: Dropdown 下拉菜单
-order: 113
+order: 155
 ---
 
 # Dropdown 下拉菜单
 
-Dropdown 下拉菜单 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于承载更多操作或次级选项。
 
 ## 组件类型
 

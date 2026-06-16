@@ -1,11 +1,11 @@
 ---
 title: notification 通知提醒框
-order: 161
+order: 169
 ---
 
 # notification 通知提醒框
 
-notification 通知提醒框 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于展示较完整的全局通知和风险提醒。
 
 ## 组件类型
 

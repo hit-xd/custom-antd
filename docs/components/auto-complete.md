@@ -1,11 +1,11 @@
 ---
 title: AutoComplete 自动完成
-order: 118
+order: 157
 ---
 
 # AutoComplete 自动完成
 
-AutoComplete 自动完成 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于在输入过程中提供匹配建议。
 
 ## 组件类型
 
@@ -18,7 +18,7 @@ AutoComplete 自动完成 透传 Ant Design v5 能力，可直接从 privatebank
 最小可用示例，适合快速确认组件默认样式和主题效果。
 
 ```tsx
-import { ConfigProvider, AutoComplete } from 'privatebank-design';
+import { ConfigProvider, AutoComplete, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -36,7 +36,7 @@ export default () => (
 展示业务里最常见的类型、状态或组合形态。
 
 ```tsx
-import { ConfigProvider, AutoComplete } from 'privatebank-design';
+import { ConfigProvider, AutoComplete, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -55,7 +55,7 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, AutoComplete, Card, Typography, Space } from 'privatebank-design';
+import { ConfigProvider, AutoComplete, Space, Card, Typography } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -78,7 +78,7 @@ export default () => (
 在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
 
 ```tsx
-import { ConfigProvider, AutoComplete, Card } from 'privatebank-design';
+import { ConfigProvider, AutoComplete, Space, Card } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -99,7 +99,7 @@ export default () => (
 放入查询条件区域，体现与表单标签、按钮的组合方式。
 
 ```tsx
-import { ConfigProvider, AutoComplete, Button, Form } from 'privatebank-design';
+import { ConfigProvider, AutoComplete, Space, Button, Form } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

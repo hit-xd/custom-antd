@@ -1,11 +1,11 @@
 ---
 title: Col 栅格列
-order: 107
+order: 152
 ---
 
 # Col 栅格列
 
-Col 栅格列 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于创建栅格列和响应式宽度。
 
 ## 组件类型
 

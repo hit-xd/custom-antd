@@ -1,11 +1,11 @@
 ---
 title: App 包裹组件
-order: 157
+order: 167
 ---
 
 # App 包裹组件
 
-App 包裹组件 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于为 message、modal、notification 等静态方法提供上下文。
 
 ## 组件类型
 

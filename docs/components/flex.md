@@ -1,11 +1,11 @@
 ---
 title: Flex 弹性布局
-order: 104
+order: 149
 ---
 
 # Flex 弹性布局
 
-Flex 弹性布局 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于构建一维弹性排列和对齐关系。
 
 ## 组件类型
 

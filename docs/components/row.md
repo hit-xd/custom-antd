@@ -1,11 +1,11 @@
 ---
 title: Row 栅格行
-order: 106
+order: 151
 ---
 
 # Row 栅格行
 
-Row 栅格行 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于创建横向栅格行并配合 Col 使用。
 
 ## 组件类型
 

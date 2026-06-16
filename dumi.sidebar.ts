@@ -72,6 +72,22 @@ export const ComponentSidebar = [
         title: 'Transfer 穿梭框',
         link: '/components/transfer',
       },
+      {
+        title: 'AutoComplete 自动完成',
+        link: '/components/auto-complete',
+      },
+      {
+        title: 'ColorPicker 颜色选择器',
+        link: '/components/color-picker',
+      },
+      {
+        title: 'Mentions 提及',
+        link: '/components/mentions',
+      },
+      {
+        title: 'Rate 评分',
+        link: '/components/rate',
+      },
     ],
   },
   {
@@ -129,6 +145,30 @@ export const ComponentSidebar = [
         title: 'Tour 漫游式引导',
         link: '/components/tour',
       },
+      {
+        title: 'Calendar 日历',
+        link: '/components/calendar',
+      },
+      {
+        title: 'Empty 空状态',
+        link: '/components/empty',
+      },
+      {
+        title: 'QRCode 二维码',
+        link: '/components/qrcode',
+      },
+      {
+        title: 'Segmented 分段控制器',
+        link: '/components/segmented',
+      },
+      {
+        title: 'Timeline 时间轴',
+        link: '/components/timeline',
+      },
+      {
+        title: 'Tree 树形控件',
+        link: '/components/tree',
+      },
     ],
   },
   {
@@ -166,6 +206,18 @@ export const ComponentSidebar = [
         title: 'Spin 加载中',
         link: '/components/spin',
       },
+      {
+        title: 'App 包裹组件',
+        link: '/components/app',
+      },
+      {
+        title: 'message 全局提示',
+        link: '/components/message',
+      },
+      {
+        title: 'notification 通知提醒框',
+        link: '/components/notification',
+      },
     ],
   },
   {
@@ -199,6 +251,14 @@ export const ComponentSidebar = [
         title: 'BackTop 回到顶部',
         link: '/components/back-top',
       },
+      {
+        title: 'Dropdown 下拉菜单',
+        link: '/components/dropdown',
+      },
+      {
+        title: 'Menu 导航菜单',
+        link: '/components/menu',
+      },
     ],
   },
   {
@@ -207,6 +267,10 @@ export const ComponentSidebar = [
       {
         title: 'FloatButton 悬浮按钮',
         link: '/components/float-button',
+      },
+      {
+        title: 'Typography 排版',
+        link: '/components/typography',
       },
     ],
   },
@@ -220,6 +284,39 @@ export const ComponentSidebar = [
       {
         title: 'Watermark 水印',
         link: '/components/watermark',
+      },
+    ],
+  },
+  {
+    title: '布局',
+    children: [
+      {
+        title: 'Divider 分割线',
+        link: '/components/divider',
+      },
+      {
+        title: 'Flex 弹性布局',
+        link: '/components/flex',
+      },
+      {
+        title: 'Grid 栅格断点',
+        link: '/components/grid',
+      },
+      {
+        title: 'Row 栅格行',
+        link: '/components/row',
+      },
+      {
+        title: 'Col 栅格列',
+        link: '/components/col',
+      },
+      {
+        title: 'Space 间距',
+        link: '/components/space',
+      },
+      {
+        title: 'Splitter 分割面板',
+        link: '/components/splitter',
       },
     ],
   },

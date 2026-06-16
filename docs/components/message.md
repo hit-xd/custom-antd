@@ -1,11 +1,11 @@
 ---
 title: message 全局提示
-order: 159
+order: 168
 ---
 
 # message 全局提示
 
-message 全局提示 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于展示轻量级全局操作反馈。
 
 ## 组件类型
 

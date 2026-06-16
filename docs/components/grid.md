@@ -1,11 +1,11 @@
 ---
 title: Grid 栅格断点
-order: 105
+order: 150
 ---
 
 # Grid 栅格断点
 
-Grid 栅格断点 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于读取响应式断点并适配页面布局。
 
 ## 组件类型
 

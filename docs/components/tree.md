@@ -1,11 +1,11 @@
 ---
 title: Tree 树形控件
-order: 155
+order: 166
 ---
 
 # Tree 树形控件
 
-Tree 树形控件 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于展示层级结构并支持展开、选择和勾选。
 
 ## 组件类型
 
@@ -18,7 +18,7 @@ Tree 树形控件 透传 Ant Design v5 能力，可直接从 privatebank-design 
 最小可用示例，适合快速确认组件默认样式和主题效果。
 
 ```tsx
-import { ConfigProvider, Tree } from 'privatebank-design';
+import { ConfigProvider, Tree, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -34,7 +34,7 @@ export default () => (
 展示业务里最常见的类型、状态或组合形态。
 
 ```tsx
-import { ConfigProvider, Tree } from 'privatebank-design';
+import { ConfigProvider, Tree, Space } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -52,7 +52,7 @@ export default () => (
 放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
 
 ```tsx
-import { ConfigProvider, Tree, Card, Typography, Space } from 'privatebank-design';
+import { ConfigProvider, Tree, Space, Card, Typography } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -75,7 +75,7 @@ export default () => (
 在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
 
 ```tsx
-import { ConfigProvider, Tree, Card } from 'privatebank-design';
+import { ConfigProvider, Tree, Space, Card } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>
@@ -95,7 +95,7 @@ export default () => (
 在列表或详情内容区中使用组件，适合检查只读信息展示场景。
 
 ```tsx
-import { ConfigProvider, Tree, List, Space } from 'privatebank-design';
+import { ConfigProvider, Tree, Space, List } from 'privatebank-design';
 
 export default () => (
   <ConfigProvider>

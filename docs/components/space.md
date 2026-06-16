@@ -1,11 +1,11 @@
 ---
 title: Space 间距
-order: 109
+order: 153
 ---
 
 # Space 间距
 
-Space 间距 透传 Ant Design v5 能力，可直接从 privatebank-design 导入，并在企业主题下保持统一视觉。
+用于在相邻元素之间保持统一间距。
 
 ## 组件类型
 
