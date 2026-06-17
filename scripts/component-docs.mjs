@@ -504,7 +504,7 @@ export const componentDocs = [
       {
         title: '类型导入',
         description: '组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。',
-        code: `import type { FloatButtonProps } from 'privatebank-design';`,
+        code: `import type { FloatButtonProps } from '@lf39.03/antd';`,
         pure: true,
       },
     ],
@@ -534,7 +534,7 @@ export const componentDocs = [
     category: '其他',
     spec: 'antd',
     summary: '用于在敏感内容区域添加背景水印。',
-    basic: `<Watermark content="privatebank-design"><div style={{ height: 160 }}>水印内容区域</div></Watermark>`,
+    basic: `<Watermark content="@lf39.03/antd"><div style={{ height: 160 }}>水印内容区域</div></Watermark>`,
     advanced: `<Watermark content={['Private Bank', 'Confidential']}><div style={{ height: 160 }}>敏感信息区域</div></Watermark>`,
   },
   {
@@ -782,7 +782,7 @@ ${renderVariants(doc.variants)}
 ## 基础用法
 
 \`\`\`tsx
-import { ConfigProvider, ${imports.join(', ')} } from 'privatebank-design';
+import { ConfigProvider, ${imports.join(', ')} } from '@lf39.03/antd';
 ${extraImports}
 export default () => (
   <ConfigProvider>
@@ -794,7 +794,7 @@ export default () => (
 ## 常用类型与状态
 
 \`\`\`tsx
-import { ConfigProvider, ${imports.join(', ')} } from 'privatebank-design';
+import { ConfigProvider, ${imports.join(', ')} } from '@lf39.03/antd';
 ${extraImports}
 export default () => (
   <ConfigProvider>
@@ -805,10 +805,10 @@ export default () => (
 
 ## API 与类型
 
-组件 Props 完全继承 antd，可直接从 \`privatebank-design\` 导入：
+组件 Props 完全继承 antd，可直接从 \`@lf39.03/antd\` 导入：
 
 \`\`\`tsx | pure
-import type { ${propsType} } from 'privatebank-design';
+import type { ${propsType} } from '@lf39.03/antd';
 \`\`\`
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

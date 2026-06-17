@@ -2,7 +2,7 @@
 
 ## 项目结构与模块组织
 
-本项目是一个 pnpm 管理的 TypeScript 组件库，基于 Ant Design v5 做企业级 UI 二次封装。目标是让业务项目从 `import * from 'antd'` 平滑切换到 `import * from 'privatebank-design'`。
+本项目是一个 pnpm 管理的 TypeScript 组件库，基于 Ant Design v5 做企业级 UI 二次封装。目标是让业务项目从 `import * from 'antd'` 平滑切换到 `import * from '@lf39.03/antd'`。
 
 - `src/index.ts` 是包入口，默认透传 antd 导出，并暴露企业封装能力。
 - `src/theme/` 存放企业主题 token、主题工厂和组件级样式配置。
@@ -44,7 +44,7 @@
 
 ## 文档规范
 
-文档使用 dumi。全局指南放在 `docs/`，组件文档优先放在组件目录下的 `index.md`。组件文档应包含用途说明、基础示例、可配置示例和 API 说明。示例代码应使用 `privatebank-design` 导入，体现业务项目真实用法。
+文档使用 dumi。全局指南放在 `docs/`，组件文档优先放在组件目录下的 `index.md`。组件文档应包含用途说明、基础示例、可配置示例和 API 说明。示例代码应使用 `@lf39.03/antd` 导入，体现业务项目真实用法。
 
 ## Commit 与 Pull Request 规范
 

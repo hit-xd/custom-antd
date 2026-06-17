@@ -18,7 +18,7 @@ order: 203
 ## 基础流程
 
 ```tsx
-import { ConfigProvider, ApprovalProgressSteps } from 'privatebank-design';
+import { ConfigProvider, ApprovalProgressSteps } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -41,7 +41,7 @@ export default () => (
 ## 审批意见
 
 ```tsx
-import { ConfigProvider, ApprovalProgressSteps } from 'privatebank-design';
+import { ConfigProvider, ApprovalProgressSteps } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -70,7 +70,7 @@ export default () => (
 ## 驳回与附件
 
 ```tsx
-import { ConfigProvider, ApprovalProgressSteps } from 'privatebank-design';
+import { ConfigProvider, ApprovalProgressSteps } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -95,15 +95,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入。
 
 ```tsx | pure
-import type { ApprovalProgressStepsProps } from 'privatebank-design';
+import type { ApprovalProgressStepsProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 可直接从 `privatebank-design` 导入：
+组件 Props 可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { ApprovalProgressStepsProps } from 'privatebank-design';
+import type { ApprovalProgressStepsProps } from '@lf39.03/antd';
 ```
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

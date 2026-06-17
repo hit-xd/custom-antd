@@ -20,7 +20,7 @@ order: 200
 适合列表、详情模块或卡片内容为空时使用。
 
 ```tsx
-import { ConfigProvider, ErrorBlock } from 'privatebank-design';
+import { ConfigProvider, ErrorBlock } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -38,7 +38,7 @@ export default () => (
 通过 variant 区分表格、日历和业务区块的空态语义。
 
 ```tsx
-import { ConfigProvider, ErrorBlock, Space } from 'privatebank-design';
+import { ConfigProvider, ErrorBlock, Space } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -56,7 +56,7 @@ export default () => (
 与 Table 的 emptyText 组合，统一表格无数据反馈。
 
 ```tsx
-import { ConfigProvider, ErrorBlock, Table } from 'privatebank-design';
+import { ConfigProvider, ErrorBlock, Table } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -79,15 +79,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入。
 
 ```tsx | pure
-import type { ErrorBlockProps } from 'privatebank-design';
+import type { ErrorBlockProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 可直接从 `privatebank-design` 导入：
+组件 Props 可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { ErrorBlockProps } from 'privatebank-design';
+import type { ErrorBlockProps } from '@lf39.03/antd';
 ```
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

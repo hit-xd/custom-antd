@@ -5,7 +5,7 @@ order: 2
 
 # 主题定制
 
-`privatebank-design` 通过 `wplusTheme` 统一维护企业主题。业务项目使用包装版 `ConfigProvider` 后，会默认注入企业主题 token，同时保留 Ant Design v5 的 `theme` 配置能力。
+`@lf39.03/antd` 通过 `wplusTheme` 统一维护企业主题。业务项目使用包装版 `ConfigProvider` 后，会默认注入企业主题 token，同时保留 Ant Design v5 的 `theme` 配置能力。
 
 当前主题以 `src/theme/tokens` 为事实来源：
 
@@ -31,8 +31,8 @@ order: 2
 在应用根节点包裹 `ConfigProvider`，并引入 `reset.css` 获取基础样式和 CSS 变量。
 
 ```tsx
-import { Button, ConfigProvider } from 'privatebank-design';
-import 'privatebank-design/reset.css';
+import { Button, ConfigProvider } from '@lf39.03/antd';
+import '@lf39.03/antd/reset.css';
 
 export default () => (
   <ConfigProvider>
@@ -46,7 +46,7 @@ export default () => (
 通过 `theme.token` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 `wplusTheme`。传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
 
 ```tsx
-import { Button, Card, ConfigProvider, Space } from 'privatebank-design';
+import { Button, Card, ConfigProvider, Space } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider
@@ -70,7 +70,7 @@ export default () => (
 通过 `theme.components` 覆盖指定 antd 组件 token，适合只调整某一类组件的尺寸、圆角或背景。
 
 ```tsx
-import { Button, ConfigProvider, Space, Table } from 'privatebank-design';
+import { Button, ConfigProvider, Space, Table } from '@lf39.03/antd';
 
 const columns = [
   { title: '客户', dataIndex: 'name' },
@@ -104,7 +104,7 @@ export default () => (
 包装版 `ConfigProvider` 默认会注入企业组件级 token。传入非空 `theme.token` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 `theme.components`。此时 `theme.components` 只使用用户传入的组件配置。
 
 ```tsx
-import { Button, ConfigProvider, Space, Table } from 'privatebank-design';
+import { Button, ConfigProvider, Space, Table } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider
@@ -133,7 +133,7 @@ export default () => (
 需要在独立预览、微前端子应用或局部区域复用完整企业主题时，可以直接传入 `wplusTheme`。需要追加覆盖时，基于 `wplusTheme` 展开后再覆盖。
 
 ```tsx
-import { Button, ConfigProvider, Space, wplusTheme } from 'privatebank-design';
+import { Button, ConfigProvider, Space, wplusTheme } from '@lf39.03/antd';
 
 const theme = {
   ...wplusTheme,
@@ -172,7 +172,7 @@ import {
   Typography,
   privateBankingPrimitiveTokens,
   privateBankingSemanticTokens,
-} from 'privatebank-design';
+} from '@lf39.03/antd';
 
 const { colors, spacing } = privateBankingPrimitiveTokens;
 const semantic = privateBankingSemanticTokens;
@@ -201,7 +201,7 @@ export default () => (
 
 ## CSS 变量
 
-`privatebank-design/reset.css` 会注入基础 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
+`@lf39.03/antd/reset.css` 会注入基础 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
 
 ```css
 .page {

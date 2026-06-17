@@ -19,7 +19,7 @@ order: 143
 在固定高度容器中展示悬浮按钮，方便在文档预览区直接观察位置。
 
 ```tsx
-import { ConfigProvider, FloatButton } from 'privatebank-design';
+import { ConfigProvider, FloatButton } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -35,7 +35,7 @@ export default () => (
 展示组合按钮和回到顶部入口。
 
 ```tsx
-import { ConfigProvider, FloatButton } from 'privatebank-design';
+import { ConfigProvider, FloatButton } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -55,15 +55,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
 
 ```tsx | pure
-import type { FloatButtonProps } from 'privatebank-design';
+import type { FloatButtonProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 完全继承 antd，可直接从 `privatebank-design` 导入：
+组件 Props 完全继承 antd，可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { FloatButtonProps } from 'privatebank-design';
+import type { FloatButtonProps } from '@lf39.03/antd';
 ```
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

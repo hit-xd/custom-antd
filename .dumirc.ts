@@ -5,8 +5,8 @@ import { ComponentSidebar } from './dumi.sidebar';
 export default defineConfig({
   outputPath: 'docs-dist',
   alias: {
-    'privatebank-design': path.resolve(process.cwd(), 'src'),
-    'privatebank-design/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
+    '@lf39.03/antd': path.resolve(process.cwd(), 'src'),
+    '@lf39.03/antd/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
   },
   resolve: {
     atomDirs: [
@@ -21,7 +21,7 @@ export default defineConfig({
     ],
   },
   themeConfig: {
-    name: 'privatebank-design',
+    name: '@lf39.03/antd',
     nav: [
       { title: '指南', link: '/guide' },
       { title: '主题', link: '/theme' },

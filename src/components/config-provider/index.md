@@ -19,7 +19,7 @@ order: 1
 ## 基础用法
 
 ```tsx
-import { ConfigProvider, Button } from 'privatebank-design';
+import { ConfigProvider, Button } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -33,7 +33,7 @@ export default () => (
 传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
 
 ```tsx
-import { ConfigProvider, Button } from 'privatebank-design';
+import { ConfigProvider, Button } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -49,7 +49,7 @@ export default () => (
 传入非空 `theme.token` 后不会注入企业组件级 token，`theme.components` 只使用用户传入的组件配置。
 
 ```tsx
-import { ConfigProvider, Button, Space, Table } from 'privatebank-design';
+import { ConfigProvider, Button, Space, Table } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -78,7 +78,7 @@ export default () => (
 ## 组件级主题
 
 ```tsx
-import { ConfigProvider, Button, Space } from 'privatebank-design';
+import { ConfigProvider, Button, Space } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -95,7 +95,7 @@ export default () => (
 ## 表单文案
 
 ```tsx
-import { ConfigProvider, Button, Form, Input } from 'privatebank-design';
+import { ConfigProvider, Button, Form, Input } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -118,15 +118,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入。
 
 ```tsx | pure
-import type { ConfigProviderProps } from 'privatebank-design';
+import type { ConfigProviderProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 可直接从 `privatebank-design` 导入：
+组件 Props 可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { ConfigProviderProps } from 'privatebank-design';
+import type { ConfigProviderProps } from '@lf39.03/antd';
 ```
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

@@ -7,7 +7,7 @@ const primaryComponentDocs = [
     category: '基础能力',
     spec: '全局规范/Button.style.md',
     summary:
-      '`privatebank-design` 透传 antd `Button` API，并通过企业主题统一主按钮颜色、圆角和交互状态。',
+      '`@lf39.03/antd` 透传 antd `Button` API，并通过企业主题统一主按钮颜色、圆角和交互状态。',
     imports: ['Button', 'Space'],
     variants: ['主按钮', '默认按钮', '危险按钮', '链接按钮', '加载状态', '禁用状态'],
     basic: `<Space>
@@ -235,7 +235,7 @@ const createComponentDemos = (doc) => {
     demo({
       title: '类型导入',
       description: '组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。',
-      code: `import type { ${doc.typeName ?? `${doc.name}Props`} } from 'privatebank-design';`,
+      code: `import type { ${doc.typeName ?? `${doc.name}Props`} } from '@lf39.03/antd';`,
       pure: true,
     }),
   );
@@ -255,7 +255,7 @@ ${item.code}
   const extraImports = item.extraImports ? `${item.extraImports}\n` : '';
 
   return `\`\`\`tsx
-import { ${imports.join(', ')} } from 'privatebank-design';
+import { ${imports.join(', ')} } from '@lf39.03/antd';
 ${extraImports}
 export default () => (
   <ConfigProvider>
@@ -300,10 +300,10 @@ ${renderDemos(createComponentDemos(doc))}
 
 ## API 与类型
 
-组件 Props 完全继承 antd，可直接从 \`privatebank-design\` 导入：
+组件 Props 完全继承 antd，可直接从 \`@lf39.03/antd\` 导入：
 
 \`\`\`tsx | pure
-import type { ${propsType} } from 'privatebank-design';
+import type { ${propsType} } from '@lf39.03/antd';
 \`\`\`
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。`;
@@ -603,17 +603,17 @@ ${renderDemos([
   demo({
     title: '类型导入',
     description: '组件 Props 类型可直接从包入口导入。',
-    code: `import type { ${doc.propsType} } from 'privatebank-design';`,
+    code: `import type { ${doc.propsType} } from '@lf39.03/antd';`,
     pure: true,
   }),
 ])}
 
 ## API 与类型
 
-组件 Props 可直接从 \`privatebank-design\` 导入：
+组件 Props 可直接从 \`@lf39.03/antd\` 导入：
 
 \`\`\`tsx | pure
-import type { ${doc.propsType} } from 'privatebank-design';
+import type { ${doc.propsType} } from '@lf39.03/antd';
 \`\`\`
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。`;

@@ -18,7 +18,7 @@ order: 202
 ## 基础页头
 
 ```tsx
-import { ConfigProvider, DetailPageHeader } from 'privatebank-design';
+import { ConfigProvider, DetailPageHeader } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -30,7 +30,7 @@ export default () => (
 ## 带操作按钮
 
 ```tsx
-import { ConfigProvider, DetailPageHeader } from 'privatebank-design';
+import { ConfigProvider, DetailPageHeader } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -50,7 +50,7 @@ export default () => (
 ## 完整详情页头
 
 ```tsx
-import { ConfigProvider, DetailPageHeader, Status } from 'privatebank-design';
+import { ConfigProvider, DetailPageHeader, Status } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -78,15 +78,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入。
 
 ```tsx | pure
-import type { DetailPageHeaderProps } from 'privatebank-design';
+import type { DetailPageHeaderProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 可直接从 `privatebank-design` 导入：
+组件 Props 可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { DetailPageHeaderProps } from 'privatebank-design';
+import type { DetailPageHeaderProps } from '@lf39.03/antd';
 ```
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

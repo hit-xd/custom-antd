@@ -21,7 +21,7 @@ order: 201
 展示业务中常见的状态类型。
 
 ```tsx
-import { ConfigProvider, Space, Status } from 'privatebank-design';
+import { ConfigProvider, Space, Status } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -41,7 +41,7 @@ export default () => (
 在列表中保持状态点和状态文案的统一展示。
 
 ```tsx
-import { ConfigProvider, Status, Table } from 'privatebank-design';
+import { ConfigProvider, Status, Table } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -69,7 +69,7 @@ export default () => (
 用于详情页字段中，避免只用颜色表达状态。
 
 ```tsx
-import { ConfigProvider, Descriptions, Status } from 'privatebank-design';
+import { ConfigProvider, Descriptions, Status } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -90,15 +90,15 @@ export default () => (
 组件 Props 类型可直接从包入口导入。
 
 ```tsx | pure
-import type { StatusProps } from 'privatebank-design';
+import type { StatusProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
 
-组件 Props 可直接从 `privatebank-design` 导入：
+组件 Props 可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { StatusProps } from 'privatebank-design';
+import type { StatusProps } from '@lf39.03/antd';
 ```
 
 业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

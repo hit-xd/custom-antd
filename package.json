@@ -1,5 +1,5 @@
 {
-  "name": "privatebank-design",
+  "name": "@lf39.03/antd",
   "version": "0.1.0",
   "description": "Enterprise UI wrapper and business component library based on Ant Design v5.",
   "type": "module",
