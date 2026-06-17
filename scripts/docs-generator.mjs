@@ -513,7 +513,14 @@ export const configProviderDoc = {
   title: 'ConfigProvider',
   summary:
     '包装 Ant Design v5 的 ConfigProvider，默认注入企业级主题 token，其他能力与 antd 保持兼容。',
-  variants: ['默认企业主题', '覆盖主题 token', '组件级主题', '表单文案', '类型导入'],
+  variants: [
+    '默认企业主题',
+    '覆盖主题 token',
+    '不使用定制主题',
+    '组件级主题',
+    '表单文案',
+    '类型导入',
+  ],
   propsType: 'ConfigProviderProps',
   demos: [
     demo({
@@ -527,6 +534,30 @@ export const configProviderDoc = {
       imports: ['Button'],
       code: `<ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
       <Button type="primary">品牌按钮</Button>
+    </ConfigProvider>`,
+    }),
+    demo({
+      title: '不使用定制主题',
+      description:
+        '传入非空 `theme.token` 后不会注入企业组件级 token，`theme.components` 只使用用户传入的组件配置。',
+      imports: ['Button', 'Space', 'Table'],
+      code: `<ConfigProvider
+      theme={{
+        token: { colorPrimary: '#0052d9' },
+        components: {
+          Button: { borderRadius: 8 },
+          Table: { headerBg: '#F7F4E9' },
+        },
+      }}
+    >
+      <Space direction="vertical" style={{ width: '100%' }}>
+        <Button type="primary">默认派生主按钮</Button>
+        <Table
+          pagination={false}
+          columns={[{ title: '客户', dataIndex: 'name' }]}
+          dataSource={[{ key: '1', name: '张先生' }]}
+        />
+      </Space>
     </ConfigProvider>`,
     }),
     demo({

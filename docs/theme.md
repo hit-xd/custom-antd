@@ -99,18 +99,30 @@ export default () => (
 );
 ```
 
-## 使用默认组件配置
+## 不使用定制主题
 
-包装版 `ConfigProvider` 默认会注入企业组件级 token。传入非空 `theme.token` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 `theme.components`。
+包装版 `ConfigProvider` 默认会注入企业组件级 token。传入非空 `theme.token` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 `theme.components`。此时 `theme.components` 只使用用户传入的组件配置。
 
 ```tsx
-import { Button, ConfigProvider, Space } from 'privatebank-design';
+import { Button, ConfigProvider, Space, Table } from 'privatebank-design';
 
 export default () => (
-  <ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
-    <Space>
+  <ConfigProvider
+    theme={{
+      token: { colorPrimary: '#0052d9' },
+      components: {
+        Button: { borderRadius: 8 },
+        Table: { headerBg: '#F7F4E9' },
+      },
+    }}
+  >
+    <Space direction="vertical" style={{ width: '100%' }}>
       <Button type="primary">默认派生主按钮</Button>
-      <Button>默认按钮</Button>
+      <Table
+        pagination={false}
+        columns={[{ title: '客户', dataIndex: 'name' }]}
+        dataSource={[{ key: '1', name: '张先生' }]}
+      />
     </Space>
   </ConfigProvider>
 );
