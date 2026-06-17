@@ -57,6 +57,20 @@ const themeSource = {
 };
 
 const themeSourceText = Object.values(themeSource).join('\n');
+const isColorValue = (value) =>
+  /^#[0-9a-fA-F]{3,8}$/.test(value) ||
+  /^rgba?\(/.test(value) ||
+  /^hsla?\(/.test(value) ||
+  /^linear-gradient\(/.test(value);
+
+const colorSwatchCell = (value) => {
+  if (!isColorValue(value)) return `\`${value}\``;
+  const escaped = value.replace(/`/g, '');
+  const inlineStyle = value.startsWith('linear-gradient(')
+    ? `background:${escaped}`
+    : `background:${escaped}`;
+  return `<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:14px;${inlineStyle};border:1px solid rgba(0,0,0,0.1);border-radius:2px;flex-shrink:0"></span><code>${escaped}</code></span>`;
+};
 const rawConstValues = Object.fromEntries(
   matchAll(themeSourceText, /export const ([A-Z][A-Z0-9_]*)\s*=\s*([^;\n]+);/g, (m) => [
     m[1],
@@ -241,21 +255,21 @@ order: 100
 | Token | Value |
 | --- | --- |
 ${Object.entries(sourceTheme.brand)
-  .map(([key, value]) => `| Brand ${key} | \`${value}\` |`)
+  .map(([key, value]) => `| Brand ${key} | ${colorSwatchCell(value)} |`)
   .join('\n')}
 
 ## 数据色
 
 | Index | Value |
 | --- | --- |
-${sourceTheme.dataColors.map((value, index) => `| ${index + 1} | \`${value}\` |`).join('\n')}
+${sourceTheme.dataColors.map((value, index) => `| ${index + 1} | ${colorSwatchCell(value)} |`).join('\n')}
 
 ## 渐变色
 
 | Token | Value |
 | --- | --- |
 ${Object.entries(sourceTheme.gradients)
-  .map(([key, value]) => `| ${key} | \`${value}\` |`)
+  .map(([key, value]) => `| ${key} | ${colorSwatchCell(value)} |`)
   .join('\n')}
 
 ## 圆角
@@ -263,7 +277,7 @@ ${Object.entries(sourceTheme.gradients)
 | Token | Value |
 | --- | --- |
 ${Object.entries(sourceTheme.radius)
-  .map(([key, value]) => `| ${key} | \`${value}\` |`)
+  .map(([key, value]) => `| ${key} | ${colorSwatchCell(value)} |`)
   .join('\n')}
 
 ## 阴影
@@ -271,7 +285,7 @@ ${Object.entries(sourceTheme.radius)
 | Token | Value |
 | --- | --- |
 ${Object.entries(sourceTheme.shadows)
-  .map(([key, value]) => `| ${key} | \`${value}\` |`)
+  .map(([key, value]) => `| ${key} | ${colorSwatchCell(value)} |`)
   .join('\n')}
 
 ## 间距
@@ -289,7 +303,7 @@ ${Object.entries(sourceTheme.spacing)
 | --- | --- |
 ${Object.entries(sourceTheme.antdTokens)
   .slice(0, 32)
-  .map(([key, value]) => `| ${key} | \`${value}\` |`)
+  .map(([key, value]) => `| ${key} | ${colorSwatchCell(value)} |`)
   .join('\n')}
 `,
 );
