@@ -33,9 +33,7 @@ export default defineConfig({
       '/components': [
         {
           title: '全局配置',
-          children: [
-            { title: 'ConfigProvider', link: '/components/config-provider' },
-          ],
+          children: [{ title: 'ConfigProvider', link: '/components/config-provider' }],
         },
         ...ComponentSidebar,
       ],

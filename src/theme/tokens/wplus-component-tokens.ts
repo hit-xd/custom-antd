@@ -10,7 +10,7 @@ import {
   ICON_SIZE_XL,
   LAYER_BORDER_RADIUS,
   SURFACE_BORDER_RADIUS,
-  wplusSpacing
+  wplusSpacing,
 } from './primitive-tokens';
 import {
   BUTTON_COLOR_LINK,
@@ -28,7 +28,7 @@ import {
   TABS_SEGMENTED_BG,
   TABS_TEXT_COLOR,
   TABS_TEXT_DISABLED,
-  TABS_TEXT_STRONG
+  TABS_TEXT_STRONG,
 } from './semantic-tokens';
 
 export const wplusComponentTokens = {
@@ -625,6 +625,5 @@ export const wplusComponentTokens = {
     fontSize: FONT_SIZE_BASE,
   },
 } as const;
-
 
 export const privateBankingComponentTokens = wplusComponentTokens;

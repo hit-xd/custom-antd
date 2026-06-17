@@ -2,12 +2,7 @@
  * W+ semantic tokens.
  * Business meaning layered on primitive values.
  */
-import {
-  BRAND_1,
-  BRAND_5,
-  BRAND_6,
-  BRAND_7,
-} from './primitive-tokens';
+import { BRAND_1, BRAND_5, BRAND_6, BRAND_7 } from './primitive-tokens';
 
 export const COLOR_PRIMARY = BRAND_6;
 /** 主色浅 1（hover / 填充背景） */

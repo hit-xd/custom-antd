@@ -33,9 +33,7 @@
   border-color: var(--wplus-color-border);
 }
 
-.ant-tabs-card
-  > .ant-tabs-nav
-  .ant-tabs-tab-active {
+.ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active {
   background: var(--wplus-color-bg-container);
   border-bottom-color: var(--wplus-color-bg-container);
 }

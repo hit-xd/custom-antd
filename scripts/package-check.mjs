@@ -2,10 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-const requiredFiles = [
-  'package/src/reset.css',
-  'package/src/styles/css-variables.css',
-];
+const requiredFiles = ['package/src/reset.css', 'package/src/styles/css-variables.css'];
 
 const pnpmCli = process.env.npm_execpath;
 
@@ -60,15 +57,9 @@ try {
   }
 
   // 验证 Modal 分隔线 CSS 规则已从旧文件迁移到组件级 styles.css
-  const modalCss = readFileSync(
-    path.resolve('src/components/modal/styles.css'),
-    'utf8',
-  );
+  const modalCss = readFileSync(path.resolve('src/components/modal/styles.css'), 'utf8');
 
-  const requiredModalRules = [
-    'border-bottom: 1px solid',
-    'border-top: 1px solid',
-  ];
+  const requiredModalRules = ['border-bottom: 1px solid', 'border-top: 1px solid'];
 
   const missingModalRules = requiredModalRules.filter((rule) => !modalCss.includes(rule));
 

@@ -70,7 +70,6 @@
   color: var(--wplus-color-text-heading);
 }
 
-.ant-modal-root .ant-modal-confirm .ant-modal-confirm-body
-  > .anticon.ant-modal-confirm-body-icon {
+.ant-modal-root .ant-modal-confirm .ant-modal-confirm-body > .anticon.ant-modal-confirm-body-icon {
   color: var(--wplus-color-warning);
 }

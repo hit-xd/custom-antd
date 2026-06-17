@@ -48,6 +48,7 @@ export function App() {
 ```
 
 `import 'privatebank-design/reset.css'` 会加载完整的 W+ 设计体系：
+
 - antd 基础 reset 样式
 - `:root` CSS 变量定义（`--wplus-*`）
 - 所有 B 类组件的样式覆盖
@@ -76,27 +77,27 @@ export function Example() {
 
 组件按定制方式分为两类：
 
-| 类别 | 说明 | 数量 |
-|------|------|------|
-| A 类（纯 Token 驱动） | 直接透传 antd，样式由 `ConfigProvider` 的 design token 控制 | 30+ |
-| B 类（Token + CSS） | 独立 wrapper，通过组件级 `styles.css` 覆盖 token 无法描述的结构/布局 | 12 |
+| 类别                  | 说明                                                                 | 数量 |
+| --------------------- | -------------------------------------------------------------------- | ---- |
+| A 类（纯 Token 驱动） | 直接透传 antd，样式由 `ConfigProvider` 的 design token 控制          | 30+  |
+| B 类（Token + CSS）   | 独立 wrapper，通过组件级 `styles.css` 覆盖 token 无法描述的结构/布局 | 12   |
 
 B 类组件列表：
 
-| 组件 | CSS 覆盖要点 |
-|------|-------------|
-| Modal | Header 56px / Body 30px 内边距 / Footer 52px + 分隔线 |
-| Drawer | Header 56px / Body 24px / Footer 16px + 分隔线 |
-| Table | 表头背景、紧凑模式行高、行 hover 背景 |
-| Menu | 深色顶部导航、侧边导航选中指示线 |
-| Tabs | 导航底线色、ink bar 主色 |
-| Alert | 四态背景/边框精调 |
-| Pagination | 激活态主色边框 |
-| Popover | 标题分隔线、容器圆角与阴影 |
-| Collapse | 边框色与圆角 |
-| Descriptions | 标签与内容文字色 |
-| Upload | 拖拽区边框与背景 |
-| Breadcrumb | 分隔符间距与链接色 |
+| 组件         | CSS 覆盖要点                                          |
+| ------------ | ----------------------------------------------------- |
+| Modal        | Header 56px / Body 30px 内边距 / Footer 52px + 分隔线 |
+| Drawer       | Header 56px / Body 24px / Footer 16px + 分隔线        |
+| Table        | 表头背景、紧凑模式行高、行 hover 背景                 |
+| Menu         | 深色顶部导航、侧边导航选中指示线                      |
+| Tabs         | 导航底线色、ink bar 主色                              |
+| Alert        | 四态背景/边框精调                                     |
+| Pagination   | 激活态主色边框                                        |
+| Popover      | 标题分隔线、容器圆角与阴影                            |
+| Collapse     | 边框色与圆角                                          |
+| Descriptions | 标签与内容文字色                                      |
+| Upload       | 拖拽区边框与背景                                      |
+| Breadcrumb   | 分隔符间距与链接色                                    |
 
 每个 B 类组件目录结构：
 
@@ -156,12 +157,12 @@ export function App() {
 所有设计 Token 同时以 CSS 自定义属性的形式输出，定义在 `:root` 中：
 
 ```css
---wplus-color-brand-7: #b0915c;      /* 品牌主色 */
---wplus-radius-xs: 2px;              /* 小圆角 */
---wplus-radius-sm: 4px;              /* 默认圆角 */
---wplus-space-lg: 16px;              /* 大间距 */
---wplus-shadow-modal: ...;           /* 弹窗投影 */
---wplus-font-size-base: 14px;        /* 基础字号 */
+--wplus-color-brand-7: #b0915c; /* 品牌主色 */
+--wplus-radius-xs: 2px; /* 小圆角 */
+--wplus-radius-sm: 4px; /* 默认圆角 */
+--wplus-space-lg: 16px; /* 大间距 */
+--wplus-shadow-modal: ...; /* 弹窗投影 */
+--wplus-font-size-base: 14px; /* 基础字号 */
 ```
 
 CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者只需引入一次。
@@ -189,12 +190,12 @@ import { Status } from 'privatebank-design/business';
 
 ## 导出入口
 
-| 入口 | 说明 |
-|------|------|
-| `privatebank-design` | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
-| `privatebank-design/theme` | `wplusTheme` 企业主题配置 |
-| `privatebank-design/business` | 可复用业务组件 |
-| `privatebank-design/reset.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖） |
+| 入口                           | 说明                                                       |
+| ------------------------------ | ---------------------------------------------------------- |
+| `privatebank-design`           | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
+| `privatebank-design/theme`     | `wplusTheme` 企业主题配置                                  |
+| `privatebank-design/business`  | 可复用业务组件                                             |
+| `privatebank-design/reset.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
 
 ## 本地开发
 

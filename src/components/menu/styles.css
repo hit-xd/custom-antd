@@ -40,8 +40,7 @@
   color: var(--wplus-color-nav-top-text-selected);
 }
 
-.ant-menu-horizontal .ant-menu-submenu-selected
-  > .ant-menu-submenu-title {
+.ant-menu-horizontal .ant-menu-submenu-selected > .ant-menu-submenu-title {
   color: var(--wplus-color-nav-top-text-selected);
 }
 
@@ -95,9 +94,7 @@
   color: var(--wplus-color-nav-side-text-hover);
 }
 
-.ant-menu-inline
-  .ant-menu-submenu-selected
-  > .ant-menu-submenu-title {
+.ant-menu-inline .ant-menu-submenu-selected > .ant-menu-submenu-title {
   color: var(--wplus-color-nav-side-text-selected);
 }
 

@@ -90,17 +90,17 @@
   --wplus-space-xxxl: 30px;
 
   /* ── 阴影 ──────────────────────────────────────────────────────────────── */
-  --wplus-shadow-hover: 0px 3px 6px 0px rgba(0, 0, 0, 0.12),
-    0px 1px 2px -2px rgba(0, 0, 0, 0.16),
+  --wplus-shadow-hover:
+    0px 3px 6px 0px rgba(0, 0, 0, 0.12), 0px 1px 2px -2px rgba(0, 0, 0, 0.16),
     0px 5px 12px 4px rgba(0, 0, 0, 0.09);
-  --wplus-shadow-default: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
-    0px 6px 16px 0px rgba(0, 0, 0, 0.08),
+  --wplus-shadow-default:
+    0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
     0px 3px 6px -4px rgba(0, 0, 0, 0.12);
-  --wplus-shadow-modal: 0px 12px 48px 16px rgba(0, 0, 0, 0.03),
-    0px 9px 28px 0px rgba(0, 0, 0, 0.05),
+  --wplus-shadow-modal:
+    0px 12px 48px 16px rgba(0, 0, 0, 0.03), 0px 9px 28px 0px rgba(0, 0, 0, 0.05),
     0px 6px 16px -8px rgba(0, 0, 0, 0.08);
-  --wplus-shadow-tooltip: 0px 9px 28px 8px rgba(0, 0, 0, 0.05),
-    0px 6px 16px 0px rgba(0, 0, 0, 0.08),
+  --wplus-shadow-tooltip:
+    0px 9px 28px 8px rgba(0, 0, 0, 0.05), 0px 6px 16px 0px rgba(0, 0, 0, 0.08),
     0px 3px 7px -4px rgba(0, 0, 0, 0.12);
   --wplus-shadow-header: 0 12px 36px rgba(15, 31, 53, 0.18);
 
@@ -114,8 +114,9 @@
   --wplus-control-height-lg: 40px;
 
   /* ── 字体 ──────────────────────────────────────────────────────────────── */
-  --wplus-font-family: "Helvetica Neue", Helvetica, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  --wplus-font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑',
+    Arial, sans-serif;
   --wplus-font-size-base: 14px;
   --wplus-font-size-sm: 12px;
   --wplus-font-size-lg: 16px;
