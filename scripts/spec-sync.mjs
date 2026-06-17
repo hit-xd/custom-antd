@@ -323,8 +323,7 @@ order: 110
 | --- | --- | --- |
 ${componentDocs
   .map(
-    (doc) =>
-      `| ${doc.category} | ${doc.title} | \`import { ${doc.name} } from '@lf39.03/antd'\` |`,
+    (doc) => `| ${doc.category} | ${doc.title} | \`import { ${doc.name} } from '@lf39.03/antd'\` |`,
   )
   .join('\n')}
 `,
