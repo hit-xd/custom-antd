@@ -523,6 +523,7 @@ export const configProviderDoc = {
     }),
     demo({
       title: '覆盖主题',
+      description: '传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。',
       imports: ['Button'],
       code: `<ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
       <Button type="primary">品牌按钮</Button>

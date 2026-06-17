@@ -78,8 +78,17 @@ for (let index = 0; index < 4; index += 1) {
   }
 }
 
-const blockContent = (source, name) =>
-  firstMatch(source, new RegExp(`export const ${name}[^=]*=\\s*([\\s\\S]*?)\\s*] as const;`));
+const arrayBlockContent = (source, name) =>
+  firstMatch(
+    source,
+    new RegExp(`export const ${name}[^=]*=\\s*\\[([\\s\\S]*?)\\]\\s*(?:as const)?;`),
+  );
+
+const objectBlockContent = (source, name) =>
+  firstMatch(
+    source,
+    new RegExp(`export const ${name}[^=]*=\\s*\\{([\\s\\S]*?)\\}\\s*(?:as const)?;`),
+  );
 
 const sourceBrandEntries = matchAll(
   themeSource.primitive,
@@ -88,37 +97,37 @@ const sourceBrandEntries = matchAll(
 ).sort(([a], [b]) => a - b);
 
 const sourceDataColors = matchAll(
-  blockContent(themeSource.primitive, 'DATA_COLORS'),
+  arrayBlockContent(themeSource.primitive, 'DATA_COLORS'),
   /'([^']+)'/g,
   (m) => m[1],
 );
 
 const sourceGradientEntries = matchAll(
-  firstMatch(themeSource.primitive, /export const GRADIENTS\s*=\s*({[\s\S]*?}) as const;/),
+  objectBlockContent(themeSource.primitive, 'GRADIENTS'),
   /(\w+):\s*'([^']+)'/g,
   (m) => [m[1], m[2]],
 );
 
 const sourceRadiusEntries = matchAll(
-  blockContent(themeSource.primitive, 'RADIUS_TOKENS'),
+  arrayBlockContent(themeSource.primitive, 'RADIUS_TOKENS'),
   /key:\s*'([^']+)'[\s\S]*?radius:\s*'([^']+)'/g,
   (m) => [m[1], m[2]],
 );
 
 const sourceShadowEntries = matchAll(
-  blockContent(themeSource.primitive, 'SHADOW_TOKENS'),
+  arrayBlockContent(themeSource.primitive, 'SHADOW_TOKENS'),
   /key:\s*'([^']+)'[\s\S]*?boxShadow:\s*([^,\n]+)/g,
   (m) => [m[1], resolveThemeValue(m[2])],
 );
 
 const sourceSpacingEntries = matchAll(
-  firstMatch(themeSource.primitive, /export const wplusSpacing\s*=\s*({[\s\S]*?}) as const;/),
+  objectBlockContent(themeSource.primitive, 'wplusSpacing'),
   /(\w+):\s*(\d+)/g,
   (m) => [m[1], Number(m[2])],
 );
 
 const sourceTypographyEntries = matchAll(
-  blockContent(themeSource.primitive, 'TYPOGRAPHY_TOKENS'),
+  arrayBlockContent(themeSource.primitive, 'TYPOGRAPHY_TOKENS'),
   /key:\s*'([^']+)'[\s\S]*?label:\s*'([^']+)'[\s\S]*?fontSize:\s*([^,\n]+)[\s\S]*?lineHeight:\s*([^,\n]+)[\s\S]*?fontWeight:\s*([^,\n]+)/g,
   (m) => [
     m[1],
@@ -132,8 +141,8 @@ const sourceTypographyEntries = matchAll(
 );
 
 const sourceAntdTokenEntries = matchAll(
-  firstMatch(themeSource.antd, /export const antdTokens\s*=\s*({[\s\S]*?})\s*as const;/),
-  /^\s{4}([a-zA-Z]\w+):\s*([^,\n]+)/gm,
+  objectBlockContent(themeSource.antd, 'antdTokens'),
+  /^\s+([a-zA-Z]\w+):\s*([^,\n]+)/gm,
   (m) => [m[1], resolveThemeValue(m[2])],
 );
 
@@ -146,7 +155,7 @@ const sourceTheme = {
   spacing: Object.fromEntries(sourceSpacingEntries),
   typography: Object.fromEntries(sourceTypographyEntries),
   antdTokens: Object.fromEntries(sourceAntdTokenEntries),
-  componentTokenCount: matchAll(themeSource.antdComponent, /^\s{4}[A-Z]\w+:\s*{/gm).length,
+  componentTokenCount: matchAll(themeSource.antdComponent, /^\s+[A-Z]\w+:\s*{/gm).length,
   wplusComponentTokenCount: matchAll(themeSource.wplusComponent, /^\s{2}[a-zA-Z]\w+:\s*{/gm).length,
 };
 
@@ -389,7 +398,7 @@ export default () => (
 
 ## 全局 token 覆盖
 
-通过 \`theme.token\` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 \`wplusTheme\`。
+通过 \`theme.token\` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 \`wplusTheme\`。传入非空 \`theme.token\` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
 
 \`\`\`tsx
 import { Button, Card, ConfigProvider, Space } from 'privatebank-design';
@@ -440,6 +449,23 @@ export default () => (
     <Space direction="vertical" style={{ width: '100%' }}>
       <Button type="primary">组件级圆角</Button>
       <Table pagination={false} columns={columns} dataSource={dataSource} />
+    </Space>
+  </ConfigProvider>
+);
+\`\`\`
+
+## 使用默认组件配置
+
+包装版 \`ConfigProvider\` 默认会注入企业组件级 token。传入非空 \`theme.token\` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 \`theme.components\`。
+
+\`\`\`tsx
+import { Button, ConfigProvider, Space } from 'privatebank-design';
+
+export default () => (
+  <ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
+    <Space>
+      <Button type="primary">默认派生主按钮</Button>
+      <Button>默认按钮</Button>
     </Space>
   </ConfigProvider>
 );

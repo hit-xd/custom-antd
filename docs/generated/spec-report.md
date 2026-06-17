@@ -13,10 +13,10 @@ order: 120
 - 品牌色：10 项
 - 数据色：10 项
 - 渐变色：5 项
-- 圆角 token：0 项
-- 阴影 token：0 项
+- 圆角 token：5 项
+- 阴影 token：4 项
 - 间距 token：57 项
-- 字体层级：0 项
+- 字体层级：9 项
 - antd 全局 token：39 项
 - antd 组件 token 分组：42 项
 - W+ 组件 token 分组：56 项
