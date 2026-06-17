@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd';
-import { Button } from 'antd';
+import { Button, theme as antdTheme } from 'antd';
 import { describe, expect, it, vi } from 'vitest';
 import { ConfigProvider } from './index';
 import { wplusTheme } from '../../theme';
@@ -40,7 +40,32 @@ describe('ConfigProvider', () => {
     expect(theme.components?.Table?.headerBg).toBe('#F1F2F7');
   });
 
-  it('merges custom theme overrides on top of the enterprise theme', () => {
+  it('merges component overrides on top of the enterprise component theme', () => {
+    render(
+      <ConfigProvider
+        theme={{
+          components: { Button: { borderRadius: 8 }, Table: { headerBg: '#F7F4E9' } },
+        }}
+      >
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.token?.colorPrimary).toBe('#C5A267');
+    expect(theme?.token?.borderRadius).toBe(4);
+    expect(theme?.token?.colorLink).toBe('#1874FF');
+    expect(theme?.components?.Button?.borderRadius).toBe(8);
+    expect(theme?.components?.Button?.colorPrimary).toBe(
+      wplusTheme.components?.Button?.colorPrimary,
+    );
+    expect(theme?.components?.Button?.primaryShadow).toBe('none');
+    expect(theme?.components?.Table?.headerBg).toBe('#F7F4E9');
+    expect(theme?.components?.Table?.headerColor).toBe(wplusTheme.components?.Table?.headerColor);
+  });
+
+  it('uses antd default component tokens when custom global tokens are provided', () => {
     render(
       <ConfigProvider
         theme={{
@@ -58,6 +83,32 @@ describe('ConfigProvider', () => {
     expect(theme?.token?.borderRadius).toBe(6);
     expect(theme?.token?.colorLink).toBe('#1874FF');
     expect(theme?.components?.Button?.borderRadius).toBe(8);
-    expect(theme?.components?.Table?.headerBg).toBe('#F1F2F7');
+    expect(theme?.components?.Button?.colorPrimary).toBeUndefined();
+    expect(theme?.components?.Table).toBeUndefined();
+  });
+
+  it('does not inject enterprise component tokens when components is an empty object', () => {
+    render(
+      <ConfigProvider theme={{ components: {} }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.token?.colorPrimary).toBe('#C5A267');
+    expect(theme?.components).toEqual({});
+  });
+
+  it('allows custom algorithms to override the default algorithm', () => {
+    render(
+      <ConfigProvider theme={{ algorithm: antdTheme.darkAlgorithm }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.algorithm).toBe(antdTheme.darkAlgorithm);
   });
 });

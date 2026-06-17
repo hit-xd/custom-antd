@@ -41,6 +41,8 @@ export default () => (
 );
 ```
 
+传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
+
 ## 组件级主题
 
 ```tsx

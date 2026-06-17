@@ -43,7 +43,7 @@ export default () => (
 
 ## 全局 token 覆盖
 
-通过 `theme.token` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 `wplusTheme`。
+通过 `theme.token` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 `wplusTheme`。传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
 
 ```tsx
 import { Button, Card, ConfigProvider, Space } from 'privatebank-design';
@@ -94,6 +94,23 @@ export default () => (
     <Space direction="vertical" style={{ width: '100%' }}>
       <Button type="primary">组件级圆角</Button>
       <Table pagination={false} columns={columns} dataSource={dataSource} />
+    </Space>
+  </ConfigProvider>
+);
+```
+
+## 使用默认组件配置
+
+包装版 `ConfigProvider` 默认会注入企业组件级 token。传入非空 `theme.token` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 `theme.components`。
+
+```tsx
+import { Button, ConfigProvider, Space } from 'privatebank-design';
+
+export default () => (
+  <ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
+    <Space>
+      <Button type="primary">默认派生主按钮</Button>
+      <Button>默认按钮</Button>
     </Space>
   </ConfigProvider>
 );
