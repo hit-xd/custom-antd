@@ -1,7 +1,7 @@
 import './styles.css';
 
-import { Breadcrumb as AntdBreadcrumb } from 'antd';
 import type { BreadcrumbProps as AntdBreadcrumbProps } from 'antd';
+import { Breadcrumb as AntdBreadcrumb } from 'antd';
 
 export type BreadcrumbProps = AntdBreadcrumbProps;
 

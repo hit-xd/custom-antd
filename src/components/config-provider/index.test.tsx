@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd';
-import { Button, theme as antdTheme } from 'antd';
+import { Button, DatePicker, theme as antdTheme } from 'antd';
 import { describe, expect, it, vi } from 'vitest';
-import { ConfigProvider } from './index';
 import { wplusTheme } from '../../theme';
+import { ConfigProvider } from './index';
 
 let lastAntdConfigProviderProps: AntdConfigProviderProps | undefined;
 
@@ -14,7 +14,9 @@ vi.mock('antd', async (importOriginal) => {
     ...actual,
     ConfigProvider: ({ children, ...props }: AntdConfigProviderProps) => {
       lastAntdConfigProviderProps = props;
-      return <>{children}</>;
+      const ActualConfigProvider = actual.ConfigProvider;
+
+      return <ActualConfigProvider {...props}>{children}</ActualConfigProvider>;
     },
   };
 });
@@ -28,6 +30,27 @@ describe('ConfigProvider', () => {
     );
 
     expect(screen.getByText('Save')).toBeTruthy();
+  });
+
+  it('uses the resolved zh_CN locale config by default', () => {
+    render(
+      <ConfigProvider>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    expect(lastAntdConfigProviderProps?.locale?.locale).toBe('zh-cn');
+    expect(lastAntdConfigProviderProps?.locale).not.toHaveProperty('default');
+  });
+
+  it('renders date components with the default zh_CN locale', () => {
+    render(
+      <ConfigProvider>
+        <DatePicker />
+      </ConfigProvider>,
+    );
+
+    expect(screen.getByPlaceholderText('请选择日期')).toBeTruthy();
   });
 
   it('uses design spec tokens as the default enterprise theme', () => {

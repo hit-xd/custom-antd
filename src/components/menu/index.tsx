@@ -1,7 +1,7 @@
 import './styles.css';
 
-import { Menu as AntdMenu } from 'antd';
 import type { MenuProps as AntdMenuProps } from 'antd';
+import { Menu as AntdMenu } from 'antd';
 
 export type MenuProps = AntdMenuProps;
 

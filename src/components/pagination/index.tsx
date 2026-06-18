@@ -1,8 +1,8 @@
-import './styles.css';
 import React from 'react';
+import './styles.css';
 
-import { Pagination as AntdPagination } from 'antd';
 import type { PaginationProps as AntdPaginationProps } from 'antd';
+import { Pagination as AntdPagination } from 'antd';
 
 export type PaginationProps = AntdPaginationProps;
 

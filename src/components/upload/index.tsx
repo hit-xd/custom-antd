@@ -1,7 +1,7 @@
 import './styles.css';
 
-import { Upload as AntdUpload } from 'antd';
 import type { UploadProps as AntdUploadProps } from 'antd';
+import { Upload as AntdUpload } from 'antd';
 
 export type UploadProps = AntdUploadProps;
 

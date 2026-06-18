@@ -1,6 +1,6 @@
-import type { CSSProperties, ReactNode } from 'react';
-import { Breadcrumb, Button, Space } from 'antd';
 import type { BreadcrumbProps, ButtonProps } from 'antd';
+import { Breadcrumb, Button, Space } from 'antd';
+import type { CSSProperties, ReactNode } from 'react';
 
 export interface DetailPageHeaderAction extends ButtonProps {
   key: string;

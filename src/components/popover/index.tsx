@@ -1,7 +1,7 @@
 import './styles.css';
 
-import { Popover as AntdPopover } from 'antd';
 import type { PopoverProps as AntdPopoverProps } from 'antd';
+import { Popover as AntdPopover } from 'antd';
 
 export type PopoverProps = AntdPopoverProps;
 
