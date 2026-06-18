@@ -1,8 +1,11 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, readFileSync, rmSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-const requiredFiles = ['package/src/reset.css', 'package/src/styles/css-variables.css'];
+const cssExport = './index.css';
+const expectedCssExportTarget = './dist/index.css';
+const expectedPackedCssFile = 'package/dist/index.css';
+const expectedPackedManifestFile = 'package/package.json';
 
 const pnpmCli = process.env.npm_execpath;
 
@@ -20,16 +23,26 @@ try {
     stdio: 'pipe',
   });
 
-  const manifest = JSON.parse(readFileSync(path.resolve('package.json'), 'utf8'));
-  const tarballName = `${manifest.name.replace('/', '-')}-${manifest.version}.tgz`;
+  const tarballs = readdirSync(packDir).filter((file) => file.endsWith('.tgz'));
+
+  if (tarballs.length !== 1) {
+    throw new Error(
+      `Expected exactly one packed tarball, found ${tarballs.length}:\n${tarballs
+        .map((file) => `- ${file}`)
+        .join('\n')}`,
+    );
+  }
+
+  const tarballPath = path.join(packDir, tarballs[0]);
   const packedFiles = new Set(
-    execFileSync('tar', ['-tf', path.join(packDir, tarballName)], {
+    execFileSync('tar', ['-tf', tarballPath], {
       encoding: 'utf8',
     })
       .split(/\r?\n/)
       .filter(Boolean),
   );
 
+  const requiredFiles = [expectedPackedManifestFile, expectedPackedCssFile];
   const missingFiles = requiredFiles.filter((file) => !packedFiles.has(file));
 
   if (missingFiles.length > 0) {
@@ -38,40 +51,45 @@ try {
     );
   }
 
-  const resetCss = readFileSync(path.resolve('src/reset.css'), 'utf8');
-  const resetImports = [...resetCss.matchAll(/@import\s+['"](.+)['"];/g)].map(
-    ([, importPath]) => importPath,
+  const packedManifest = JSON.parse(
+    execFileSync('tar', ['-xOf', tarballPath, expectedPackedManifestFile], {
+      encoding: 'utf8',
+    }),
   );
 
-  const missingResetImports = resetImports
-    .filter((importPath) => importPath.startsWith('./'))
-    .map((importPath) => `package/src/${importPath.slice(2)}`)
-    .filter((file) => !packedFiles.has(file));
+  const cssExportTarget = packedManifest.exports?.[cssExport];
 
-  if (missingResetImports.length > 0) {
+  if (cssExportTarget !== expectedCssExportTarget) {
     throw new Error(
-      `Package is missing files imported by src/reset.css:\n${missingResetImports
-        .map((file) => `- ${file}`)
+      `Package export ${cssExport} must point to ${expectedCssExportTarget}, got ${JSON.stringify(
+        cssExportTarget,
+      )}.`,
+    );
+  }
+
+  const indexCss = execFileSync('tar', ['-xOf', tarballPath, expectedPackedCssFile], {
+    encoding: 'utf8',
+  });
+
+  const requiredCssSnippets = [
+    'antd/dist/reset.css',
+    '--wplus-',
+    'border-bottom: 1px solid',
+    'border-top: 1px solid',
+  ];
+
+  const missingCssSnippets = requiredCssSnippets.filter((snippet) => !indexCss.includes(snippet));
+
+  if (missingCssSnippets.length > 0) {
+    throw new Error(
+      `Package CSS is missing required content:\n${missingCssSnippets
+        .map((snippet) => `- ${snippet}`)
         .join('\n')}`,
     );
   }
 
-  // 验证 Modal 分隔线 CSS 规则已从旧文件迁移到组件级 styles.css
-  const modalCss = readFileSync(path.resolve('src/components/modal/styles.css'), 'utf8');
-
-  const requiredModalRules = ['border-bottom: 1px solid', 'border-top: 1px solid'];
-
-  const missingModalRules = requiredModalRules.filter((rule) => !modalCss.includes(rule));
-
-  if (missingModalRules.length > 0) {
-    throw new Error(
-      `Modal divider rules are missing from component overrides:\n${missingModalRules
-        .map((rule) => `- ${rule}`)
-        .join('\n')}`,
-    );
-  }
-
-  console.log('Package CSS files are publishable.');
+  console.log('Package CSS export is publishable.');
 } finally {
   rmSync(packDir, { force: true, recursive: true });
+  rmSync(path.resolve('.pack-inspect'), { force: true, recursive: true });
 }

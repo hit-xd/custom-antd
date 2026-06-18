@@ -36,7 +36,7 @@ pnpm add @lf39.03/antd antd react react-dom
 
 ```tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/reset.css';
+import '@lf39.03/antd/index.css';
 
 export function App() {
   return (
@@ -47,7 +47,7 @@ export function App() {
 }
 ```
 
-`import '@lf39.03/antd/reset.css'` 会加载完整的 W+ 设计体系：
+`import '@lf39.03/antd/index.css'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
 
 - antd 基础 reset 样式
 - `:root` CSS 变量定义（`--wplus-*`）
@@ -123,13 +123,21 @@ src/theme/tokens/
 主入口导出企业主题：
 
 ```ts
-import { wplusTheme } from '@lf39.03/antd';
+import {
+  privateBankingPrimitiveTokens,
+  privateBankingSemanticTokens,
+  wplusTheme,
+} from '@lf39.03/antd';
 ```
 
 也可以从主题子入口导入：
 
 ```ts
-import { wplusTheme } from '@lf39.03/antd/theme';
+import {
+  privateBankingPrimitiveTokens,
+  privateBankingSemanticTokens,
+  wplusTheme,
+} from '@lf39.03/antd/theme';
 ```
 
 `ConfigProvider` 会默认使用 `wplusTheme`，并合并业务侧传入的 antd `theme`：
@@ -152,6 +160,14 @@ export function App() {
 }
 ```
 
+主题合并规则：
+
+- 默认使用 `antd` 的 `defaultAlgorithm`，业务侧传入 `algorithm` 时会覆盖默认算法。
+- `theme.token` 会覆盖企业全局 token。
+- 未传自定义全局 token，且未显式传入 `components: {}` 时，组件 token 会在企业组件 token 基础上合并业务侧 `theme.components`。
+- 传入自定义全局 token 时，组件 token 只使用业务侧 `theme.components`，不再自动补齐企业组件 token。
+- `components: {}` 表示显式关闭企业组件 token 注入。
+
 ### CSS 变量
 
 所有设计 Token 同时以 CSS 自定义属性的形式输出，定义在 `:root` 中：
@@ -165,7 +181,7 @@ export function App() {
 --wplus-font-size-base: 14px; /* 基础字号 */
 ```
 
-CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者只需引入一次。
+CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者通过 `@lf39.03/antd/index.css` 引入一次即可。
 
 ## 业务组件
 
@@ -195,7 +211,7 @@ import { Status } from '@lf39.03/antd/business';
 | `@lf39.03/antd`           | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
 | `@lf39.03/antd/theme`     | `wplusTheme` 企业主题配置                                  |
 | `@lf39.03/antd/business`  | 可复用业务组件                                             |
-| `@lf39.03/antd/reset.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
+| `@lf39.03/antd/index.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
 
 ## 本地开发
 
@@ -211,11 +227,15 @@ pnpm dev
 ```bash
 pnpm docs:dev       # 启动 dumi 文档站
 pnpm docs:build     # 构建静态文档
+pnpm docs:preview   # 预览静态文档
 pnpm build          # 输出 ESM + CJS + DTS 到 dist/
 pnpm typecheck      # TypeScript 类型检查
 pnpm test           # 运行 Vitest
+pnpm test:watch     # 以 watch 模式运行 Vitest
 pnpm lint           # ESLint 检查
 pnpm spec:sync      # 从 ui-spec/ 同步生成主题 Token
+pnpm spec:check     # 校验 ui-spec/ 与生成文件一致性
+pnpm package:check  # 校验发布包关键文件
 pnpm check          # 串联规范同步、格式、lint、类型检查和测试
 pnpm run ci         # 完整 CI（check + build + package-check + docs:build）
 ```
