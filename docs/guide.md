@@ -17,7 +17,7 @@ pnpm add @lf39.03/antd antd react react-dom
 
 ```tsx | pure
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css$';
+import '@lf39.03/antd/index.css';
 
 export default () => (
   <ConfigProvider>

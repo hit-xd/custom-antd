@@ -10,29 +10,31 @@ export interface ConfigProviderProps extends AntdConfigProviderProps {
 const isEmptyObject = (value: unknown): value is Record<string, never> =>
   !!value && typeof value === 'object' && Object.keys(value).length === 0;
 
+const hasOwnThemeKey = (theme: ThemeConfig | undefined, key: keyof ThemeConfig) =>
+  !!theme && Object.prototype.hasOwnProperty.call(theme, key);
+
 const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
-  let customToken;
-  let customComponents;
+  const hasCustomToken = hasOwnThemeKey(theme, 'token');
+  const hasCustomComponents = hasOwnThemeKey(theme, 'components');
+  const useEnterpriseTheme = !hasCustomToken && !hasCustomComponents;
 
-  if (theme?.token && isEmptyObject(theme.token)) {
-    customToken = wplusTheme.token;
-  } else {
-    customToken = theme?.token;
-  }
+  const token = useEnterpriseTheme
+    ? wplusTheme.token
+    : hasCustomToken && isEmptyObject(theme?.token)
+      ? {}
+      : theme?.token;
 
-  if (theme?.components && isEmptyObject(theme.components)) {
-    customComponents = wplusTheme.components;
-  } else {
-    customComponents = theme?.components;
-  }
+  const components = useEnterpriseTheme
+    ? wplusTheme.components
+    : hasCustomComponents && isEmptyObject(theme?.components)
+      ? {}
+      : theme?.components;
 
   return {
     algorithm: antdTheme.defaultAlgorithm,
     ...theme,
-    token: {
-      ...customToken,
-    },
-    components: { ...customComponents },
+    token,
+    components,
   };
 };
 

@@ -36,7 +36,7 @@ pnpm add @lf39.03/antd antd react react-dom
 
 ```tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css$$';
+import '@lf39.03/antd/index.css';
 
 export function App() {
   return (
@@ -47,7 +47,7 @@ export function App() {
 }
 ```
 
-`import '@lf39.03/antd/index.css$$'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
+`import '@lf39.03/antd/index.css'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
 
 - antd 基础 reset 样式
 - `:root` CSS 变量定义（`--wplus-*`）
@@ -140,7 +140,7 @@ import {
 } from '@lf39.03/antd/theme';
 ```
 
-`ConfigProvider` 会默认使用 `wplusTheme`，并合并业务侧传入的 antd `theme`：
+`ConfigProvider` 在未传 `token` 和 `components` 时会默认使用 `wplusTheme`，并透传业务侧传入的 antd `theme`：
 
 ```tsx
 import { ConfigProvider } from '@lf39.03/antd';
@@ -163,10 +163,9 @@ export function App() {
 主题合并规则：
 
 - 默认使用 `antd` 的 `defaultAlgorithm`，业务侧传入 `algorithm` 时会覆盖默认算法。
-- `theme.token` 会覆盖企业全局 token。
-- 未传自定义全局 token，且未显式传入 `components: {}` 时，组件 token 会在企业组件 token 基础上合并业务侧 `theme.components`。
-- 传入自定义全局 token 时，组件 token 只使用业务侧 `theme.components`，不再自动补齐企业组件 token。
-- `components: {}` 表示显式关闭企业组件 token 注入。
+- 未传 `theme.token` 和 `theme.components` 时使用企业全局 token 和企业组件 token。
+- `theme.token: {}` 或 `theme.components: {}` 表示显式使用 Ant Design 默认主题。
+- `theme.token` 或 `theme.components` 为非空对象时，只使用传入值，其他配置继续使用 Ant Design 默认值。
 
 ### CSS 变量
 
@@ -181,7 +180,7 @@ export function App() {
 --wplus-font-size-base: 14px; /* 基础字号 */
 ```
 
-CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者通过 `@lf39.03/antd/index.css$$` 引入一次即可。
+CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者通过 `@lf39.03/antd/index.css` 引入一次即可。
 
 ## 业务组件
 
@@ -211,7 +210,7 @@ import { Status } from '@lf39.03/antd/business';
 | `@lf39.03/antd`             | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
 | `@lf39.03/antd/theme`       | `wplusTheme` 企业主题配置                                  |
 | `@lf39.03/antd/business`    | 可复用业务组件                                             |
-| `@lf39.03/antd/index.css$$` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
+| `@lf39.03/antd/index.css`   | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
 
 ## 本地开发
 

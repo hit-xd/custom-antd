@@ -400,7 +400,7 @@ order: 2
 
 \`\`\`tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css$$';
+import '@lf39.03/antd/index.css';
 
 export default () => (
   <ConfigProvider>
@@ -411,7 +411,7 @@ export default () => (
 
 ## 全局 token 覆盖
 
-通过 \`theme.token\` 覆盖 Ant Design 全局 token。传入值会覆盖企业默认值，未传入的 token 继续使用 \`wplusTheme\`。传入非空 \`theme.token\` 后，组件级 token 会回到 Ant Design 默认派生逻辑。
+通过 \`theme.token\` 覆盖 Ant Design 全局 token。未传 \`token\` 和 \`components\` 时默认使用企业主题；显式传入 \`theme.token\` 后，只使用传入的 token，其余 token 回到 Ant Design 默认值。
 
 \`\`\`tsx
 import { Button, Card, ConfigProvider, Space } from '@lf39.03/antd';
@@ -469,7 +469,7 @@ export default () => (
 
 ## 不使用定制主题
 
-包装版 \`ConfigProvider\` 默认会注入企业组件级 token。传入非空 \`theme.token\` 后，会自动使用 Ant Design 默认组件派生配置。如果只想显式清空企业组件级 token，也可以传入空的 \`theme.components\`。此时 \`theme.components\` 只使用用户传入的组件配置。
+包装版 \`ConfigProvider\` 在未传 \`token\` 和 \`components\` 时会注入企业主题。显式传入空对象会使用 Ant Design 默认主题；传入非空对象时只应用传入值，其他配置继续使用 Ant Design 默认值。
 
 \`\`\`tsx
 import { Button, ConfigProvider, Space, Table } from '@lf39.03/antd';
@@ -569,7 +569,7 @@ export default () => (
 
 ## CSS 变量
 
-\`@lf39.03/antd/index.css$$\` 会注入基础样式和 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
+\`@lf39.03/antd/index.css\` 会注入基础样式和 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
 
 \`\`\`css
 .page {
