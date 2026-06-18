@@ -1,7 +1,26 @@
-import { ConfigProvider as AntdConfigProvider, theme as antdTheme } from 'antd';
 import type { ConfigProviderProps as AntdConfigProviderProps, ThemeConfig } from 'antd';
+import { ConfigProvider as AntdConfigProvider, theme as antdTheme } from 'antd';
+import zhCNRaw from 'antd/locale/zh_CN.js';
 import type { PropsWithChildren } from 'react';
 import { wplusTheme } from '../../theme';
+
+type AntdLocale = NonNullable<AntdConfigProviderProps['locale']>;
+type LocaleModule = AntdLocale | { default: LocaleModule };
+
+const unwrapLocale = (localeModule: LocaleModule): AntdLocale => {
+  if (
+    localeModule &&
+    typeof localeModule === 'object' &&
+    'default' in localeModule &&
+    !('locale' in localeModule)
+  ) {
+    return unwrapLocale(localeModule.default);
+  }
+
+  return localeModule as AntdLocale;
+};
+
+const zhCN = unwrapLocale(zhCNRaw as LocaleModule);
 
 export interface ConfigProviderProps extends AntdConfigProviderProps {
   theme?: ThemeConfig;
@@ -40,11 +59,12 @@ const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
 
 export function ConfigProvider({
   children,
+  locale = zhCN,
   theme,
   ...props
 }: PropsWithChildren<ConfigProviderProps>) {
   return (
-    <AntdConfigProvider {...props} theme={mergeTheme(theme)}>
+    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme)}>
       {children}
     </AntdConfigProvider>
   );
