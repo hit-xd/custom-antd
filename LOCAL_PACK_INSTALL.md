@@ -99,7 +99,7 @@ pnpm add file:E:\tmp\pack\@lf39.03/antd-0.1.0.tgz
 
 ```tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/reset.css';
+import '@lf39.03/antd/index.css$';
 
 export function App() {
   return (
@@ -141,11 +141,11 @@ pnpm dev
 
 - `@lf39.03/antd` 组件可以正常导入。
 - `ConfigProvider` 注入的企业主题生效。
-- `@lf39.03/antd/reset.css` 引入后组件样式和 CSS 变量生效。
+- `@lf39.03/antd/index.css$` 引入后组件样式和 CSS 变量生效。
 
 ## 7. 常见问题
 
-### 7.1 安装后找不到 `@lf39.03/antd/reset.css`
+### 7.1 安装后找不到 `@lf39.03/antd/index.css$`
 
 确认打包前执行过：
 
@@ -164,7 +164,7 @@ dist/index.css
 确认目标项目入口已引入：
 
 ```tsx
-import '@lf39.03/antd/reset.css';
+import '@lf39.03/antd/index.css$';
 ```
 
 ### 7.3 主题 token 没有生效

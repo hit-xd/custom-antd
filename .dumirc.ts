@@ -5,8 +5,8 @@ import { ComponentSidebar } from './dumi.sidebar';
 export default defineConfig({
   outputPath: 'docs-dist',
   alias: {
+    '@lf39.03/antd/index.css$$': path.resolve(process.cwd(), 'src/reset.css'),
     '@lf39.03/antd': path.resolve(process.cwd(), 'src'),
-    '@lf39.03/antd/reset.css': path.resolve(process.cwd(), 'src/reset.css'),
   },
   resolve: {
     atomDirs: [

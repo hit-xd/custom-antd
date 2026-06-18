@@ -36,7 +36,7 @@ pnpm add @lf39.03/antd antd react react-dom
 
 ```tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css';
+import '@lf39.03/antd/index.css$$';
 
 export function App() {
   return (
@@ -47,7 +47,7 @@ export function App() {
 }
 ```
 
-`import '@lf39.03/antd/index.css'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
+`import '@lf39.03/antd/index.css$$'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
 
 - antd 基础 reset 样式
 - `:root` CSS 变量定义（`--wplus-*`）
@@ -181,7 +181,7 @@ export function App() {
 --wplus-font-size-base: 14px; /* 基础字号 */
 ```
 
-CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者通过 `@lf39.03/antd/index.css` 引入一次即可。
+CSS 变量与组件样式打包在同一个 `dist/index.css` 中，消费者通过 `@lf39.03/antd/index.css$$` 引入一次即可。
 
 ## 业务组件
 
@@ -211,7 +211,7 @@ import { Status } from '@lf39.03/antd/business';
 | `@lf39.03/antd`           | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
 | `@lf39.03/antd/theme`     | `wplusTheme` 企业主题配置                                  |
 | `@lf39.03/antd/business`  | 可复用业务组件                                             |
-| `@lf39.03/antd/index.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
+| `@lf39.03/antd/index.css$$` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
 
 ## 本地开发
 

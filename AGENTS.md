@@ -24,7 +24,7 @@
 - `@lf39.03/antd`：主入口，透传 antd + W+ 包装组件 + 业务组件 + 主题。
 - `@lf39.03/antd/theme`：主题子入口。
 - `@lf39.03/antd/business`：业务组件子入口。
-- `@lf39.03/antd/index.css`：完整样式入口，对应 `dist/index.css`。
+- `@lf39.03/antd/index.css$$`：完整样式入口，对应 `dist/index.css`。
 
 构建配置在 `tsup.config.ts`，入口包括：
 
@@ -172,7 +172,7 @@ README 中说明 token 文件由 `pnpm spec:sync` 从 `ui-spec/` 同步生成。
 
 - 输出目录：`docs-dist`
 - `@lf39.03/antd` alias 到本地 `src`
-- `@lf39.03/antd/reset.css` alias 到 `src/reset.css`
+- `@lf39.03/antd/index.css$` alias 到 `src/reset.css`
 - 组件侧边栏部分来自 `dumi.sidebar.ts`
 
 全局指南放在 `docs/`。组件文档优先放在组件目录下的 `index.md` 或由 `pnpm spec:sync` 生成到 `docs/components/`。组件文档应包含用途说明、基础示例、可配置示例和 API 说明。示例代码应使用 `@lf39.03/antd` 导入，体现业务项目真实用法。

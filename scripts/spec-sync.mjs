@@ -400,7 +400,7 @@ order: 2
 
 \`\`\`tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css';
+import '@lf39.03/antd/index.css$$';
 
 export default () => (
   <ConfigProvider>
@@ -569,7 +569,7 @@ export default () => (
 
 ## CSS 变量
 
-\`@lf39.03/antd/index.css\` 会注入基础样式和 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
+\`@lf39.03/antd/index.css$$\` 会注入基础样式和 CSS 变量，适合在业务 CSS、Less 或 CSS Modules 中引用。
 
 \`\`\`css
 .page {

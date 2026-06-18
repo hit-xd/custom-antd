@@ -25,7 +25,7 @@
       "import": "./dist/business/index.js",
       "require": "./dist/business/index.cjs"
     },
-    "./index.css": "./dist/index.css"
+    "./dist/index.css": "./dist/index.css"
   },
   "files": [
     "dist",
