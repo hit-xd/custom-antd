@@ -7,47 +7,32 @@ export interface ConfigProviderProps extends AntdConfigProviderProps {
   theme?: ThemeConfig;
 }
 
-const isNonEmptyObject = (value: unknown): value is Record<string, unknown> =>
-  !!value && typeof value === 'object' && Object.keys(value).length > 0;
-
 const isEmptyObject = (value: unknown): value is Record<string, never> =>
   !!value && typeof value === 'object' && Object.keys(value).length === 0;
 
-const mergeComponentThemes = (
-  components?: ThemeConfig['components'],
-): ThemeConfig['components'] => {
-  const mergedComponents = { ...wplusTheme.components } as Record<string, unknown>;
-  const customComponents = components as Record<string, unknown> | undefined;
-
-  Object.entries(customComponents ?? {}).forEach(([componentName, componentTheme]) => {
-    const defaultComponentTheme = mergedComponents[componentName];
-
-    mergedComponents[componentName] = {
-      ...(defaultComponentTheme && typeof defaultComponentTheme === 'object'
-        ? defaultComponentTheme
-        : undefined),
-      ...(componentTheme && typeof componentTheme === 'object' ? componentTheme : undefined),
-    };
-  });
-
-  return mergedComponents as ThemeConfig['components'];
-};
-
 const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
-  const hasCustomToken = isNonEmptyObject(theme?.token);
-  const hasEmptyComponents = isEmptyObject(theme?.components);
-  const shouldUseEnterpriseComponents = !hasCustomToken && !hasEmptyComponents;
+  let customToken;
+  let customComponents;
+
+  if (theme?.token && isEmptyObject(theme.token)) {
+    customToken = wplusTheme.token;
+  } else {
+    customToken = theme?.token;
+  }
+
+  if (theme?.components && isEmptyObject(theme.components)) {
+    customComponents = wplusTheme.components;
+  } else {
+    customComponents = theme?.components;
+  }
 
   return {
     algorithm: antdTheme.defaultAlgorithm,
     ...theme,
     token: {
-      ...wplusTheme.token,
-      ...theme?.token,
+      ...customToken,
     },
-    components: shouldUseEnterpriseComponents
-      ? mergeComponentThemes(theme?.components)
-      : theme?.components,
+    components: { ...customComponents },
   };
 };
 
