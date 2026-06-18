@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-const cssExport = './index.css';
+const cssExport = './dist/index.css';
 const expectedCssExportTarget = './dist/index.css';
 const expectedPackedCssFile = 'package/dist/index.css';
 const expectedPackedManifestFile = 'package/package.json';
