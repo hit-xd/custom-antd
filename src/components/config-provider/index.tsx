@@ -35,7 +35,7 @@ const hasOwnThemeKey = (theme: ThemeConfig | undefined, key: keyof ThemeConfig) 
 const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
   const hasCustomToken = hasOwnThemeKey(theme, 'token');
   const hasCustomComponents = hasOwnThemeKey(theme, 'components');
-  const useEnterpriseTheme = !hasCustomToken && !hasCustomComponents;
+  const useEnterpriseTheme = theme === undefined;
 
   const token = useEnterpriseTheme
     ? wplusTheme.token

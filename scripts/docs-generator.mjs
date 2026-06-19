@@ -517,7 +517,7 @@ export const configProviderDoc = {
     '默认企业主题',
     '覆盖主题 token',
     '不使用定制主题',
-    '组件级主题',
+    '默认组件主题',
     '表单文案',
     '类型导入',
   ],
@@ -530,28 +530,19 @@ export const configProviderDoc = {
     }),
     demo({
       title: '覆盖主题',
-      description: '传入非空 `theme.token` 后，组件级 token 会回到 Ant Design 默认派生逻辑。',
+      description: '默认启用 W+ 主题和 CSS 变量；业务侧传入 `theme.cssVar` 时可接管变量命名。',
       imports: ['Button'],
-      code: `<ConfigProvider theme={{ token: { colorPrimary: '#0052d9' } }}>
-      <Button type="primary">品牌按钮</Button>
+      code: `<ConfigProvider theme={{ cssVar: { prefix: 'wplus', key: 'demo' } }}>
+      <Button type="primary">提交申请</Button>
     </ConfigProvider>`,
     }),
     demo({
       title: '不使用定制主题',
-      description:
-        '传入非空 `theme.token` 后不会注入企业组件级 token，`theme.components` 只使用用户传入的组件配置。',
+      description: '显式传入空 `theme` 对象时不会注入企业主题配置。',
       imports: ['Button', 'Space', 'Table'],
-      code: `<ConfigProvider
-      theme={{
-        token: { colorPrimary: '#0052d9' },
-        components: {
-          Button: { borderRadius: 8 },
-          Table: { headerBg: '#F7F4E9' },
-        },
-      }}
-    >
+      code: `<ConfigProvider theme={{}}>
       <Space direction="vertical" style={{ width: '100%' }}>
-        <Button type="primary">默认派生主按钮</Button>
+        <Button type="primary">Ant Design 默认主按钮</Button>
         <Table
           pagination={false}
           columns={[{ title: '客户', dataIndex: 'name' }]}
@@ -561,14 +552,17 @@ export const configProviderDoc = {
     </ConfigProvider>`,
     }),
     demo({
-      title: '组件级主题',
-      imports: ['Button', 'Space'],
-      code: `<ConfigProvider theme={{ components: { Button: { borderRadius: 8 } } }}>
-      <Space>
-        <Button type="primary">主按钮</Button>
-        <Button>默认按钮</Button>
-      </Space>
-    </ConfigProvider>`,
+      title: '默认组件主题',
+      description: '未传 `theme.components` 时，组件默认使用 W+ 组件级 token。',
+      imports: ['Button', 'Space', 'Table'],
+      code: `<Space direction="vertical" style={{ width: '100%' }}>
+        <Button type="primary">新增客户</Button>
+        <Table
+          pagination={false}
+          columns={[{ title: '客户', dataIndex: 'name' }]}
+          dataSource={[{ key: '1', name: '张先生' }]}
+        />
+      </Space>`,
     }),
     demo({
       title: '表单文案',

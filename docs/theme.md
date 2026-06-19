@@ -50,17 +50,10 @@ export default () => (
 import { Button, Card, ConfigProvider, Space } from '@lf39.03/antd';
 
 export default () => (
-  <ConfigProvider
-    theme={{
-      token: {
-        colorPrimary: '#0052d9',
-        borderRadius: 6,
-      },
-    }}
-  >
+  <ConfigProvider>
     <Space direction="vertical">
-      <Button type="primary">蓝色主按钮</Button>
-      <Card title="统一圆角">内容区域</Card>
+      <Button type="primary">提交申请</Button>
+      <Card title="客户资产概览">内容区域</Card>
     </Space>
   </ConfigProvider>
 );
@@ -68,7 +61,7 @@ export default () => (
 
 ## 组件级 token 覆盖
 
-通过 `theme.components` 覆盖指定 antd 组件 token，适合只调整某一类组件的尺寸、圆角或背景。
+通过 `theme.components` 覆盖指定 antd 组件 token。业务界面默认应使用 W+ 组件规范，只有在明确的局部场景中才覆盖组件 token。
 
 ```tsx
 import { Button, ConfigProvider, Space, Table } from '@lf39.03/antd';
@@ -84,16 +77,9 @@ const dataSource = [
 ];
 
 export default () => (
-  <ConfigProvider
-    theme={{
-      components: {
-        Button: { borderRadius: 8 },
-        Table: { headerBg: '#F7F4E9' },
-      },
-    }}
-  >
+  <ConfigProvider>
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Button type="primary">组件级圆角</Button>
+      <Button type="primary">新增客户</Button>
       <Table pagination={false} columns={columns} dataSource={dataSource} />
     </Space>
   </ConfigProvider>
@@ -102,23 +88,15 @@ export default () => (
 
 ## 不使用定制主题
 
-包装版 `ConfigProvider` 在未传 `token` 和 `components` 时会注入企业主题。显式传入空对象会使用 Ant Design 默认主题；传入非空对象时只应用传入值，其他配置继续使用 Ant Design 默认值。
+包装版 `ConfigProvider` 未传 `theme` 时会注入企业主题。显式传入空 `theme` 对象会使用 Ant Design 默认主题；传入非空对象时只应用传入值，其他配置继续使用 Ant Design 默认值。
 
 ```tsx
 import { Button, ConfigProvider, Space, Table } from '@lf39.03/antd';
 
 export default () => (
-  <ConfigProvider
-    theme={{
-      token: { colorPrimary: '#0052d9' },
-      components: {
-        Button: { borderRadius: 8 },
-        Table: { headerBg: '#F7F4E9' },
-      },
-    }}
-  >
+  <ConfigProvider theme={{}}>
     <Space direction="vertical" style={{ width: '100%' }}>
-      <Button type="primary">默认派生主按钮</Button>
+      <Button type="primary">Ant Design 默认主按钮</Button>
       <Table
         pagination={false}
         columns={[{ title: '客户', dataIndex: 'name' }]}
@@ -131,30 +109,15 @@ export default () => (
 
 ## 复用完整主题
 
-需要在独立预览、微前端子应用或局部区域复用完整企业主题时，可以直接传入 `wplusTheme`。需要追加覆盖时，基于 `wplusTheme` 展开后再覆盖。
+需要在独立预览、微前端子应用或局部区域复用完整企业主题时，可以直接传入 `wplusTheme`。
 
 ```tsx
 import { Button, ConfigProvider, Space, wplusTheme } from '@lf39.03/antd';
 
-const theme = {
-  ...wplusTheme,
-  token: {
-    ...wplusTheme.token,
-    colorPrimary: '#0052d9',
-  },
-  components: {
-    ...wplusTheme.components,
-    Button: {
-      ...wplusTheme.components?.Button,
-      borderRadius: 8,
-    },
-  },
-};
-
 export default () => (
-  <ConfigProvider theme={theme}>
+  <ConfigProvider theme={wplusTheme}>
     <Space>
-      <Button type="primary">扩展主题</Button>
+      <Button type="primary">提交申请</Button>
       <Button>默认按钮</Button>
     </Space>
   </ConfigProvider>

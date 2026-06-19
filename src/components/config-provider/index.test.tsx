@@ -133,6 +133,20 @@ describe('ConfigProvider', () => {
     expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 
+  it('uses antd default theme when theme is an empty object', () => {
+    render(
+      <ConfigProvider theme={{}}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.token).toBeUndefined();
+    expect(theme?.components).toBeUndefined();
+    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+  });
+
   it('uses antd default global tokens when token is an empty object', () => {
     render(
       <ConfigProvider theme={{ token: {} }}>
