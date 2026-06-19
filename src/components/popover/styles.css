@@ -5,8 +5,13 @@
 
 /* ── 容器 ──────────────────────────────────────────────────────────────── */
 .ant-popover .ant-popover-inner {
+  max-width: 200px;
   border-radius: var(--wplus-radius-sm);
   box-shadow: var(--wplus-shadow-tooltip);
+}
+
+.ant-popover .ant-popover-inner-content {
+  padding: var(--wplus-space-md) var(--wplus-space-lg);
 }
 
 /* ── 标题分隔线 ────────────────────────────────────────────────────────── */

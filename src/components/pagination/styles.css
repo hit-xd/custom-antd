@@ -6,6 +6,13 @@
 /* ── 页码靠右 ──────────────────────────────────────────────────────────── */
 .ant-pagination {
   justify-content: flex-end;
+  gap: 8px;
+  margin: 20px 20px 20px 0;
+}
+
+.ant-table-wrapper + .ant-pagination,
+.ant-table-wrapper .ant-pagination {
+  margin-top: 20px;
 }
 
 /* ── 激活态 ────────────────────────────────────────────────────────────── */

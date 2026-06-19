@@ -1,0 +1,19 @@
+/* ==========================================================================
+ * Empty 空状态 — 组件样式覆盖
+ * ========================================================================== */
+
+.ant-empty {
+  color: var(--wplus-color-text-disabled);
+  font-size: var(--wplus-font-size-base);
+}
+
+.ant-empty .ant-empty-image {
+  height: 64px;
+  margin-bottom: var(--wplus-space-lg);
+}
+
+.ant-empty .ant-empty-image svg,
+.ant-empty .ant-empty-image img {
+  max-width: 64px;
+  max-height: 64px;
+}

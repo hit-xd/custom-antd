@@ -29,6 +29,10 @@
   line-height: 22px;
 }
 
+.ant-drawer .ant-drawer-body > * + * {
+  margin-top: var(--wplus-space-xl);
+}
+
 /* ── 底部操作区 ────────────────────────────────────────────────────────── */
 .ant-drawer .ant-drawer-footer {
   padding: 10px var(--wplus-space-xxl);

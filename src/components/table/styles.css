@@ -15,6 +15,14 @@
   color: var(--wplus-color-text-body);
 }
 
+.ant-table-wrapper .ant-table-thead > tr > th {
+  height: 48px;
+}
+
+.ant-table-wrapper .ant-table-tbody > tr > td {
+  height: 56px;
+}
+
 /* ── 行 hover ──────────────────────────────────────────────────────────── */
 .ant-table-tbody > tr.ant-table-row:hover > td {
   background: var(--wplus-color-bg-module);
@@ -22,9 +30,16 @@
 
 /* ── 紧凑模式：表头 34px / 行高 34px ───────────────────────────────────── */
 .ant-table-wrapper .ant-table.ant-table-small .ant-table-thead > tr > th {
+  height: 34px;
   padding: 8px var(--wplus-space-lg);
 }
 
 .ant-table-wrapper .ant-table.ant-table-small .ant-table-tbody > tr > td {
+  height: 34px;
   padding: 8px var(--wplus-space-lg);
+}
+
+.ant-table-wrapper .ant-table-cell .ant-space,
+.ant-table-wrapper .ant-table-cell .ant-btn + .ant-btn {
+  column-gap: 12px;
 }

@@ -61,6 +61,12 @@ describe('ConfigProvider', () => {
     expect(theme.token?.borderRadius).toBe(4);
     expect(theme.components?.Button?.borderRadius).toBe(2);
     expect(theme.components?.Table?.headerBg).toBe('#F1F2F7');
+    expect(theme.components?.Layout?.headerHeight).toBe(64);
+    expect(theme.components?.Avatar?.containerSize).toBe(32);
+    expect(theme.components?.Carousel?.dotWidth).toBe(24);
+    expect(theme.components).not.toHaveProperty('button');
+    expect(theme.components).not.toHaveProperty('searchForm');
+    expect(theme.components).not.toHaveProperty('table');
   });
 
   it('uses antd default global tokens and only the provided component tokens when components are provided', () => {

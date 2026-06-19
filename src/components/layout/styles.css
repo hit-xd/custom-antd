@@ -1,0 +1,16 @@
+/* ==========================================================================
+ * Layout 布局 — 组件样式覆盖
+ * ========================================================================== */
+
+.ant-layout {
+  background: var(--wplus-color-bg-page);
+}
+
+.ant-layout-header {
+  min-height: 64px;
+  padding-inline: var(--wplus-space-xxl);
+}
+
+.ant-layout-content {
+  min-width: 0;
+}

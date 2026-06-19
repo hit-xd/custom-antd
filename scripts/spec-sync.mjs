@@ -53,7 +53,6 @@ const themeSource = {
   semantic: readThemeToken('semantic-tokens.ts'),
   antd: readThemeToken('antd-tokens.ts'),
   antdComponent: readThemeToken('antd-component-tokens.ts'),
-  wplusComponent: readThemeToken('wplus-component-tokens.ts'),
 };
 
 const themeSourceText = Object.values(themeSource).join('\n');
@@ -170,7 +169,6 @@ const sourceTheme = {
   typography: Object.fromEntries(sourceTypographyEntries),
   antdTokens: Object.fromEntries(sourceAntdTokenEntries),
   componentTokenCount: matchAll(themeSource.antdComponent, /^\s+[A-Z]\w+:\s*{/gm).length,
-  wplusComponentTokenCount: matchAll(themeSource.wplusComponent, /^\s{2}[a-zA-Z]\w+:\s*{/gm).length,
 };
 
 const componentTypeNames = componentDocs
@@ -178,8 +176,15 @@ const componentTypeNames = componentDocs
   .filter((typeName) => Boolean(typeName))
   .filter((typeName, index, typeNames) => typeNames.indexOf(typeName) === index);
 
-const toSlug = (name) => name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+const slugOverrides = {
+  QRCode: 'qr-code',
+};
+const toSlug = (name) =>
+  slugOverrides[name] ?? name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 const sidebarItem = (title, link) => ({ title, link });
+const passthroughApiNames = new Set(['message', 'notification', 'Grid']);
+const wrapperComponentDocs = componentDocs.filter((doc) => !passthroughApiNames.has(doc.name));
+const passthroughComponentDocs = componentDocs.filter((doc) => passthroughApiNames.has(doc.name));
 
 const componentCategories = [...new Set(componentDocs.map((doc) => doc.category))];
 const ComponentSidebar = componentCategories
@@ -213,7 +218,10 @@ const GeneratedSidebar = [
 
 await addFile(
   'src/components/generated/index.ts',
-  `${fileHeader}export { ${componentDocs.map((doc) => doc.name).join(', ')} } from 'antd';\nexport type { ${componentTypeNames.join(', ')} } from 'antd';\n`,
+  `${fileHeader}${wrapperComponentDocs
+    .map((doc) => `export { ${doc.name} } from '../${toSlug(doc.name)}';`)
+    .join('\n')}
+${passthroughComponentDocs.length ? `export { ${passthroughComponentDocs.map((doc) => doc.name).join(', ')} } from 'antd';\n` : ''}export type { ${componentTypeNames.join(', ')} } from 'antd';\n`,
 );
 
 await addFile(
@@ -352,7 +360,6 @@ order: 120
 - 字体层级：${Object.keys(sourceTheme.typography).length} 项
 - antd 全局 token：${Object.keys(sourceTheme.antdTokens).length} 项
 - antd 组件 token 分组：${sourceTheme.componentTokenCount} 项
-- W+ 组件 token 分组：${sourceTheme.wplusComponentTokenCount} 项
 - 自动导出组件/API：${componentDocs.length} 个
 - 业务组件文档：${businessDocs.length} 个
 
@@ -383,7 +390,6 @@ order: 2
 | \`src/theme/tokens/semantic-tokens.ts\` | 业务语义色、文字色、背景色、边框色 |
 | \`src/theme/tokens/antd-tokens.ts\` | Ant Design 全局 token |
 | \`src/theme/tokens/antd-component-tokens.ts\` | Ant Design 组件级 token |
-| \`src/theme/tokens/wplus-component-tokens.ts\` | W+ 组件语义 token |
 
 ## 主题入口
 
