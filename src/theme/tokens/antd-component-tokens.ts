@@ -350,7 +350,7 @@ export const antdComponentTokens = {
     iconSizeSM: 24,
     dotSize: 8,
     dotCurrentSize: 10,
-    titleLineHeight: 22,
+    titleLineHeight: 32,
     descriptionMaxWidth: 220,
   },
 
