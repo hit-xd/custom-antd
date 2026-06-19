@@ -18,8 +18,7 @@ order: 120
 - 间距 token：57 项
 - 字体层级：9 项
 - antd 全局 token：39 项
-- antd 组件 token 分组：42 项
-- W+ 组件 token 分组：56 项
+- antd 组件 token 分组：48 项
 - 自动导出组件/API：70 个
 - 业务组件文档：4 个
 

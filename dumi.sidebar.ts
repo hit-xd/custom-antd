@@ -155,7 +155,7 @@ export const ComponentSidebar = [
       },
       {
         title: 'QRCode 二维码',
-        link: '/components/qrcode',
+        link: '/components/qr-code',
       },
       {
         title: 'Segmented 分段控制器',

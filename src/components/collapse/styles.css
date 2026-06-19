@@ -5,12 +5,12 @@
 
 /* ── 边框与圆角 ────────────────────────────────────────────────────────── */
 .ant-collapse {
-  border-color: #e5e6eb;
+  border-color: var(--wplus-color-border);
   border-radius: var(--wplus-radius-xs);
 }
 
 .ant-collapse > .ant-collapse-item {
-  border-bottom-color: #e5e6eb;
+  border-bottom-color: var(--wplus-color-border);
 }
 
 /* ── 面板标题 ──────────────────────────────────────────────────────────── */
@@ -21,5 +21,5 @@
 
 .ant-collapse .ant-collapse-content {
   color: var(--wplus-color-text-body);
-  border-top-color: #e5e6eb;
+  border-top-color: var(--wplus-color-border);
 }

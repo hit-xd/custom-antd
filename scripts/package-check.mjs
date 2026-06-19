@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readdirSync, rmSync } from 'node:fs';
 import path from 'node:path';
 
-const cssExport = './dist/index.css';
+const cssExports = ['./index.css', './dist/index.css'];
 const expectedCssExportTarget = './dist/index.css';
 const expectedPackedCssFile = 'package/dist/index.css';
 const expectedPackedManifestFile = 'package/package.json';
@@ -57,13 +57,17 @@ try {
     }),
   );
 
-  const cssExportTarget = packedManifest.exports?.[cssExport];
+  const invalidCssExports = cssExports.filter(
+    (cssExport) => packedManifest.exports?.[cssExport] !== expectedCssExportTarget,
+  );
 
-  if (cssExportTarget !== expectedCssExportTarget) {
+  if (invalidCssExports.length > 0) {
     throw new Error(
-      `Package export ${cssExport} must point to ${expectedCssExportTarget}, got ${JSON.stringify(
-        cssExportTarget,
-      )}.`,
+      `Package CSS exports must point to ${expectedCssExportTarget}:\n${invalidCssExports
+        .map(
+          (cssExport) => `- ${cssExport}: ${JSON.stringify(packedManifest.exports?.[cssExport])}`,
+        )
+        .join('\n')}`,
     );
   }
 

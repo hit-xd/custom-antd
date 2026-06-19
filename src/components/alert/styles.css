@@ -10,17 +10,17 @@
 
 /* ── 状态背景色 / 边框色精调 ──────────────────────────────────────────── */
 .ant-alert-success {
-  background: #e6fff1;
+  background: var(--wplus-color-alert-success-bg);
   border-color: var(--wplus-color-success);
 }
 
 .ant-alert-info {
-  background: #e6f4ff;
+  background: var(--wplus-color-alert-info-bg);
   border-color: var(--wplus-color-info);
 }
 
 .ant-alert-warning {
-  background: #fffae6;
+  background: var(--wplus-color-alert-warning-bg);
   border-color: var(--wplus-color-warning);
 }
 

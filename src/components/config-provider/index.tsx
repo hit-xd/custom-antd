@@ -48,12 +48,14 @@ const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
     : hasCustomComponents && isEmptyObject(theme?.components)
       ? {}
       : theme?.components;
+  const cssVar = theme?.cssVar ?? wplusTheme.cssVar;
 
   return {
     algorithm: antdTheme.defaultAlgorithm,
     ...theme,
     token,
     components,
+    cssVar,
   };
 };
 

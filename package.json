@@ -25,6 +25,7 @@
       "import": "./dist/business/index.js",
       "require": "./dist/business/index.cjs"
     },
+    "./index.css": "./dist/index.css",
     "./dist/index.css": "./dist/index.css"
   },
   "files": [
@@ -36,6 +37,8 @@
     "docs:dev": "dumi dev",
     "docs:build": "dumi build",
     "docs:preview": "dumi preview",
+    "tokens:css": "node scripts/generate-css-variables.mjs",
+    "tokens:css:check": "node scripts/generate-css-variables.mjs --check",
     "spec:sync": "node scripts/spec-sync.mjs",
     "spec:check": "node scripts/spec-sync.mjs --check",
     "build": "tsup",
@@ -48,7 +51,7 @@
     "format:check": "prettier --check .",
     "package:check": "node scripts/package-check.mjs",
     "fix": "pnpm lint:fix && pnpm format",
-    "check": "pnpm spec:check && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
+    "check": "pnpm spec:check && pnpm tokens:css:check && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
     "ci": "pnpm check && pnpm build && pnpm package:check && pnpm docs:build",
     "prepublishOnly": "pnpm run ci",
     "prepare": "husky",

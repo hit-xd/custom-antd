@@ -20,7 +20,7 @@ import * as antd from '@lf39.03/antd';
 - 全量透传 Ant Design v5 组件（`export * from 'antd'`），可直接替换导入来源。
 - 12 个 B 类包装组件（Modal / Drawer / Table / Menu / Tabs 等），通过 Token + CSS 精准覆盖设计规范。
 - 内置企业主题 `wplusTheme`，由 `ui-spec/` 规范同步生成，注入 `ConfigProvider`。
-- CSS 变量体系 `--wplus-*`，统一管理颜色、圆角、间距、阴影、字体等设计 Token。
+- CSS 变量体系 `--wplus-*` 从 TS token 生成，统一管理颜色、圆角、间距、阴影、字体等设计 Token。
 - 4 个业务组件：`ApprovalProgressSteps`、`DetailPageHeader`、`ErrorBlock`、`Status`。
 - 使用 dumi 维护文档站，文档风格参考 Ant Design 官网。
 
@@ -47,7 +47,7 @@ export function App() {
 }
 ```
 
-`import '@lf39.03/antd/index.css'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。
+`import '@lf39.03/antd/index.css'` 会加载完整的 W+ 设计体系。该入口对应发布产物 `dist/index.css`，建议在业务应用入口显式引入，避免依赖不同打包器对 JS 入口 CSS 副作用的处理差异。兼容历史用法时也可以继续使用 `@lf39.03/antd/dist/index.css`。
 
 - antd 基础 reset 样式
 - `:root` CSS 变量定义（`--wplus-*`）
@@ -116,9 +116,10 @@ src/theme/tokens/
   ├── primitive-tokens.ts      # 原子 Token（品牌色阶、功能色等）
   ├── semantic-tokens.ts       # 语义 Token
   ├── antd-tokens.ts           # ConfigProvider 全局 Token
-  ├── antd-component-tokens.ts # antd 组件级 Token
-  └── wplus-component-tokens.ts # W+ 自定义组件 Token
+  └── antd-component-tokens.ts # antd 组件级 Token
 ```
+
+`src/styles/css-variables.css` 由上述 TS token 生成，使用 `pnpm tokens:css` 更新，`pnpm tokens:css:check` 校验一致性。
 
 主入口导出企业主题：
 
@@ -163,6 +164,7 @@ export function App() {
 主题合并规则：
 
 - 默认使用 `antd` 的 `defaultAlgorithm`，业务侧传入 `algorithm` 时会覆盖默认算法。
+- 默认启用 Ant Design v5 `theme.cssVar`，配置为 `{ prefix: 'wplus', key: 'wplus' }`；业务侧传入 `theme.cssVar` 时会覆盖默认配置。
 - 未传 `theme.token` 和 `theme.components` 时使用企业全局 token 和企业组件 token。
 - `theme.token: {}` 或 `theme.components: {}` 表示显式使用 Ant Design 默认主题。
 - `theme.token` 或 `theme.components` 为非空对象时，只使用传入值，其他配置继续使用 Ant Design 默认值。
@@ -205,12 +207,13 @@ import { Status } from '@lf39.03/antd/business';
 
 ## 导出入口
 
-| 入口                      | 说明                                                       |
-| ------------------------- | ---------------------------------------------------------- |
-| `@lf39.03/antd`           | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
-| `@lf39.03/antd/theme`     | `wplusTheme` 企业主题配置                                  |
-| `@lf39.03/antd/business`  | 可复用业务组件                                             |
-| `@lf39.03/antd/index.css` | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
+| 入口                           | 说明                                                       |
+| ------------------------------ | ---------------------------------------------------------- |
+| `@lf39.03/antd`                | 主入口，透传 antd 全部导出 + W+ 包装组件 + 业务组件 + 主题 |
+| `@lf39.03/antd/theme`          | `wplusTheme` 企业主题配置                                  |
+| `@lf39.03/antd/business`       | 可复用业务组件                                             |
+| `@lf39.03/antd/index.css`      | 完整 W+ 样式（antd reset + CSS 变量 + 组件覆盖）           |
+| `@lf39.03/antd/dist/index.css` | 兼容样式入口，指向同一份 `dist/index.css`                  |
 
 ## 本地开发
 
@@ -232,6 +235,7 @@ pnpm typecheck      # TypeScript 类型检查
 pnpm test           # 运行 Vitest
 pnpm test:watch     # 以 watch 模式运行 Vitest
 pnpm lint           # ESLint 检查
+pnpm tokens:css     # 从 TS token 生成 CSS variables
 pnpm spec:sync      # 从 ui-spec/ 同步生成主题 Token
 pnpm spec:check     # 校验 ui-spec/ 与生成文件一致性
 pnpm package:check  # 校验发布包关键文件

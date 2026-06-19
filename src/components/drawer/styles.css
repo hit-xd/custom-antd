@@ -36,7 +36,7 @@
 /* ── 底部操作区 ────────────────────────────────────────────────────────── */
 .ant-drawer .ant-drawer-footer {
   padding: 10px var(--wplus-space-xxl);
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-top: 1px solid var(--wplus-color-split);
 }
 
 /* ── 遮罩层 ────────────────────────────────────────────────────────────── */

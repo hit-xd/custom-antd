@@ -5,17 +5,18 @@ order: 2
 
 # 主题定制
 
-`@lf39.03/antd` 通过 `wplusTheme` 统一维护企业主题。业务项目使用包装版 `ConfigProvider` 后，会默认注入企业主题 token，同时保留 Ant Design v5 的 `theme` 配置能力。
+`@lf39.03/antd` 通过 `wplusTheme` 统一维护企业主题。业务项目使用包装版 `ConfigProvider` 后，会默认注入企业主题 token，并启用 Ant Design v5 `theme.cssVar`，同时保留 Ant Design v5 的 `theme` 配置能力。
 
 当前主题以 `src/theme/tokens` 为事实来源：
 
-| 源码文件                                     | 落地方式                                         |
-| -------------------------------------------- | ------------------------------------------------ |
-| `src/theme/tokens/primitive-tokens.ts`       | 品牌色、数据色、渐变、圆角、阴影、间距和字体层级 |
-| `src/theme/tokens/semantic-tokens.ts`        | 业务语义色、文字色、背景色、边框色               |
-| `src/theme/tokens/antd-tokens.ts`            | Ant Design 全局 token                            |
-| `src/theme/tokens/antd-component-tokens.ts`  | Ant Design 组件级 token                          |
-| `src/theme/tokens/wplus-component-tokens.ts` | W+ 组件语义 token                                |
+| 源码文件                                    | 落地方式                                         |
+| ------------------------------------------- | ------------------------------------------------ |
+| `src/theme/tokens/primitive-tokens.ts`      | 品牌色、数据色、渐变、圆角、阴影、间距和字体层级 |
+| `src/theme/tokens/semantic-tokens.ts`       | 业务语义色、文字色、背景色、边框色               |
+| `src/theme/tokens/antd-tokens.ts`           | Ant Design 全局 token                            |
+| `src/theme/tokens/antd-component-tokens.ts` | Ant Design 组件级 token                          |
+
+`src/styles/css-variables.css` 从上述 TS token 生成，用于承载业务布局变量和组件 CSS 覆盖需要读取的 `--wplus-*` 变量。
 
 ## 主题入口
 
@@ -43,7 +44,7 @@ export default () => (
 
 ## 全局 token 覆盖
 
-通过 `theme.token` 覆盖 Ant Design 全局 token。未传 `token` 和 `components` 时默认使用企业主题；显式传入 `theme.token` 后，只使用传入的 token，其余 token 回到 Ant Design 默认值。
+通过 `theme.token` 覆盖 Ant Design 全局 token。未传 `token` 和 `components` 时默认使用企业主题；显式传入 `theme.token` 后，只使用传入的 token，其余 token 回到 Ant Design 默认值。默认 `theme.cssVar` 为 `{ prefix: 'wplus', key: 'wplus' }`，需要接管 Ant Design CSS 变量命名时可自行传入 `theme.cssVar`。
 
 ```tsx
 import { Button, Card, ConfigProvider, Space } from '@lf39.03/antd';

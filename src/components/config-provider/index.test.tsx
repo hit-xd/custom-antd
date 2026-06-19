@@ -59,14 +59,19 @@ describe('ConfigProvider', () => {
     expect(theme.token?.colorPrimary).toBe('#C5A267');
     expect(theme.token?.colorLink).toBe('#1874FF');
     expect(theme.token?.borderRadius).toBe(4);
+    expect(theme.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
     expect(theme.components?.Button?.borderRadius).toBe(2);
     expect(theme.components?.Table?.headerBg).toBe('#F1F2F7');
-    expect(theme.components?.Layout?.headerHeight).toBe(64);
     expect(theme.components?.Avatar?.containerSize).toBe(32);
     expect(theme.components?.Carousel?.dotWidth).toBe(24);
+    expect(theme.components?.Layout?.headerBg).toBe('#050816');
     expect(theme.components).not.toHaveProperty('button');
     expect(theme.components).not.toHaveProperty('searchForm');
     expect(theme.components).not.toHaveProperty('table');
+    expect(theme.components?.Layout).not.toHaveProperty('headerHeight');
+    expect(theme.components?.Switch).not.toHaveProperty('colorPrimary');
+    expect(theme.components?.Result).not.toHaveProperty('colorSuccess');
+    expect(theme.components?.Pagination).not.toHaveProperty('itemSize');
   });
 
   it('uses antd default global tokens and only the provided component tokens when components are provided', () => {
@@ -88,6 +93,7 @@ describe('ConfigProvider', () => {
     expect(theme?.components?.Button?.primaryShadow).toBeUndefined();
     expect(theme?.components?.Table?.headerBg).toBe('#F7F4E9');
     expect(theme?.components?.Table?.headerColor).toBeUndefined();
+    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 
   it('uses antd default tokens for values omitted from custom global tokens', () => {
@@ -110,6 +116,7 @@ describe('ConfigProvider', () => {
     expect(theme?.components?.Button?.borderRadius).toBe(8);
     expect(theme?.components?.Button?.colorPrimary).toBeUndefined();
     expect(theme?.components?.Table).toBeUndefined();
+    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 
   it('uses antd default component tokens when components is an empty object', () => {
@@ -123,6 +130,7 @@ describe('ConfigProvider', () => {
 
     expect(theme?.token).toBeUndefined();
     expect(theme?.components).toEqual({});
+    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 
   it('uses antd default global tokens when token is an empty object', () => {
@@ -136,6 +144,7 @@ describe('ConfigProvider', () => {
 
     expect(theme?.token).toEqual({});
     expect(theme?.components).toBeUndefined();
+    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 
   it('allows custom algorithms to override the default algorithm', () => {
@@ -148,5 +157,17 @@ describe('ConfigProvider', () => {
     const theme = lastAntdConfigProviderProps?.theme;
 
     expect(theme?.algorithm).toBe(antdTheme.darkAlgorithm);
+  });
+
+  it('allows custom css variable config to override the default config', () => {
+    render(
+      <ConfigProvider theme={{ cssVar: { prefix: 'app', key: 'app' } }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.cssVar).toEqual({ prefix: 'app', key: 'app' });
   });
 });

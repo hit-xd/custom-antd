@@ -8,4 +8,8 @@ export { privateBankingPrimitiveTokens, privateBankingSemanticTokens } from './t
 export const wplusTheme: ThemeConfig = {
   token: antdTokens,
   components: antdComponentTokens,
+  cssVar: {
+    prefix: 'wplus',
+    key: 'wplus',
+  },
 };
