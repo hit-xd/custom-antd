@@ -10,11 +10,11 @@
   }
 
   .dumi-default-doc-layout > main > article {
-    max-width: 1280px;
+    max-width: 1820px;
   }
 
   .dumi-default-content {
-    max-width: 1280px;
+    max-width: 1820px;
   }
 
   .dumi-default-content .dumi-default-previewer,
@@ -40,4 +40,18 @@
 
 .dumi-default-sidebar {
   width: 240px;
+}
+
+.dumi-default-hero-title > span {
+    color: transparent;
+    text-shadow: 0 10px 20px rgba(238, 221, 145, 0.15);
+    background: linear-gradient(30deg, #DED3BA 30%, #C5A267);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.dumi-default-features-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
