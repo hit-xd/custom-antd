@@ -15,7 +15,7 @@
 进入当前组件库根目录：
 
 ```powershell
-cd E:\Code\FE\custom-antd
+cd E:\Code\FE\wrap-antd
 ```
 
 安装依赖：
@@ -28,6 +28,12 @@ pnpm install
 
 ```powershell
 pnpm spec:sync
+```
+
+如果修改过 token 或规范来源，建议同步 CSS 变量：
+
+```powershell
+pnpm tokens:css
 ```
 
 构建库产物：
@@ -46,7 +52,7 @@ pnpm test
 如果需要完整校验，可执行：
 
 ```powershell
-pnpm run ci
+pnpm ci
 ```
 
 ## 3. 打包成本地安装包
@@ -75,14 +81,18 @@ pnpm pack --pack-destination E:\tmp\pack
 pnpm package:check
 ```
 
-该检查会验证包内是否包含必要 CSS 文件，以及 `reset.css` 引用的样式文件是否可发布。
+该检查会验证：
+
+- 包内包含 `package/dist/index.css`。
+- `package.json` 中 `./index.css` 和 `./dist/index.css` 都指向 `./dist/index.css`。
+- CSS 包含 antd reset、`--wplus-*` CSS 变量和关键覆盖样式。
 
 ## 4. 在目标项目中安装
 
 进入目标业务项目目录后，通过本地 `.tgz` 安装：
 
 ```powershell
-pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
+pnpm add file:E:\Code\FE\wrap-antd\@lf39.03/antd-0.1.0.tgz
 ```
 
 如果 `.tgz` 输出到了 `E:\tmp\pack`：
@@ -99,7 +109,7 @@ pnpm add file:E:\tmp\pack\@lf39.03/antd-0.1.0.tgz
 
 ```tsx
 import { Button, ConfigProvider } from '@lf39.03/antd';
-import '@lf39.03/antd/index.css$';
+import '@lf39.03/antd/index.css';
 
 export function App() {
   return (
@@ -122,6 +132,12 @@ import { wplusTheme } from '@lf39.03/antd/theme';
 import { Status } from '@lf39.03/antd/business';
 ```
 
+兼容历史用法时，也可以引入同一份 CSS 产物：
+
+```tsx
+import '@lf39.03/antd/dist/index.css';
+```
+
 ## 6. 验证安装结果
 
 在目标项目中检查依赖：
@@ -141,11 +157,12 @@ pnpm dev
 
 - `@lf39.03/antd` 组件可以正常导入。
 - `ConfigProvider` 注入的企业主题生效。
-- `@lf39.03/antd/index.css$` 引入后组件样式和 CSS 变量生效。
+- `@lf39.03/antd/index.css` 引入后组件样式和 CSS 变量生效。
+- `@lf39.03/antd/theme` 和 `@lf39.03/antd/business` 子入口可以按需导入。
 
 ## 7. 常见问题
 
-### 7.1 安装后找不到 `@lf39.03/antd/index.css$`
+### 7.1 安装后找不到 `@lf39.03/antd/index.css`
 
 确认打包前执行过：
 
@@ -159,13 +176,23 @@ pnpm build
 dist/index.css
 ```
 
+也可以执行：
+
+```powershell
+pnpm package:check
+```
+
+确认发布包 CSS export 可用。
+
 ### 7.2 组件样式没有生效
 
 确认目标项目入口已引入：
 
 ```tsx
-import '@lf39.03/antd/index.css$';
+import '@lf39.03/antd/index.css';
 ```
+
+不要使用 `@lf39.03/antd/index.css$`。带 `$` 的写法是文档站 alias 匹配方式，不是业务项目的公开样式入口。
 
 ### 7.3 主题 token 没有生效
 
@@ -176,6 +203,8 @@ import { ConfigProvider } from '@lf39.03/antd';
 ```
 
 不要直接从 `antd` 引入 `ConfigProvider`。
+
+如果传入了 `theme: {}`、`theme.token: {}` 或 `theme.components: {}`，表示显式使用 antd 默认 token 或组件 token，企业 token 不会注入。
 
 ### 7.4 修改库代码后目标项目没有变化
 
@@ -189,7 +218,13 @@ pnpm pack
 然后在目标项目重新安装新的 `.tgz`：
 
 ```powershell
-pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
+pnpm add file:E:\Code\FE\wrap-antd\@lf39.03/antd-0.1.0.tgz
+```
+
+如果使用固定输出目录：
+
+```powershell
+pnpm add file:E:\tmp\pack\@lf39.03/antd-0.1.0.tgz
 ```
 
 ### 7.5 目标项目仍使用旧缓存
@@ -198,7 +233,7 @@ pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
 
 ```powershell
 pnpm remove @lf39.03/antd
-pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
+pnpm add file:E:\Code\FE\wrap-antd\@lf39.03/antd-0.1.0.tgz
 ```
 
 必要时清理目标项目的构建缓存后重新启动开发服务。
@@ -207,25 +242,28 @@ pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
 
 1. 在组件库中修改代码。
 2. 执行 `pnpm spec:sync`。
-3. 执行 `pnpm build`。
-4. 执行 `pnpm pack`。
-5. 在目标项目中执行 `pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz`。
-6. 启动目标项目验证组件、主题和样式。
+3. 如修改过 token 或规范来源，执行 `pnpm tokens:css`。
+4. 执行 `pnpm build`。
+5. 执行 `pnpm package:check`。
+6. 执行 `pnpm pack`。
+7. 在目标项目中执行 `pnpm add file:E:\Code\FE\wrap-antd\@lf39.03/antd-0.1.0.tgz`。
+8. 启动目标项目验证组件、主题和样式。
 
 ## 9. 最小命令清单
 
 组件库：
 
 ```powershell
-cd E:\Code\FE\custom-antd
+cd E:\Code\FE\wrap-antd
 pnpm spec:sync
 pnpm build
+pnpm package:check
 pnpm pack
 ```
 
 目标项目：
 
 ```powershell
-pnpm add file:E:\Code\FE\custom-antd\@lf39.03/antd-0.1.0.tgz
+pnpm add file:E:\Code\FE\wrap-antd\@lf39.03/antd-0.1.0.tgz
 pnpm dev
 ```
