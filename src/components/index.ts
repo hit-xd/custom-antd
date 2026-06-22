@@ -5,6 +5,8 @@
 // ==========================================================================
 
 export * from 'antd';
+export { Grid, message, notification, theme, unstableSetRender, version } from 'antd';
+export type { MessageArgsProps, NotificationArgsProps } from 'antd';
 
 export { Affix } from './affix';
 export type { AffixProps } from './affix';
@@ -42,6 +44,8 @@ export { Collapse } from './collapse';
 export type { CollapseProps } from './collapse';
 export { ColorPicker } from './color-picker';
 export type { ColorPickerProps } from './color-picker';
+export { ConfigProvider } from './config-provider';
+export type { ConfigProviderProps } from './config-provider';
 export { DatePicker } from './date-picker';
 export type { DatePickerProps } from './date-picker';
 export { Descriptions } from './descriptions';
