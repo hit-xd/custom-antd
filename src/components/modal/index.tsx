@@ -1,3 +1,4 @@
+import React from 'react';
 import './styles.css';
 
 import type { ModalProps as AntdModalProps } from 'antd';

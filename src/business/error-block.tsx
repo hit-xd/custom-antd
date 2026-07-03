@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import type { CSSProperties, ReactNode } from 'react';
+import React, { type CSSProperties, type ReactNode } from 'react';
 
 export type ErrorBlockVariant = 'default' | 'table' | 'calendar' | 'business';
 

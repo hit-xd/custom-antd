@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'antd';
 import { Button, DatePicker, theme as antdTheme } from 'antd';
+import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { wplusTheme } from '../../theme';
 import { ConfigProvider } from './index';

@@ -1,7 +1,7 @@
 import type { ConfigProviderProps as AntdConfigProviderProps, ThemeConfig } from 'antd';
 import { ConfigProvider as AntdConfigProvider, theme as antdTheme } from 'antd';
 import zhCNRaw from 'antd/locale/zh_CN.js';
-import type { PropsWithChildren } from 'react';
+import React, { type PropsWithChildren } from 'react';
 import { wplusTheme } from '../../theme';
 
 type AntdLocale = NonNullable<AntdConfigProviderProps['locale']>;
