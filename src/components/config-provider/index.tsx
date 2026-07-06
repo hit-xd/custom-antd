@@ -6,6 +6,9 @@ import { wplusTheme } from '../../theme';
 
 type AntdLocale = NonNullable<AntdConfigProviderProps['locale']>;
 type LocaleModule = AntdLocale | { default: LocaleModule };
+type CssVarConfig = Exclude<NonNullable<ThemeConfig['cssVar']>, boolean>;
+
+let cssVarKeySeed = 0;
 
 const unwrapLocale = (localeModule: LocaleModule): AntdLocale => {
   if (
@@ -32,7 +35,45 @@ const isEmptyObject = (value: unknown): value is Record<string, never> =>
 const hasOwnThemeKey = (theme: ThemeConfig | undefined, key: keyof ThemeConfig) =>
   !!theme && Object.prototype.hasOwnProperty.call(theme, key);
 
-const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
+const createCssVarFallbackKey = () => {
+  cssVarKeySeed += 1;
+
+  return `wplus-theme-${cssVarKeySeed}`;
+};
+
+const getDefaultCssVar = (): CssVarConfig =>
+  typeof wplusTheme.cssVar === 'object' && wplusTheme.cssVar
+    ? wplusTheme.cssVar
+    : { prefix: 'wplus', key: 'wplus' };
+
+const normalizeCssVar = (
+  cssVar: ThemeConfig['cssVar'] | undefined,
+  getFallbackKey: () => string,
+): ThemeConfig['cssVar'] => {
+  if (cssVar === undefined) {
+    return getDefaultCssVar();
+  }
+
+  if (cssVar === false) {
+    return false;
+  }
+
+  if (cssVar === true) {
+    return {
+      ...getDefaultCssVar(),
+      key: getFallbackKey(),
+    };
+  }
+
+  return cssVar.key
+    ? cssVar
+    : {
+        ...cssVar,
+        key: getFallbackKey(),
+      };
+};
+
+const mergeTheme = (theme: ThemeConfig | undefined, getFallbackKey: () => string): ThemeConfig => {
   const hasCustomToken = hasOwnThemeKey(theme, 'token');
   const hasCustomComponents = hasOwnThemeKey(theme, 'components');
   const useEnterpriseTheme = theme === undefined;
@@ -48,7 +89,7 @@ const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
     : hasCustomComponents && isEmptyObject(theme?.components)
       ? {}
       : theme?.components;
-  const cssVar = theme?.cssVar ?? wplusTheme.cssVar;
+  const cssVar = normalizeCssVar(theme?.cssVar, getFallbackKey);
 
   return {
     algorithm: antdTheme.defaultAlgorithm,
@@ -65,8 +106,17 @@ export function ConfigProvider({
   theme,
   ...props
 }: PropsWithChildren<ConfigProviderProps>) {
+  const cssVarKeyRef = React.useRef<string>();
+  const getFallbackKey = () => {
+    if (!cssVarKeyRef.current) {
+      cssVarKeyRef.current = createCssVarFallbackKey();
+    }
+
+    return cssVarKeyRef.current;
+  };
+
   return (
-    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme)}>
+    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme, getFallbackKey)}>
       {children}
     </AntdConfigProvider>
   );

@@ -185,4 +185,40 @@ describe('ConfigProvider', () => {
 
     expect(theme?.cssVar).toEqual({ prefix: 'app', key: 'app' });
   });
+
+  it('adds a css variable key when cssVar is enabled with boolean shorthand', () => {
+    const { rerender } = render(
+      <ConfigProvider theme={{ cssVar: true }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const firstCssVar = lastAntdConfigProviderProps?.theme?.cssVar;
+
+    expect(firstCssVar).toMatchObject({ prefix: 'wplus' });
+    expect(typeof firstCssVar === 'object' ? firstCssVar.key : undefined).toMatch(
+      /^wplus-theme-\d+$/,
+    );
+
+    rerender(
+      <ConfigProvider theme={{ cssVar: true }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    expect(lastAntdConfigProviderProps?.theme?.cssVar).toEqual(firstCssVar);
+  });
+
+  it('adds a css variable key when custom cssVar config omits key', () => {
+    render(
+      <ConfigProvider theme={{ cssVar: { prefix: 'app' } }}>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const cssVar = lastAntdConfigProviderProps?.theme?.cssVar;
+
+    expect(cssVar).toMatchObject({ prefix: 'app' });
+    expect(typeof cssVar === 'object' ? cssVar.key : undefined).toMatch(/^wplus-theme-\d+$/);
+  });
 });
