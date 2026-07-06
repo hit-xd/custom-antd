@@ -30,7 +30,7 @@ export default () => (
 
 ## 覆盖主题
 
-默认启用 W+ 主题和 CSS 变量；业务侧传入 `theme.cssVar` 时可接管变量命名。
+默认启用 W+ 主题和 CSS 变量；业务侧传入 `theme.cssVar` 时可接管变量命名。React 17 下每一层启用 `cssVar` 的 `ConfigProvider` 都需要唯一 `key`，包装版会为 `cssVar: true` 或缺少 `key` 的配置自动补充 fallback key。
 
 ```tsx
 import { ConfigProvider, Button } from '@lf39.03/antd';

@@ -10,8 +10,10 @@ order: 1
 ## 安装
 
 ```bash
-pnpm add @lf39.03/antd antd react react-dom
+pnpm add @lf39.03/antd antd react@17 react-dom@17
 ```
+
+当前开发和测试矩阵基于 React 17。业务项目需要显式安装 `antd`、`react@17` 和 `react-dom@17`。
 
 ## 替换导入
 

@@ -27,10 +27,10 @@ import * as antd from '@lf39.03/antd';
 ## 安装
 
 ```bash
-pnpm add @lf39.03/antd antd react react-dom
+pnpm add @lf39.03/antd antd react@17 react-dom@17
 ```
 
-`antd`、`react` 和 `react-dom` 是 peer dependencies，业务项目需要显式安装。
+`antd`、`react` 和 `react-dom` 是 peer dependencies，业务项目需要显式安装。当前开发、测试和文档示例按 React 17 依赖矩阵维护，建议业务项目显式安装 `react@17` 和 `react-dom@17`。
 
 ## 快速使用
 
@@ -164,6 +164,7 @@ export function App() {
 - 未传 `theme` 时，使用 `wplusTheme.token`、`wplusTheme.components` 和 `wplusTheme.cssVar`。
 - 默认使用 `antd` 的 `defaultAlgorithm`，业务侧传入 `theme.algorithm` 时会覆盖默认算法。
 - 默认启用 Ant Design v5 `theme.cssVar`，配置为 `{ prefix: 'wplus', key: 'wplus' }`；业务侧传入 `theme.cssVar` 时会覆盖默认配置。
+- React 17 下 Ant Design CSS 变量模式要求每一层启用 `cssVar` 的 `ConfigProvider` 都有唯一 `key`。包装版 `ConfigProvider` 会为 `cssVar: true` 或缺少 `key` 的 `theme.cssVar` 自动补充当前 provider 稳定的 fallback key；如果业务代码嵌套使用 antd 原生 `ConfigProvider`，需要手动设置 `theme.cssVar.key` 或改用本包导出的 `ConfigProvider`。
 - 传入 `theme: {}` 时，不注入企业全局 token 和企业组件 token，使用 antd 默认 token，同时保留默认 CSS 变量配置。
 - 传入 `theme.token` 时，只使用业务侧传入的全局 token；`theme.token: {}` 表示显式使用 antd 默认全局 token。
 - 传入 `theme.components` 时，只使用业务侧传入的组件 token；`theme.components: {}` 表示显式使用 antd 默认组件 token。

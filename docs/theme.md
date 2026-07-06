@@ -46,6 +46,8 @@ export default () => (
 
 通过 `theme.token` 覆盖 Ant Design 全局 token。未传 `token` 和 `components` 时默认使用企业主题；显式传入 `theme.token` 后，只使用传入的 token，其余 token 回到 Ant Design 默认值。默认 `theme.cssVar` 为 `{ prefix: 'wplus', key: 'wplus' }`，需要接管 Ant Design CSS 变量命名时可自行传入 `theme.cssVar`。
 
+当前文档和测试矩阵基于 React 17。Ant Design CSS 变量模式在 React 17 下要求每一层启用 `cssVar` 的 `ConfigProvider` 都有唯一 `key`；包装版 `ConfigProvider` 会为 `cssVar: true` 或缺少 `key` 的 `theme.cssVar` 自动补充当前 provider 稳定的 fallback key。如果业务代码嵌套使用 antd 原生 `ConfigProvider`，需要手动设置 `theme.cssVar.key` 或改用本包导出的 `ConfigProvider`。
+
 ```tsx
 import { Button, Card, ConfigProvider, Space } from '@lf39.03/antd';
 
