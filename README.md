@@ -161,10 +161,10 @@ export function App() {
 
 主题合并规则：
 
-- 未传 `theme` 时，使用 `wplusTheme.token`、`wplusTheme.components` 和 `wplusTheme.cssVar`。
+- 未传 `theme` 时，使用 `wplusTheme.token` 和 `wplusTheme.components`。
 - 默认使用 `antd` 的 `defaultAlgorithm`，业务侧传入 `theme.algorithm` 时会覆盖默认算法。
-- 默认启用 Ant Design v5 `theme.cssVar`，配置为 `{ prefix: 'wplus', key: 'wplus' }`；业务侧传入 `theme.cssVar` 时会覆盖默认配置。
-- React 17 下 Ant Design CSS 变量模式要求每一层启用 `cssVar` 的 `ConfigProvider` 都有唯一 `key`。包装版 `ConfigProvider` 会为 `cssVar: true` 或缺少 `key` 的 `theme.cssVar` 自动补充当前 provider 稳定的 fallback key；如果业务代码嵌套使用 antd 原生 `ConfigProvider`，需要手动设置 `theme.cssVar.key` 或改用本包导出的 `ConfigProvider`。
+- Ant Design v5 `theme.cssVar` 由包装版 `ConfigProvider` 按 React 版本统一控制：React 17 下不启用，React 18/19 下使用 `{ prefix: 'wplus', key: 'wplus' }`。
+- React 17 下不启用 antd `theme.cssVar` 不影响 W+ token 主题，也不影响 `@lf39.03/antd/index.css` 中的 `--wplus-*` CSS 变量。
 - 传入 `theme: {}` 时，不注入企业全局 token 和企业组件 token，使用 antd 默认 token，同时保留默认 CSS 变量配置。
 - 传入 `theme.token` 时，只使用业务侧传入的全局 token；`theme.token: {}` 表示显式使用 antd 默认全局 token。
 - 传入 `theme.components` 时，只使用业务侧传入的组件 token；`theme.components: {}` 表示显式使用 antd 默认组件 token。

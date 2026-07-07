@@ -30,14 +30,14 @@ export default () => (
 
 ## 覆盖主题
 
-默认启用 W+ 主题和 CSS 变量；业务侧传入 `theme.cssVar` 时可接管变量命名。React 17 下每一层启用 `cssVar` 的 `ConfigProvider` 都需要唯一 `key`，包装版会为 `cssVar: true` 或缺少 `key` 的配置自动补充 fallback key。
+默认启用 W+ 主题 token；Ant Design `theme.cssVar` 由包装版按 React 版本统一控制：React 17 下不启用，React 18/19 下使用 W+ 默认 cssVar 配置。
 
 ```tsx
 import { ConfigProvider, Button } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <ConfigProvider theme={{ cssVar: { prefix: 'wplus', key: 'demo' } }}>
+    <ConfigProvider theme={{ token: { colorPrimary: '#8A642D' } }}>
       <Button type="primary">提交申请</Button>
     </ConfigProvider>
   </ConfigProvider>

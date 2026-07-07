@@ -4,7 +4,7 @@ import { Button, DatePicker, theme as antdTheme } from 'antd';
 import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 import { wplusTheme } from '../../theme';
-import { ConfigProvider } from './index';
+import { ConfigProvider, resolveAntdCssVar, shouldEnableAntdCssVar } from './index';
 
 let lastAntdConfigProviderProps: AntdConfigProviderProps | undefined;
 
@@ -75,6 +75,20 @@ describe('ConfigProvider', () => {
     expect(theme.components?.Pagination).not.toHaveProperty('itemSize');
   });
 
+  it('uses enterprise tokens without antd css variables in React 17', () => {
+    render(
+      <ConfigProvider>
+        <Button>Save</Button>
+      </ConfigProvider>,
+    );
+
+    const theme = lastAntdConfigProviderProps?.theme;
+
+    expect(theme?.token?.colorPrimary).toBe('#C5A267');
+    expect(theme?.components?.Button?.borderRadius).toBe(2);
+    expect(theme?.cssVar).toBeUndefined();
+  });
+
   it('uses antd default global tokens and only the provided component tokens when components are provided', () => {
     render(
       <ConfigProvider
@@ -94,7 +108,7 @@ describe('ConfigProvider', () => {
     expect(theme?.components?.Button?.primaryShadow).toBeUndefined();
     expect(theme?.components?.Table?.headerBg).toBe('#F7F4E9');
     expect(theme?.components?.Table?.headerColor).toBeUndefined();
-    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
   it('uses antd default tokens for values omitted from custom global tokens', () => {
@@ -117,7 +131,7 @@ describe('ConfigProvider', () => {
     expect(theme?.components?.Button?.borderRadius).toBe(8);
     expect(theme?.components?.Button?.colorPrimary).toBeUndefined();
     expect(theme?.components?.Table).toBeUndefined();
-    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
   it('uses antd default component tokens when components is an empty object', () => {
@@ -131,7 +145,7 @@ describe('ConfigProvider', () => {
 
     expect(theme?.token).toBeUndefined();
     expect(theme?.components).toEqual({});
-    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
   it('uses antd default theme when theme is an empty object', () => {
@@ -145,7 +159,7 @@ describe('ConfigProvider', () => {
 
     expect(theme?.token).toBeUndefined();
     expect(theme?.components).toBeUndefined();
-    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
   it('uses antd default global tokens when token is an empty object', () => {
@@ -159,7 +173,7 @@ describe('ConfigProvider', () => {
 
     expect(theme?.token).toEqual({});
     expect(theme?.components).toBeUndefined();
-    expect(theme?.cssVar).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
   it('allows custom algorithms to override the default algorithm', () => {
@@ -174,7 +188,7 @@ describe('ConfigProvider', () => {
     expect(theme?.algorithm).toBe(antdTheme.darkAlgorithm);
   });
 
-  it('allows custom css variable config to override the default config', () => {
+  it('ignores custom css variable config in React 17', () => {
     render(
       <ConfigProvider theme={{ cssVar: { prefix: 'app', key: 'app' } }}>
         <Button>Save</Button>
@@ -183,42 +197,25 @@ describe('ConfigProvider', () => {
 
     const theme = lastAntdConfigProviderProps?.theme;
 
-    expect(theme?.cssVar).toEqual({ prefix: 'app', key: 'app' });
+    expect(theme?.cssVar).toBeUndefined();
   });
 
-  it('adds a css variable key when cssVar is enabled with boolean shorthand', () => {
-    const { rerender } = render(
-      <ConfigProvider theme={{ cssVar: true }}>
-        <Button>Save</Button>
-      </ConfigProvider>,
-    );
-
-    const firstCssVar = lastAntdConfigProviderProps?.theme?.cssVar;
-
-    expect(firstCssVar).toMatchObject({ prefix: 'wplus' });
-    expect(typeof firstCssVar === 'object' ? firstCssVar.key : undefined).toMatch(
-      /^wplus-theme-\d+$/,
-    );
-
-    rerender(
-      <ConfigProvider theme={{ cssVar: true }}>
-        <Button>Save</Button>
-      </ConfigProvider>,
-    );
-
-    expect(lastAntdConfigProviderProps?.theme?.cssVar).toEqual(firstCssVar);
-  });
-
-  it('adds a css variable key when custom cssVar config omits key', () => {
+  it('ignores cssVar boolean shorthand in React 17', () => {
     render(
-      <ConfigProvider theme={{ cssVar: { prefix: 'app' } }}>
+      <ConfigProvider theme={{ cssVar: true }}>
         <Button>Save</Button>
       </ConfigProvider>,
     );
 
-    const cssVar = lastAntdConfigProviderProps?.theme?.cssVar;
+    expect(lastAntdConfigProviderProps?.theme?.cssVar).toBeUndefined();
+  });
 
-    expect(cssVar).toMatchObject({ prefix: 'app' });
-    expect(typeof cssVar === 'object' ? cssVar.key : undefined).toMatch(/^wplus-theme-\d+$/);
+  it('enables antd css variables by React major version', () => {
+    expect(shouldEnableAntdCssVar('17.0.2')).toBe(false);
+    expect(shouldEnableAntdCssVar('18.3.1')).toBe(true);
+    expect(shouldEnableAntdCssVar('19.0.0')).toBe(true);
+    expect(resolveAntdCssVar('17.0.2')).toBeUndefined();
+    expect(resolveAntdCssVar('18.3.1')).toEqual({ prefix: 'wplus', key: 'wplus' });
+    expect(resolveAntdCssVar('19.0.0')).toEqual({ prefix: 'wplus', key: 'wplus' });
   });
 });

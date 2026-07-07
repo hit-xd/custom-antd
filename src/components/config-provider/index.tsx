@@ -8,8 +8,6 @@ type AntdLocale = NonNullable<AntdConfigProviderProps['locale']>;
 type LocaleModule = AntdLocale | { default: LocaleModule };
 type CssVarConfig = Exclude<NonNullable<ThemeConfig['cssVar']>, boolean>;
 
-let cssVarKeySeed = 0;
-
 const unwrapLocale = (localeModule: LocaleModule): AntdLocale => {
   if (
     localeModule &&
@@ -35,48 +33,36 @@ const isEmptyObject = (value: unknown): value is Record<string, never> =>
 const hasOwnThemeKey = (theme: ThemeConfig | undefined, key: keyof ThemeConfig) =>
   !!theme && Object.prototype.hasOwnProperty.call(theme, key);
 
-const createCssVarFallbackKey = () => {
-  cssVarKeySeed += 1;
-
-  return `wplus-theme-${cssVarKeySeed}`;
-};
-
 const getDefaultCssVar = (): CssVarConfig =>
   typeof wplusTheme.cssVar === 'object' && wplusTheme.cssVar
     ? wplusTheme.cssVar
     : { prefix: 'wplus', key: 'wplus' };
 
-const normalizeCssVar = (
-  cssVar: ThemeConfig['cssVar'] | undefined,
-  getFallbackKey: () => string,
-): ThemeConfig['cssVar'] => {
-  if (cssVar === undefined) {
-    return getDefaultCssVar();
-  }
+export const shouldEnableAntdCssVar = (reactVersion = React.version) => {
+  const major = Number.parseInt(reactVersion.split('.')[0] ?? '', 10);
 
-  if (cssVar === false) {
-    return false;
-  }
-
-  if (cssVar === true) {
-    return {
-      ...getDefaultCssVar(),
-      key: getFallbackKey(),
-    };
-  }
-
-  return cssVar.key
-    ? cssVar
-    : {
-        ...cssVar,
-        key: getFallbackKey(),
-      };
+  return Number.isFinite(major) && major >= 18;
 };
 
-const mergeTheme = (theme: ThemeConfig | undefined, getFallbackKey: () => string): ThemeConfig => {
+export const resolveAntdCssVar = (reactVersion = React.version): ThemeConfig['cssVar'] =>
+  shouldEnableAntdCssVar(reactVersion) ? getDefaultCssVar() : undefined;
+
+const omitCssVar = (theme?: ThemeConfig): ThemeConfig | undefined => {
+  if (!hasOwnThemeKey(theme, 'cssVar')) {
+    return theme;
+  }
+
+  const themeWithoutCssVar = { ...theme };
+  delete themeWithoutCssVar.cssVar;
+
+  return themeWithoutCssVar;
+};
+
+const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
   const hasCustomToken = hasOwnThemeKey(theme, 'token');
   const hasCustomComponents = hasOwnThemeKey(theme, 'components');
   const useEnterpriseTheme = theme === undefined;
+  const themeWithoutCssVar = omitCssVar(theme);
 
   const token = useEnterpriseTheme
     ? wplusTheme.token
@@ -89,14 +75,14 @@ const mergeTheme = (theme: ThemeConfig | undefined, getFallbackKey: () => string
     : hasCustomComponents && isEmptyObject(theme?.components)
       ? {}
       : theme?.components;
-  const cssVar = normalizeCssVar(theme?.cssVar, getFallbackKey);
+  const cssVar = resolveAntdCssVar();
 
   return {
     algorithm: antdTheme.defaultAlgorithm,
-    ...theme,
+    ...themeWithoutCssVar,
     token,
     components,
-    cssVar,
+    ...(cssVar ? { cssVar } : {}),
   };
 };
 
@@ -106,17 +92,8 @@ export function ConfigProvider({
   theme,
   ...props
 }: PropsWithChildren<ConfigProviderProps>) {
-  const cssVarKeyRef = React.useRef<string>();
-  const getFallbackKey = () => {
-    if (!cssVarKeyRef.current) {
-      cssVarKeyRef.current = createCssVarFallbackKey();
-    }
-
-    return cssVarKeyRef.current;
-  };
-
   return (
-    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme, getFallbackKey)}>
+    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme)}>
       {children}
     </AntdConfigProvider>
   );
