@@ -1,6 +1,6 @@
 ---
 title: Mentions 提及
-order: 159
+order: 158
 ---
 
 # Mentions 提及
@@ -128,7 +128,7 @@ export default () => (
 组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
 
 ```tsx | pure
-import type { MentionsProps } from '@lf39.03/antd';
+import type { MentionProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
@@ -136,7 +136,7 @@ import type { MentionsProps } from '@lf39.03/antd';
 组件 Props 完全继承 antd，可直接从 `@lf39.03/antd` 导入：
 
 ```tsx | pure
-import type { MentionsProps } from '@lf39.03/antd';
+import type { MentionProps } from '@lf39.03/antd';
 ```
 
 详细 API 以 Ant Design v5 对应组件为准。业务代码应优先使用公开 Props，不依赖内部 DOM 结构。

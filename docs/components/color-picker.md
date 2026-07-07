@@ -1,6 +1,6 @@
 ---
 title: ColorPicker 颜色选择器
-order: 158
+order: 157
 ---
 
 # ColorPicker 颜色选择器

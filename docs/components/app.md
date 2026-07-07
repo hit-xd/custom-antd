@@ -1,6 +1,6 @@
 ---
 title: App 包裹组件
-order: 167
+order: 166
 ---
 
 # App 包裹组件

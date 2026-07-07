@@ -1,6 +1,6 @@
 ---
 title: Segmented 分段控制器
-order: 164
+order: 163
 ---
 
 # Segmented 分段控制器

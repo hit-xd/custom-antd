@@ -606,15 +606,6 @@ export const componentDocs = [
     advanced: `<Space direction="vertical" size={16}><Button>第一项</Button><Button>第二项</Button></Space>`,
   },
   {
-    name: 'Splitter',
-    title: 'Splitter 分割面板',
-    category: '布局',
-    spec: 'antd',
-    summary: '用于构建可调整大小的分栏面板。',
-    basic: `<Splitter style={{ height: 180 }}><Splitter.Panel>左侧</Splitter.Panel><Splitter.Panel>右侧</Splitter.Panel></Splitter>`,
-    advanced: `<Splitter style={{ height: 220 }}><Splitter.Panel defaultSize="30%">目录</Splitter.Panel><Splitter.Panel>详情</Splitter.Panel></Splitter>`,
-  },
-  {
     name: 'Dropdown',
     title: 'Dropdown 下拉菜单',
     category: '导航',
@@ -657,6 +648,7 @@ export const componentDocs = [
     category: '数据录入',
     spec: 'antd',
     summary: '用于在文本输入中提及人员、团队或标签。',
+    typeName: 'MentionProps',
     basic: `<Mentions style={{ width: 320 }} options={[{ value: 'risk', label: 'risk' }, { value: 'ops', label: 'ops' }]} />`,
     advanced: `<Mentions rows={3} placeholder="输入 @ 提及团队" options={[{ value: 'reviewer', label: 'reviewer' }]} />`,
   },

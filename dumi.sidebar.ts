@@ -314,10 +314,6 @@ export const ComponentSidebar = [
         title: 'Space 间距',
         link: '/components/space',
       },
-      {
-        title: 'Splitter 分割面板',
-        link: '/components/splitter',
-      },
     ],
   },
 ];

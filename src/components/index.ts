@@ -9,7 +9,7 @@ import { ensureStaticTheme } from './static-theme';
 ensureStaticTheme();
 
 export * from 'antd';
-export { Grid, theme, unstableSetRender, version } from 'antd';
+export { Grid, theme, version } from 'antd';
 export type { MessageArgsProps, NotificationArgsProps } from 'antd';
 
 export { Affix } from './affix';
@@ -79,7 +79,7 @@ export type { LayoutProps } from './layout';
 export { List } from './list';
 export type { ListProps } from './list';
 export { Mentions } from './mentions';
-export type { MentionsProps } from './mentions';
+export type { MentionProps } from './mentions';
 export { Menu } from './menu';
 export type { MenuProps } from './menu';
 export { message } from './message';
@@ -116,8 +116,6 @@ export { Space } from './space';
 export type { SpaceProps } from './space';
 export { Spin } from './spin';
 export type { SpinProps } from './spin';
-export { Splitter } from './splitter';
-export type { SplitterProps } from './splitter';
 export { Statistic } from './statistic';
 export type { StatisticProps } from './statistic';
 export { Steps } from './steps';

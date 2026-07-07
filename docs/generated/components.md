@@ -5,7 +5,7 @@ order: 110
 
 # 自动生成组件
 
-以下组件文档和显式导出清单由 `pnpm spec:sync` 自动生成。顺序按 Ant Design 官方组件导航排列，新增范围以当前依赖的 Ant Design v5.29.3 实际导出为准。
+以下组件文档和显式导出清单由 `pnpm spec:sync` 自动生成。顺序按 Ant Design 官方组件导航排列，组件范围以 Ant Design `>=5.13.0 <6` 且当前锁定的 5.13.x API 为准。
 
 | 分类     | 组件                    | 用法                                           |
 | -------- | ----------------------- | ---------------------------------------------- |
@@ -63,7 +63,6 @@ order: 110
 | 布局     | Row 栅格行              | `import { Row } from '@lf39.03/antd'`          |
 | 布局     | Col 栅格列              | `import { Col } from '@lf39.03/antd'`          |
 | 布局     | Space 间距              | `import { Space } from '@lf39.03/antd'`        |
-| 布局     | Splitter 分割面板       | `import { Splitter } from '@lf39.03/antd'`     |
 | 导航     | Dropdown 下拉菜单       | `import { Dropdown } from '@lf39.03/antd'`     |
 | 导航     | Menu 导航菜单           | `import { Menu } from '@lf39.03/antd'`         |
 | 数据录入 | AutoComplete 自动完成   | `import { AutoComplete } from '@lf39.03/antd'` |

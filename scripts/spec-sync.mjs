@@ -325,7 +325,7 @@ order: 110
 
 # 自动生成组件
 
-以下组件文档和显式导出清单由 \`pnpm spec:sync\` 自动生成。顺序按 Ant Design 官方组件导航排列，新增范围以当前依赖的 Ant Design v5.29.3 实际导出为准。
+以下组件文档和显式导出清单由 \`pnpm spec:sync\` 自动生成。顺序按 Ant Design 官方组件导航排列，组件范围以 Ant Design \`>=5.13.0 <6\` 且当前锁定的 5.13.x API 为准。
 
 | 分类 | 组件 | 用法 |
 | --- | --- | --- |
@@ -366,7 +366,7 @@ order: 120
 ## 处理原则
 
 - 文档中的设计 Token 以 \`src/theme/tokens\` 为准。
-- antd 组件顺序对齐官方组件导航，组件范围对齐当前安装的 Ant Design v5.29.3。
+- antd 组件顺序对齐官方组件导航，组件范围对齐 Ant Design \`>=5.13.0 <6\` 且当前锁定的 5.13.x API。
 - 已有 wrapper 继续由包入口覆盖，同名 API 与 Ant Design 保持兼容。
 `,
 );

@@ -1,6 +1,6 @@
 ---
 title: message 全局提示
-order: 168
+order: 167
 ---
 
 # message 全局提示

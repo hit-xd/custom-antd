@@ -19,11 +19,11 @@ order: 120
 - 字体层级：9 项
 - antd 全局 token：39 项
 - antd 组件 token 分组：48 项
-- 自动导出组件/API：70 个
+- 自动导出组件/API：69 个
 - 业务组件文档：4 个
 
 ## 处理原则
 
 - 文档中的设计 Token 以 `src/theme/tokens` 为准。
-- antd 组件顺序对齐官方组件导航，组件范围对齐当前安装的 Ant Design v5.29.3。
+- antd 组件顺序对齐官方组件导航，组件范围对齐 Ant Design `>=5.13.0 <6` 且当前锁定的 5.13.x API。
 - 已有 wrapper 继续由包入口覆盖，同名 API 与 Ant Design 保持兼容。
