@@ -4,8 +4,12 @@
 // wrappers that import per-component CSS override entrypoints.
 // ==========================================================================
 
+import { ensureStaticTheme } from './static-theme';
+
+ensureStaticTheme();
+
 export * from 'antd';
-export { Grid, message, notification, theme, unstableSetRender, version } from 'antd';
+export { Grid, theme, unstableSetRender, version } from 'antd';
 export type { MessageArgsProps, NotificationArgsProps } from 'antd';
 
 export { Affix } from './affix';
@@ -78,8 +82,10 @@ export { Mentions } from './mentions';
 export type { MentionsProps } from './mentions';
 export { Menu } from './menu';
 export type { MenuProps } from './menu';
+export { message } from './message';
 export { Modal } from './modal';
 export type { ModalProps } from './modal';
+export { notification } from './notification';
 export { Pagination } from './pagination';
 export type { PaginationProps } from './pagination';
 export { Popconfirm } from './popconfirm';

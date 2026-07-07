@@ -58,7 +58,7 @@ const omitCssVar = (theme?: ThemeConfig): ThemeConfig | undefined => {
   return themeWithoutCssVar;
 };
 
-const mergeTheme = (theme?: ThemeConfig): ThemeConfig => {
+export const resolveConfigProviderTheme = (theme?: ThemeConfig): ThemeConfig => {
   const hasCustomToken = hasOwnThemeKey(theme, 'token');
   const hasCustomComponents = hasOwnThemeKey(theme, 'components');
   const useEnterpriseTheme = theme === undefined;
@@ -93,7 +93,7 @@ export function ConfigProvider({
   ...props
 }: PropsWithChildren<ConfigProviderProps>) {
   return (
-    <AntdConfigProvider {...props} locale={locale} theme={mergeTheme(theme)}>
+    <AntdConfigProvider {...props} locale={locale} theme={resolveConfigProviderTheme(theme)}>
       {children}
     </AntdConfigProvider>
   );

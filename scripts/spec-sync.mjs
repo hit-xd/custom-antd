@@ -182,7 +182,7 @@ const slugOverrides = {
 const toSlug = (name) =>
   slugOverrides[name] ?? name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 const sidebarItem = (title, link) => ({ title, link });
-const passthroughApiNames = new Set(['message', 'notification', 'Grid']);
+const passthroughApiNames = new Set(['Grid']);
 const wrapperComponentDocs = componentDocs.filter((doc) => !passthroughApiNames.has(doc.name));
 const passthroughComponentDocs = componentDocs.filter((doc) => passthroughApiNames.has(doc.name));
 
