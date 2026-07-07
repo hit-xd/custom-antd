@@ -1,1 +1,16 @@
-/* Input styles reserved for W+ CSS overrides. */
+/* TextArea showCount should sit inside the control, not below it. */
+.ant-input-textarea.ant-input-textarea-show-count > textarea.ant-input,
+.ant-input-textarea-show-count.ant-input-textarea-affix-wrapper > textarea.ant-input {
+  padding-block-end: 28px;
+}
+
+.ant-input-textarea.ant-input-textarea-show-count .ant-input-data-count,
+.ant-input-textarea-show-count.ant-input-textarea-affix-wrapper .ant-input-data-count {
+  right: 14px;
+  bottom: var(--wplus-space-xs, 4px);
+  inset-inline-end: var(--wplus-space-md, 12px);
+  inset-block-end: var(--wplus-space-xs, 4px);
+  z-index: 1;
+  color: var(--wplus-color-text-secondary, rgba(0, 0, 0, 0.45));
+  line-height: 20px;
+}
