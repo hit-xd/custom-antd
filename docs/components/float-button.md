@@ -14,9 +14,9 @@ order: 143
 - 提示文案
 - 自定义位置
 
-## 基础用法
+## 基础按钮
 
-在固定高度容器中展示悬浮按钮，方便在文档预览区直接观察位置。
+在固定高度容器中展示悬浮按钮，方便在文档预览区观察位置。
 
 ```tsx
 import { ConfigProvider, FloatButton } from '@lf39.03/antd';
@@ -30,9 +30,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 组合按钮
 
-展示组合按钮和回到顶部入口。
+多个快捷操作可收纳为悬浮按钮组。
 
 ```tsx
 import { ConfigProvider, FloatButton } from '@lf39.03/antd';
@@ -50,12 +50,22 @@ export default () => (
 );
 ```
 
-## 类型导入
+## 回到顶部
 
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
+```tsx
+import { ConfigProvider, FloatButton } from '@lf39.03/antd';
 
-```tsx | pure
-import type { FloatButtonProps } from '@lf39.03/antd';
+export default () => (
+  <ConfigProvider>
+    <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
+      <div style={{ height: 360, padding: 16 }}>滚动区域示例</div>
+      <FloatButton.BackTop
+        visibilityHeight={0}
+        style={{ position: 'absolute', right: 24, bottom: 24 }}
+      />
+    </div>
+  </ConfigProvider>
+);
 ```
 
 ## API 与类型

@@ -17,12 +17,12 @@ order: 101
 - 禁用状态
 - 表单布局
 
-## 基础用法
+## 基础表单
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+用于编辑、提交和审批等结构化录入任务。
 
 ```tsx
-import { ConfigProvider, Button, Form, Input, Select, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Form, Input, Select } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -46,9 +46,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 行内表单
 
-展示业务里最常见的类型、状态或组合形态。
+查询区使用 inline 布局承载筛选项和操作按钮。
 
 ```tsx
 import { ConfigProvider, Button, Form, Input, Select, Space } from '@lf39.03/antd';
@@ -77,88 +77,71 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 表单校验
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+通过 rules 配置必填、格式和业务校验反馈。
 
 ```tsx
-import {
-  ConfigProvider,
-  Button,
-  Form,
-  Input,
-  Select,
-  Space,
-  Card,
-  Typography,
-} from '@lf39.03/antd';
+import { ConfigProvider, Button, Form, Input } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Form layout="vertical" style={{ maxWidth: 420 }}>
-          <Form.Item label="客户名称" name="name" rules={[{ required: true }]}>
-            <Input placeholder="请输入客户名称" />
-          </Form.Item>
-          <Form.Item label="客户类型" name="type">
-            <Select
-              options={[
-                { label: '个人客户', value: 'personal' },
-                { label: '机构客户', value: 'org' },
-              ]}
-            />
-          </Form.Item>
-          <Button type="primary" htmlType="submit">
-            提交
-          </Button>
-        </Form>
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Form layout="vertical" style={{ maxWidth: 360 }}>
+      <Form.Item label="联系人" name="owner" rules={[{ required: true, message: '请输入联系人' }]}>
+        <Input placeholder="请输入联系人" />
+      </Form.Item>
+      <Form.Item label="手机号" name="phone" rules={[{ required: true, message: '请输入手机号' }]}>
+        <Input placeholder="请输入手机号" />
+      </Form.Item>
+      <Button type="primary" htmlType="submit">
+        保存
+      </Button>
+    </Form>
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
+## 禁用表单
 
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+整组字段不可编辑时使用 disabled 统一控制状态。
 
 ```tsx
-import { ConfigProvider, Button, Form, Input, Select, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Button, Form, Input, Select } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Form layout="inline">
-        <Form.Item label="客户名称">
-          <Input placeholder="请输入" />
-        </Form.Item>
-        <Form.Item label="状态">
-          <Select
-            style={{ width: 160 }}
-            options={[
-              { label: '全部', value: 'all' },
-              { label: '处理中', value: 'processing' },
-            ]}
-          />
-        </Form.Item>
-        <Space>
-          <Button type="primary">查询</Button>
-          <Button>重置</Button>
-        </Space>
-      </Form>
-    </Card>
+    <Form disabled layout="vertical" style={{ maxWidth: 420 }}>
+      <Form.Item label="客户名称">
+        <Input defaultValue="张先生" />
+      </Form.Item>
+      <Form.Item label="客户类型">
+        <Select defaultValue="personal" options={[{ label: '个人客户', value: 'personal' }]} />
+      </Form.Item>
+      <Button type="primary">提交</Button>
+    </Form>
   </ConfigProvider>
 );
 ```
 
-## 类型导入
+## 表单布局
 
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
+通过 labelCol 和 wrapperCol 控制标签与控件的比例。
 
-```tsx | pure
-import type { FormProps } from '@lf39.03/antd';
+```tsx
+import { ConfigProvider, Button, Form, Input } from '@lf39.03/antd';
+
+export default () => (
+  <ConfigProvider>
+    <Form labelCol={{ span: 6 }} wrapperCol={{ span: 14 }} style={{ maxWidth: 520 }}>
+      <Form.Item label="客户名称" required>
+        <Input placeholder="请输入客户名称" />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 6, span: 14 }}>
+        <Button type="primary">保存</Button>
+      </Form.Item>
+    </Form>
+  </ConfigProvider>
+);
 ```
 
 ## API 与类型

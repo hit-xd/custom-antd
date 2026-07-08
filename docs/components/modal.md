@@ -16,12 +16,12 @@ order: 129
 - 异步关闭
 - 自定义底部
 
-## 基础用法
+## 基础对话框
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+用于需要用户确认或集中处理的阻断式任务。
 
 ```tsx
-import { ConfigProvider, Modal, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Modal } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
@@ -48,13 +48,12 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 确认对话框
 
-展示业务里最常见的类型、状态或组合形态。
+使用静态确认框处理轻量二次确认。
 
 ```tsx
-import { ConfigProvider, Modal, Button } from '@lf39.03/antd';
-import { useState } from 'react';
+import { ConfigProvider, Button, Modal } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -67,104 +66,115 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 异步关闭
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+提交中使用 confirmLoading 展示等待状态。
 
 ```tsx
-import { ConfigProvider, Modal, Button, Card, Typography, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Modal } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        {(() => {
-          const [open, setOpen] = useState(false);
-          return (
-            <>
-              <Button type="primary" onClick={() => setOpen(true)}>
-                打开对话框
-              </Button>
-              <Modal
-                title="确认提交"
-                open={open}
-                onOk={() => setOpen(false)}
-                onCancel={() => setOpen(false)}
-              >
-                提交后将进入审批流程。
-              </Modal>
-            </>
-          );
-        })()}
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    {(() => {
+      const [open, setOpen] = useState(false);
+      const [loading, setLoading] = useState(false);
+      const handleOk = () => {
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+          setOpen(false);
+        }, 800);
+      };
+      return (
+        <>
+          <Button type="primary" onClick={() => setOpen(true)}>
+            异步提交
+          </Button>
+          <Modal
+            title="提交审批"
+            open={open}
+            confirmLoading={loading}
+            onOk={handleOk}
+            onCancel={() => setOpen(false)}
+          >
+            正在提交审批信息。
+          </Modal>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
+## 自定义底部
 
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+复杂流程可通过 footer 自定义操作顺序和按钮文案。
 
 ```tsx
-import { ConfigProvider, Modal, Button, Card } from '@lf39.03/antd';
+import { ConfigProvider, Button, Modal, Space } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Button
-        onClick={() => Modal.confirm({ title: '确认删除客户记录？', content: '删除后无法恢复。' })}
-      >
-        确认对话框
-      </Button>
-    </Card>
+    {(() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>处理审批</Button>
+          <Modal
+            title="审批处理"
+            open={open}
+            onCancel={() => setOpen(false)}
+            footer={
+              <Space>
+                <Button onClick={() => setOpen(false)}>取消</Button>
+                <Button>保存草稿</Button>
+                <Button type="primary" onClick={() => setOpen(false)}>
+                  提交
+                </Button>
+              </Space>
+            }
+          >
+            请确认审批意见后提交。
+          </Modal>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
 ```
 
-## 流程反馈区
-
-放入审批、提交、加载等流程反馈页面，验证信息层级。
+## 表单承载
 
 ```tsx
-import { ConfigProvider, Modal, Button, Card } from '@lf39.03/antd';
+import { ConfigProvider, Button, Form, Input, Modal } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card title="流程处理结果" style={{ maxWidth: 560 }}>
-      {(() => {
-        const [open, setOpen] = useState(false);
-        return (
-          <>
-            <Button type="primary" onClick={() => setOpen(true)}>
-              打开对话框
-            </Button>
-            <Modal
-              title="确认提交"
-              open={open}
-              onOk={() => setOpen(false)}
-              onCancel={() => setOpen(false)}
-            >
-              提交后将进入审批流程。
-            </Modal>
-          </>
-        );
-      })()}
-    </Card>
+    {(() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>填写意见</Button>
+          <Modal
+            title="审批意见"
+            open={open}
+            onOk={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+          >
+            <Form layout="vertical">
+              <Form.Item label="意见" required>
+                <Input.TextArea rows={3} placeholder="请输入审批意见" />
+              </Form.Item>
+            </Form>
+          </Modal>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { ModalProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

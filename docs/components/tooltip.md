@@ -16,12 +16,10 @@ order: 125
 - 长文本
 - 受控显示
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 基础提示
 
 ```tsx
-import { ConfigProvider, Tooltip, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Tooltip } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -32,12 +30,10 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 不同方向
 
 ```tsx
-import { ConfigProvider, Tooltip, Button, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Space, Tooltip } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -53,83 +49,46 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 长文本
 
 ```tsx
-import { ConfigProvider, Tooltip, Button, Card, Typography, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Tooltip } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Tooltip title="查看客户详情">
-          <Button>悬停查看</Button>
-        </Tooltip>
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Tooltip title="这里展示一段较长的说明文字，用于解释字段含义或操作风险。">
+      <Button>字段说明</Button>
+    </Tooltip>
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+## 颜色
 
 ```tsx
-import { ConfigProvider, Tooltip, Button, Card, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Tooltip } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Space>
-        <Tooltip placement="top" title="顶部提示">
-          <Button>Top</Button>
-        </Tooltip>
-        <Tooltip placement="right" title="右侧提示">
-          <Button>Right</Button>
-        </Tooltip>
-      </Space>
-    </Card>
+    <Tooltip color="#9B7235" title="品牌色提示">
+      <Button>品牌色</Button>
+    </Tooltip>
   </ConfigProvider>
 );
 ```
 
-## 列表内容区
-
-在列表或详情内容区中使用组件，适合检查只读信息展示场景。
+## 禁用触发元素
 
 ```tsx
-import { ConfigProvider, Tooltip, Button, List, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Tooltip } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <List
-      bordered
-      dataSource={['客户信息', '资产信息']}
-      renderItem={(item) => (
-        <List.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <strong>{item}</strong>
-            <Tooltip title="查看客户详情">
-              <Button>悬停查看</Button>
-            </Tooltip>
-          </Space>
-        </List.Item>
-      )}
-    />
+    <Tooltip title="当前无权限操作">
+      <Button disabled>不可操作</Button>
+    </Tooltip>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { TooltipProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

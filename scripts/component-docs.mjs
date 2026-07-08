@@ -480,34 +480,8 @@ export const componentDocs = [
     imports: ['FloatButton'],
     typeName: 'FloatButtonProps',
     variants: ['基础按钮', '组合按钮', '提示文案', '自定义位置'],
-    demos: [
-      {
-        title: '基础用法',
-        description: '在固定高度容器中展示悬浮按钮，方便在文档预览区直接观察位置。',
-        imports: ['FloatButton'],
-        code: `<div style={{ position: 'relative', height: 160, background: '#f4f6f8' }}>
-      <FloatButton tooltip="快捷操作" style={{ position: 'absolute', right: 24, bottom: 24 }} />
-    </div>`,
-      },
-      {
-        title: '常用类型与状态',
-        description: '展示组合按钮和回到顶部入口。',
-        imports: ['FloatButton'],
-        code: `<div style={{ position: 'relative', height: 180, background: '#f4f6f8' }}>
-      <FloatButton.Group trigger="click" style={{ position: 'absolute', right: 24, bottom: 24 }}>
-        <FloatButton tooltip="编辑" />
-        <FloatButton tooltip="刷新" />
-        <FloatButton.BackTop visibilityHeight={0} />
-      </FloatButton.Group>
-    </div>`,
-      },
-      {
-        title: '类型导入',
-        description: '组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。',
-        code: `import type { FloatButtonProps } from '@lf39.03/antd';`,
-        pure: true,
-      },
-    ],
+    basic: `<div style={{ position: 'relative', height: 160, background: '#f4f6f8' }}><FloatButton tooltip="快捷操作" style={{ position: 'absolute', right: 24, bottom: 24 }} /></div>`,
+    advanced: `<div style={{ position: 'relative', height: 180, background: '#f4f6f8' }}><FloatButton.Group trigger="click" style={{ position: 'absolute', right: 24, bottom: 24 }}><FloatButton tooltip="编辑" /><FloatButton tooltip="刷新" /><FloatButton.BackTop visibilityHeight={0} /></FloatButton.Group></div>`,
   },
   {
     name: 'Transfer',
@@ -765,13 +739,17 @@ order: ${order}
 
 ${doc.summary}
 
-\`${doc.name}\` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：\`${doc.spec}\`。
+\`${
+    doc.name
+  }\` API 与 Ant Design v5 保持兼容，企业主题统一应用品牌色、文字层级、圆角和交互状态。规范来源：\`${
+    doc.spec
+  }\`。
 
 ## 组件类型
 
 ${renderVariants(doc.variants)}
 
-## 基础用法
+## 默认展示
 
 \`\`\`tsx
 import { ConfigProvider, ${imports.join(', ')} } from '@lf39.03/antd';
@@ -783,7 +761,7 @@ export default () => (
 );
 \`\`\`
 
-## 常用类型与状态
+## 组合配置
 
 \`\`\`tsx
 import { ConfigProvider, ${imports.join(', ')} } from '@lf39.03/antd';

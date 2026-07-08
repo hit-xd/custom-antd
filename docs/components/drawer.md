@@ -16,12 +16,12 @@ order: 130
 - 多层抽屉
 - 带操作区
 
-## 基础用法
+## 右侧抽屉
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+在不离开当前页面的情况下查看详情。
 
 ```tsx
-import { ConfigProvider, Drawer, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Drawer } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
@@ -41,12 +41,51 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 不同方向
 
 ```tsx
-import { ConfigProvider, Drawer, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Drawer, Space } from '@lf39.03/antd';
+import { useState } from 'react';
+
+export default () => (
+  <ConfigProvider>
+    {(() => {
+      const [placement, setPlacement] = useState('right');
+      const [open, setOpen] = useState(false);
+      return (
+        <Space>
+          <Button
+            onClick={() => {
+              setPlacement('right');
+              setOpen(true);
+            }}
+          >
+            右侧
+          </Button>
+          <Button
+            onClick={() => {
+              setPlacement('bottom');
+              setOpen(true);
+            }}
+          >
+            底部
+          </Button>
+          <Drawer placement={placement} title="抽屉" open={open} onClose={() => setOpen(false)}>
+            抽屉内容
+          </Drawer>
+        </Space>
+      );
+    })()}
+  </ConfigProvider>
+);
+```
+
+## 不同尺寸
+
+复杂编辑场景可调整 width 承载更多内容。
+
+```tsx
+import { ConfigProvider, Button, Drawer } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
@@ -74,104 +113,65 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 表单抽屉
 
 ```tsx
-import { ConfigProvider, Drawer, Button, Card, Typography, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Drawer, Form, Input } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        {(() => {
-          const [open, setOpen] = useState(false);
-          return (
-            <>
-              <Button onClick={() => setOpen(true)}>查看客户详情</Button>
-              <Drawer title="客户详情" open={open} onClose={() => setOpen(false)}>
-                客户资产和持仓信息。
-              </Drawer>
-            </>
-          );
-        })()}
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    {(() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>新建客户</Button>
+          <Drawer
+            title="新建客户"
+            open={open}
+            width={520}
+            onClose={() => setOpen(false)}
+            extra={<Button type="primary">保存</Button>}
+          >
+            <Form layout="vertical">
+              <Form.Item label="客户名称" required>
+                <Input placeholder="请输入客户名称" />
+              </Form.Item>
+              <Form.Item label="备注">
+                <Input.TextArea rows={3} />
+              </Form.Item>
+            </Form>
+          </Drawer>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
+## 无遮罩
 
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+需要保留页面可见上下文时，可关闭 mask。
 
 ```tsx
-import { ConfigProvider, Drawer, Button, Card } from '@lf39.03/antd';
+import { ConfigProvider, Button, Drawer } from '@lf39.03/antd';
 import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      {(() => {
-        const [open, setOpen] = useState(false);
-        return (
-          <>
-            <Button type="primary" onClick={() => setOpen(true)}>
-              编辑资料
-            </Button>
-            <Drawer
-              title="编辑资料"
-              open={open}
-              width={560}
-              extra={<Button type="primary">保存</Button>}
-              onClose={() => setOpen(false)}
-            >
-              客户资料编辑区。
-            </Drawer>
-          </>
-        );
-      })()}
-    </Card>
+    {(() => {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <Button onClick={() => setOpen(true)}>打开无遮罩抽屉</Button>
+          <Drawer title="客户备注" mask={false} open={open} onClose={() => setOpen(false)}>
+            页面内容仍保持可见。
+          </Drawer>
+        </>
+      );
+    })()}
   </ConfigProvider>
 );
-```
-
-## 流程反馈区
-
-放入审批、提交、加载等流程反馈页面，验证信息层级。
-
-```tsx
-import { ConfigProvider, Drawer, Button, Card } from '@lf39.03/antd';
-import { useState } from 'react';
-
-export default () => (
-  <ConfigProvider>
-    <Card title="流程处理结果" style={{ maxWidth: 560 }}>
-      {(() => {
-        const [open, setOpen] = useState(false);
-        return (
-          <>
-            <Button onClick={() => setOpen(true)}>查看客户详情</Button>
-            <Drawer title="客户详情" open={open} onClose={() => setOpen(false)}>
-              客户资产和持仓信息。
-            </Drawer>
-          </>
-        );
-      })()}
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { DrawerProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

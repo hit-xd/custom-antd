@@ -16,12 +16,10 @@ order: 140
 - 下拉菜单
 - 自定义分隔符
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 基础路径
 
 ```tsx
-import { ConfigProvider, Breadcrumb, Space } from '@lf39.03/antd';
+import { ConfigProvider, Breadcrumb } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -30,17 +28,14 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 带链接
 
 ```tsx
-import { ConfigProvider, Breadcrumb, Space } from '@lf39.03/antd';
+import { ConfigProvider, Breadcrumb } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
     <Breadcrumb
-      separator=">"
       items={[
         { title: <a href="#">首页</a> },
         { title: <a href="#">审批中心</a> },
@@ -51,70 +46,19 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 自定义分隔符
 
 ```tsx
-import { ConfigProvider, Breadcrumb, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, Breadcrumb } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Breadcrumb items={[{ title: '客户管理' }, { title: '客户列表' }, { title: '客户详情' }]} />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Breadcrumb
+      separator=">"
+      items={[{ title: '首页' }, { title: '客户管理' }, { title: '客户详情' }]}
+    />
   </ConfigProvider>
 );
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Breadcrumb, Space, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Breadcrumb
-        separator=">"
-        items={[
-          { title: <a href="#">首页</a> },
-          { title: <a href="#">审批中心</a> },
-          { title: '审批详情' },
-        ]}
-      />
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 页面导航区
-
-放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。
-
-```tsx
-import { ConfigProvider, Breadcrumb, Space, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card title="页面导航" style={{ maxWidth: 640 }}>
-      <Breadcrumb items={[{ title: '客户管理' }, { title: '客户列表' }, { title: '客户详情' }]} />
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { BreadcrumbProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

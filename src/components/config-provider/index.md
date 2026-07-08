@@ -14,9 +14,8 @@ order: 1
 - 不使用定制主题
 - 默认组件主题
 - 表单文案
-- 类型导入
 
-## 基础用法
+## 默认企业主题
 
 ```tsx
 import { ConfigProvider, Button } from '@lf39.03/antd';
@@ -107,14 +106,6 @@ export default () => (
     </ConfigProvider>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入。
-
-```tsx | pure
-import type { ConfigProviderProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

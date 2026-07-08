@@ -73,14 +73,6 @@ export default () => (
 );
 ```
 
-## 类型导入
-
-组件 Props 类型可直接从包入口导入。
-
-```tsx | pure
-import type { DetailPageHeaderProps } from '@lf39.03/antd';
-```
-
 ## API 与类型
 
 组件 Props 可直接从 `@lf39.03/antd` 导入：

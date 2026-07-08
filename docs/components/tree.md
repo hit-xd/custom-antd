@@ -9,16 +9,13 @@ order: 165
 
 ## 组件类型
 
-- 基础用法
-- 常用配置
-- 组合场景
+- 默认展示
+- 组合展示
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 基础树
 
 ```tsx
-import { ConfigProvider, Tree, Space } from '@lf39.03/antd';
+import { ConfigProvider, Tree } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -29,12 +26,10 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 可勾选
 
 ```tsx
-import { ConfigProvider, Tree, Space } from '@lf39.03/antd';
+import { ConfigProvider, Tree } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -47,84 +42,55 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 默认展开
 
 ```tsx
-import { ConfigProvider, Tree, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, Tree } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Tree
-          treeData={[
-            { title: '总部', key: 'hq', children: [{ title: '财富管理部', key: 'wealth' }] },
-          ]}
-        />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Tree, Space, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Tree
-        checkable
-        defaultExpandAll
-        treeData={[{ title: '总部', key: 'hq', children: [{ title: '运营部', key: 'ops' }] }]}
-      />
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 列表内容区
-
-在列表或详情内容区中使用组件，适合检查只读信息展示场景。
-
-```tsx
-import { ConfigProvider, Tree, Space, List } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <List
-      bordered
-      dataSource={['客户信息', '资产信息']}
-      renderItem={(item) => (
-        <List.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <strong>{item}</strong>
-            <Tree
-              treeData={[
-                { title: '总部', key: 'hq', children: [{ title: '财富管理部', key: 'wealth' }] },
-              ]}
-            />
-          </Space>
-        </List.Item>
-      )}
+    <Tree
+      defaultExpandedKeys={['hq']}
+      treeData={[{ title: '总部', key: 'hq', children: [{ title: '上海分行', key: 'shanghai' }] }]}
     />
   </ConfigProvider>
 );
 ```
 
-## 类型导入
+## 默认选中
 
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
+```tsx
+import { ConfigProvider, Tree } from '@lf39.03/antd';
 
-```tsx | pure
-import type { TreeProps } from '@lf39.03/antd';
+export default () => (
+  <ConfigProvider>
+    <Tree
+      defaultSelectedKeys={['wealth']}
+      defaultExpandAll
+      treeData={[{ title: '总部', key: 'hq', children: [{ title: '财富管理部', key: 'wealth' }] }]}
+    />
+  </ConfigProvider>
+);
+```
+
+## 禁用节点
+
+```tsx
+import { ConfigProvider, Tree } from '@lf39.03/antd';
+
+export default () => (
+  <ConfigProvider>
+    <Tree
+      treeData={[
+        {
+          title: '总部',
+          key: 'hq',
+          children: [{ title: '停用机构', key: 'disabled', disabled: true }],
+        },
+      ]}
+    />
+  </ConfigProvider>
+);
 ```
 
 ## API 与类型

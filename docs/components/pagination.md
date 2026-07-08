@@ -16,12 +16,10 @@ order: 137
 - 小尺寸
 - 简洁模式
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 基础分页
 
 ```tsx
-import { ConfigProvider, Pagination, Space } from '@lf39.03/antd';
+import { ConfigProvider, Pagination } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -30,83 +28,61 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 更多配置
 
 ```tsx
-import { ConfigProvider, Pagination, Space } from '@lf39.03/antd';
+import { ConfigProvider, Pagination } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Space direction="vertical">
-      <Pagination showSizeChanger showQuickJumper total={500} />
-      <Pagination size="small" simple total={120} />
-    </Space>
+    <Pagination
+      showSizeChanger
+      showQuickJumper
+      showTotal={(total) => `共 ${total} 条`}
+      total={500}
+    />
   </ConfigProvider>
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 小尺寸
 
 ```tsx
-import { ConfigProvider, Pagination, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, Pagination } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Pagination defaultCurrent={1} total={120} />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Pagination size="small" total={120} />
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+## 简洁模式
 
 ```tsx
-import { ConfigProvider, Pagination, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Pagination } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Space direction="vertical">
-        <Pagination showSizeChanger showQuickJumper total={500} />
-        <Pagination size="small" simple total={120} />
-      </Space>
-    </Card>
+    <Pagination simple total={120} />
   </ConfigProvider>
 );
 ```
 
-## 页面导航区
-
-放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。
+## 受控分页
 
 ```tsx
-import { ConfigProvider, Pagination, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Pagination } from '@lf39.03/antd';
+import { useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card title="页面导航" style={{ maxWidth: 640 }}>
-      <Pagination defaultCurrent={1} total={120} />
-    </Card>
+    {(() => {
+      const [current, setCurrent] = useState(1);
+      return <Pagination current={current} total={120} onChange={setCurrent} />;
+    })()}
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { PaginationProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

@@ -16,12 +16,10 @@ order: 126
 - 带标题
 - 不同方向
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 点击触发
 
 ```tsx
-import { ConfigProvider, Popover, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Popover } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -32,17 +30,29 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 悬停触发
 
 ```tsx
-import { ConfigProvider, Popover, Button } from '@lf39.03/antd';
+import { ConfigProvider, Button, Popover } from '@lf39.03/antd';
+
+export default () => (
+  <ConfigProvider>
+    <Popover trigger="hover" content="悬停后展示更多内容">
+      <Button>悬停查看</Button>
+    </Popover>
+  </ConfigProvider>
+);
+```
+
+## 带标题
+
+```tsx
+import { ConfigProvider, Button, Popover } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
     <Popover
-      trigger="click"
+      title="工作提醒"
       content={
         <div>
           <p>待处理审批：3</p>
@@ -56,86 +66,41 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 不同方向
 
 ```tsx
-import { ConfigProvider, Popover, Button, Card, Typography, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Popover, Space } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Popover title="客户信息" content="稳健型客户，资产规模 1,280 万元。">
-          <Button>查看信息</Button>
-        </Popover>
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Popover, Button, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Popover
-        trigger="click"
-        content={
-          <div>
-            <p>待处理审批：3</p>
-            <p>待回访客户：8</p>
-          </div>
-        }
-      >
-        <Button>工作提醒</Button>
+    <Space>
+      <Popover placement="top" content="顶部内容">
+        <Button>Top</Button>
       </Popover>
-    </Card>
+      <Popover placement="right" content="右侧内容">
+        <Button>Right</Button>
+      </Popover>
+    </Space>
   </ConfigProvider>
 );
 ```
 
-## 列表内容区
-
-在列表或详情内容区中使用组件，适合检查只读信息展示场景。
+## 卡片内容
 
 ```tsx
-import { ConfigProvider, Popover, Button, List, Space } from '@lf39.03/antd';
+import { ConfigProvider, Button, Popover } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <List
-      bordered
-      dataSource={['客户信息', '资产信息']}
-      renderItem={(item) => (
-        <List.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <strong>{item}</strong>
-            <Popover title="客户信息" content="稳健型客户，资产规模 1,280 万元。">
-              <Button>查看信息</Button>
-            </Popover>
-          </Space>
-        </List.Item>
-      )}
-    />
+    <Popover
+      content={
+        <div style={{ width: 220 }}>客户最近一次回访时间为 2026-06-12，当前状态为跟进中。</div>
+      }
+    >
+      <Button>客户摘要</Button>
+    </Popover>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { PopoverProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

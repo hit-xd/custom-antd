@@ -1,3 +1,4 @@
+import { componentDemoPresets, createCommonDemos } from './component-demo-presets.mjs';
 import { componentDocs as baseComponentDocs } from './component-docs.mjs';
 
 const primaryComponentDocs = [
@@ -98,7 +99,23 @@ const primaryComponentDocs = [
 
 export const componentDocs = [...primaryComponentDocs, ...baseComponentDocs];
 
-const renderVariants = (variants = ['基础用法', '常用配置', '组合场景']) =>
+const fallbackVariantsByCategory = {
+  基础能力: ['默认展示', '组合配置'],
+  数据录入: ['默认输入', '组合输入'],
+  数据展示: ['默认展示', '组合展示'],
+  反馈: ['默认反馈', '状态反馈'],
+  导航: ['默认导航', '组合导航'],
+  布局: ['默认布局', '组合布局'],
+  通用: ['默认展示', '组合配置'],
+  其他: ['默认展示', '组合配置'],
+};
+
+const getDocVariants = (doc) =>
+  doc.variants?.length
+    ? doc.variants
+    : (fallbackVariantsByCategory[doc.category] ?? ['默认展示', '组合配置']);
+
+const renderVariants = (variants = ['默认展示', '组合配置']) =>
   variants.map((item) => `- ${item}`).join('\n');
 const unique = (values) => [...new Set(values.filter(Boolean))];
 const mergeImports = (...groups) => unique(groups.flat());
@@ -123,124 +140,26 @@ const demo = ({ title, description, imports = [], extraImports, code, pure = fal
 
 const getDocImports = (doc) => doc.imports ?? [doc.name, 'Space'];
 
-const createComponentDemos = (doc) => {
+const normalizeDemos = (doc, demos, options = {}) => {
   const baseImports = getDocImports(doc);
-  const demos = [
-    demo({
-      title: '基础用法',
-      description: '最小可用示例，适合快速确认组件默认样式和主题效果。',
-      imports: baseImports,
-      extraImports: doc.extraImports,
-      code: doc.basic,
-    }),
-    demo({
-      title: '常用类型与状态',
-      description: '展示业务里最常见的类型、状态或组合形态。',
-      imports: baseImports,
-      extraImports: doc.extraImports,
-      code: doc.advanced,
-    }),
-    demo({
-      title: '业务卡片场景',
-      description: '放入企业后台常见的信息卡片，检查与周边内容的间距和层级。',
-      imports: mergeImports(baseImports, ['Card', 'Typography']),
-      extraImports: doc.extraImports,
-      code: `<Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        ${doc.basic}
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>`,
-    }),
-    demo({
-      title: '紧凑布局',
-      description: '在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。',
-      imports: mergeImports(baseImports, ['Card']),
-      extraImports: doc.extraImports,
-      code: `<Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      ${doc.advanced}
-    </Card>`,
-    }),
-  ];
+  const { inheritExtraImports = true } = options;
 
-  if (doc.category === '数据录入') {
-    demos.push(
+  return demos
+    .filter((item) => item?.code)
+    .map((item) =>
       demo({
-        title: '筛选表单',
-        description: '放入查询条件区域，体现与表单标签、按钮的组合方式。',
-        imports: mergeImports(baseImports, ['Button', 'Form']),
-        extraImports: doc.extraImports,
-        code: `<Form layout="inline">
-      <Form.Item label="查询条件">${doc.basic}</Form.Item>
-      <Form.Item>
-        <Button type="primary">查询</Button>
-      </Form.Item>
-    </Form>`,
+        ...item,
+        imports: item.imports ?? baseImports,
+        extraImports: item.extraImports ?? (inheritExtraImports ? doc.extraImports : undefined),
       }),
     );
-  }
+};
 
-  if (doc.category === '数据展示') {
-    demos.push(
-      demo({
-        title: '列表内容区',
-        description: '在列表或详情内容区中使用组件，适合检查只读信息展示场景。',
-        imports: mergeImports(baseImports, ['List']),
-        extraImports: doc.extraImports,
-        code: `<List
-      bordered
-      dataSource={['客户信息', '资产信息']}
-      renderItem={(item) => (
-        <List.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <strong>{item}</strong>
-            ${doc.basic}
-          </Space>
-        </List.Item>
-      )}
-    />`,
-      }),
-    );
-  }
+const createComponentDemos = (doc) => {
+  const preset = componentDemoPresets[doc.name];
+  if (preset) return normalizeDemos(doc, preset, { inheritExtraImports: false });
 
-  if (doc.category === '反馈') {
-    demos.push(
-      demo({
-        title: '流程反馈区',
-        description: '放入审批、提交、加载等流程反馈页面，验证信息层级。',
-        imports: mergeImports(baseImports, ['Card']),
-        extraImports: doc.extraImports,
-        code: `<Card title="流程处理结果" style={{ maxWidth: 560 }}>
-      ${doc.basic}
-    </Card>`,
-      }),
-    );
-  }
-
-  if (doc.category === '导航') {
-    demos.push(
-      demo({
-        title: '页面导航区',
-        description: '放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。',
-        imports: mergeImports(baseImports, ['Card']),
-        extraImports: doc.extraImports,
-        code: `<Card title="页面导航" style={{ maxWidth: 640 }}>
-      ${doc.basic}
-    </Card>`,
-      }),
-    );
-  }
-
-  demos.push(
-    demo({
-      title: '类型导入',
-      description: '组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。',
-      code: `import type { ${doc.typeName ?? `${doc.name}Props`} } from '@lf39.03/antd';`,
-      pure: true,
-    }),
-  );
-
-  return doc.demos ?? demos;
+  return normalizeDemos(doc, createCommonDemos(doc));
 };
 
 const renderCodeBlock = (item) => {
@@ -294,7 +213,7 @@ ${doc.summary}${specLine}
 
 ## 组件类型
 
-${renderVariants(doc.variants)}
+${renderVariants(getDocVariants(doc))}
 
 ${renderDemos(createComponentDemos(doc))}
 
@@ -513,18 +432,11 @@ export const configProviderDoc = {
   title: 'ConfigProvider',
   summary:
     '包装 Ant Design v5 的 ConfigProvider，默认注入企业级主题 token，其他能力与 antd 保持兼容。',
-  variants: [
-    '默认企业主题',
-    '覆盖主题 token',
-    '不使用定制主题',
-    '默认组件主题',
-    '表单文案',
-    '类型导入',
-  ],
+  variants: ['默认企业主题', '覆盖主题 token', '不使用定制主题', '默认组件主题', '表单文案'],
   propsType: 'ConfigProviderProps',
   demos: [
     demo({
-      title: '基础用法',
+      title: '默认企业主题',
       imports: ['Button'],
       code: `<Button type="primary">提交</Button>`,
     }),
@@ -593,15 +505,7 @@ ${doc.summary}
 
 ${renderVariants(doc.variants)}
 
-${renderDemos([
-  ...doc.demos,
-  demo({
-    title: '类型导入',
-    description: '组件 Props 类型可直接从包入口导入。',
-    code: `import type { ${doc.propsType} } from '@lf39.03/antd';`,
-    pure: true,
-  }),
-])}
+${renderDemos([...doc.demos])}
 
 ## API 与类型
 

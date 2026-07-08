@@ -17,23 +17,9 @@ order: 128
 - 错误
 - 可关闭
 
-## 基础用法
+## 四种样式
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
-
-```tsx
-import { ConfigProvider, Alert, Space } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Alert message="客户资料保存成功" type="success" showIcon />
-  </ConfigProvider>
-);
-```
-
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+通过 type 表达成功、信息、警告和错误等提示语义。
 
 ```tsx
 import { ConfigProvider, Alert, Space } from '@lf39.03/antd';
@@ -41,85 +27,82 @@ import { ConfigProvider, Alert, Space } from '@lf39.03/antd';
 export default () => (
   <ConfigProvider>
     <Space direction="vertical" style={{ width: '100%' }}>
+      <Alert message="客户资料保存成功" type="success" showIcon />
       <Alert message="配置将在发布后生效" type="info" showIcon />
-      <Alert
-        message="风险评估即将到期"
-        description="请在 7 天内完成重新评估。"
-        type="warning"
-        showIcon
-        closable
-      />
+      <Alert message="风险评估即将到期" type="warning" showIcon />
+      <Alert message="提交失败，请稍后重试" type="error" showIcon />
     </Space>
   </ConfigProvider>
 );
 ```
 
-## 业务卡片场景
+## 含描述
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+需要补充原因或处理建议时使用 description。
 
 ```tsx
-import { ConfigProvider, Alert, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, Alert } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Alert message="客户资料保存成功" type="success" showIcon />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Alert
+      message="风险评估即将到期"
+      description="请在 7 天内完成重新评估，逾期后部分业务操作将受限。"
+      type="warning"
+      showIcon
+    />
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
+## 可关闭
 
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+非阻断提示可允许用户主动关闭。
 
 ```tsx
-import { ConfigProvider, Alert, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Alert } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Space direction="vertical" style={{ width: '100%' }}>
-        <Alert message="配置将在发布后生效" type="info" showIcon />
-        <Alert
-          message="风险评估即将到期"
-          description="请在 7 天内完成重新评估。"
-          type="warning"
-          showIcon
-          closable
-        />
-      </Space>
-    </Card>
+    <Alert message="配置将在发布后生效" type="info" showIcon closable />
   </ConfigProvider>
 );
 ```
 
-## 流程反馈区
-
-放入审批、提交、加载等流程反馈页面，验证信息层级。
+## 操作按钮
 
 ```tsx
-import { ConfigProvider, Alert, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Alert, Button } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="流程处理结果" style={{ maxWidth: 560 }}>
-      <Alert message="客户资料保存成功" type="success" showIcon />
-    </Card>
+    <Alert
+      message="客户资料待补充"
+      description="补充完整后可继续发起审批。"
+      type="warning"
+      showIcon
+      action={
+        <Button size="small" type="primary">
+          去补充
+        </Button>
+      }
+    />
   </ConfigProvider>
 );
 ```
 
-## 类型导入
+## 无图标提示
 
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
+低风险提示可关闭图标，降低视觉占用。
 
-```tsx | pure
-import type { AlertProps } from '@lf39.03/antd';
+```tsx
+import { ConfigProvider, Alert } from '@lf39.03/antd';
+
+export default () => (
+  <ConfigProvider>
+    <Alert message="系统将在今晚 22:00 进行例行维护" type="info" />
+  </ConfigProvider>
+);
 ```
 
 ## API 与类型

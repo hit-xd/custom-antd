@@ -16,9 +16,9 @@ order: 127
 - 遮罩
 - 非模态引导
 
-## 基础用法
+## 基础引导
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+展示 Tour 漫游式引导 的默认样式和企业主题效果。
 
 ```tsx
 import { ConfigProvider, Button, Space, Tour } from '@lf39.03/antd';
@@ -52,9 +52,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 步骤切换 / 遮罩 / 非模态引导
 
-展示业务里最常见的类型、状态或组合形态。
+展示 Tour 漫游式引导 的常用配置、状态或组合形态。
 
 ```tsx
 import { ConfigProvider, Button, Space, Tour } from '@lf39.03/antd';
@@ -86,9 +86,9 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 容器展示
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+放入内容容器中观察与标题、辅助说明和周边内容的组合效果。
 
 ```tsx
 import { ConfigProvider, Button, Space, Tour, Card, Typography } from '@lf39.03/antd';
@@ -96,126 +96,35 @@ import { useRef, useState } from 'react';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        {(() => {
-          const [open, setOpen] = useState(false);
-          const ref = useRef(null);
-          return (
-            <>
-              <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
-                开始引导
-              </Button>
-              <Tour
-                open={open}
-                onClose={() => setOpen(false)}
-                steps={[
-                  {
-                    title: '客户检索',
-                    description: '通过条件快速查找客户。',
-                    target: () => ref.current,
-                  },
-                ]}
-              />
-            </>
-          );
-        })()}
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Button, Space, Tour, Card } from '@lf39.03/antd';
-import { useRef, useState } from 'react';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
+    <Card title="信息展示" style={{ maxWidth: 560 }}>
       {(() => {
         const [open, setOpen] = useState(false);
         const ref = useRef(null);
         return (
-          <Space>
+          <>
             <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
               开始引导
             </Button>
-            <Button>辅助操作</Button>
             <Tour
               open={open}
               onClose={() => setOpen(false)}
               steps={[
-                { title: '步骤一', description: '先确认关键入口。', target: () => ref.current },
-                { title: '步骤二', description: '继续查看后续流程。', target: () => ref.current },
+                {
+                  title: '客户检索',
+                  description: '通过条件快速查找客户。',
+                  target: () => ref.current,
+                },
               ]}
             />
-          </Space>
+          </>
         );
       })()}
+      <Typography.Paragraph type="secondary" style={{ marginTop: 12, marginBottom: 0 }}>
+        用于展示客户、产品、审批等业务信息。
+      </Typography.Paragraph>
     </Card>
   </ConfigProvider>
 );
-```
-
-## 列表内容区
-
-在列表或详情内容区中使用组件，适合检查只读信息展示场景。
-
-```tsx
-import { ConfigProvider, Button, Space, Tour, List } from '@lf39.03/antd';
-import { useRef, useState } from 'react';
-
-export default () => (
-  <ConfigProvider>
-    <List
-      bordered
-      dataSource={['客户信息', '资产信息']}
-      renderItem={(item) => (
-        <List.Item>
-          <Space direction="vertical" style={{ width: '100%' }}>
-            <strong>{item}</strong>
-            {(() => {
-              const [open, setOpen] = useState(false);
-              const ref = useRef(null);
-              return (
-                <>
-                  <Button ref={ref} type="primary" onClick={() => setOpen(true)}>
-                    开始引导
-                  </Button>
-                  <Tour
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    steps={[
-                      {
-                        title: '客户检索',
-                        description: '通过条件快速查找客户。',
-                        target: () => ref.current,
-                      },
-                    ]}
-                  />
-                </>
-              );
-            })()}
-          </Space>
-        </List.Item>
-      )}
-    />
-  </ConfigProvider>
-);
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { TourProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

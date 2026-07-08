@@ -9,13 +9,12 @@ order: 154
 
 ## 组件类型
 
-- 基础用法
-- 常用配置
-- 组合场景
+- 默认导航
+- 组合导航
 
-## 基础用法
+## 基础导航
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+展示 Dropdown 下拉菜单 的默认样式和企业主题效果。
 
 ```tsx
 import { ConfigProvider, Button, Dropdown } from '@lf39.03/antd';
@@ -36,9 +35,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 组合导航 / 页面导航
 
-展示业务里最常见的类型、状态或组合形态。
+展示 Dropdown 下拉菜单 的常用配置、状态或组合形态。
 
 ```tsx
 import { ConfigProvider, Button, Dropdown } from '@lf39.03/antd';
@@ -50,55 +49,9 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 页面导航
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
-
-```tsx
-import { ConfigProvider, Button, Dropdown, Card, Typography, Space } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Dropdown
-          menu={{
-            items: [
-              { key: 'edit', label: '编辑' },
-              { key: 'delete', label: '删除' },
-            ],
-          }}
-        >
-          <Button>更多操作</Button>
-        </Dropdown>
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Button, Dropdown, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Dropdown.Button menu={{ items: [{ key: 'download', label: '下载' }] }}>
-        主操作
-      </Dropdown.Button>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 页面导航区
-
-放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。
+在页面导航区域中使用，观察与内容标题和操作入口的组合效果。
 
 ```tsx
 import { ConfigProvider, Button, Dropdown, Card } from '@lf39.03/antd';
@@ -119,14 +72,6 @@ export default () => (
     </Card>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { DropdownProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

@@ -9,13 +9,12 @@ order: 150
 
 ## 组件类型
 
-- 基础用法
-- 常用配置
-- 组合场景
+- 默认布局
+- 组合布局
 
-## 基础用法
+## 基础布局
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+展示 Grid 栅格断点 的默认样式和企业主题效果。
 
 ```tsx
 import { ConfigProvider, Grid, Typography } from '@lf39.03/antd';
@@ -30,9 +29,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 组合布局 / 响应式布局
 
-展示业务里最常见的类型、状态或组合形态。
+展示 Grid 栅格断点 的常用配置、状态或组合形态。
 
 ```tsx
 import { ConfigProvider, Grid, Typography } from '@lf39.03/antd';
@@ -47,53 +46,23 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 响应式布局
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+展示布局组件承载不同内容块时的排列和对齐效果。
 
 ```tsx
-import { ConfigProvider, Grid, Typography, Card, Space } from '@lf39.03/antd';
+import { ConfigProvider, Grid, Typography } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        {(() => {
-          const screens = Grid.useBreakpoint();
-          return <pre>{JSON.stringify(screens, null, 2)}</pre>;
-        })()}
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, Grid, Typography, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
+    <div style={{ padding: 16, background: '#f4f6f8' }}>
       {(() => {
         const screens = Grid.useBreakpoint();
-        return <Typography.Text>{screens.md ? '桌面布局' : '移动布局'}</Typography.Text>;
+        return <pre>{JSON.stringify(screens, null, 2)}</pre>;
       })()}
-    </Card>
+    </div>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { GridProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

@@ -9,16 +9,15 @@ order: 155
 
 ## 组件类型
 
-- 基础用法
-- 常用配置
-- 组合场景
+- 默认导航
+- 组合导航
 
-## 基础用法
+## 垂直菜单
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+适用于侧边导航和页面内分组导航。
 
 ```tsx
-import { ConfigProvider, Menu, Space } from '@lf39.03/antd';
+import { ConfigProvider, Menu } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -33,12 +32,12 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 水平菜单
 
-展示业务里最常见的类型、状态或组合形态。
+适用于顶部导航。
 
 ```tsx
-import { ConfigProvider, Menu, Space } from '@lf39.03/antd';
+import { ConfigProvider, Menu } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -54,82 +53,66 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 子菜单
 
 ```tsx
-import { ConfigProvider, Menu, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, Menu } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <Menu
-          mode="inline"
-          items={[
-            { key: 'home', label: '首页' },
-            { key: 'customer', label: '客户管理' },
-          ]}
-        />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <Menu
+      mode="inline"
+      defaultOpenKeys={['customer']}
+      items={[
+        {
+          key: 'customer',
+          label: '客户管理',
+          children: [
+            { key: 'list', label: '客户列表' },
+            { key: 'group', label: '客户分组' },
+          ],
+        },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+## 暗色菜单
 
 ```tsx
-import { ConfigProvider, Menu, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Menu } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <Menu
-        mode="horizontal"
-        selectedKeys={['customer']}
-        items={[
-          { key: 'home', label: '首页' },
-          { key: 'customer', label: '客户管理' },
-        ]}
-      />
-    </Card>
+    <Menu
+      theme="dark"
+      mode="inline"
+      items={[
+        { key: 'home', label: '首页' },
+        { key: 'report', label: '报表' },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
 
-## 页面导航区
-
-放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。
+## 分组菜单
 
 ```tsx
-import { ConfigProvider, Menu, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, Menu } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="页面导航" style={{ maxWidth: 640 }}>
-      <Menu
-        mode="inline"
-        items={[
-          { key: 'home', label: '首页' },
-          { key: 'customer', label: '客户管理' },
-        ]}
-      />
-    </Card>
+    <Menu
+      mode="inline"
+      items={[
+        { type: 'group', label: '客户', children: [{ key: 'customer-list', label: '客户列表' }] },
+        { type: 'group', label: '审批', children: [{ key: 'approval-list', label: '审批列表' }] },
+      ]}
+    />
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { MenuProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

@@ -17,12 +17,10 @@ order: 109
 - 搜索
 - 禁用节点
 
-## 基础用法
-
-最小可用示例，适合快速确认组件默认样式和主题效果。
+## 单选
 
 ```tsx
-import { ConfigProvider, TreeSelect, Space } from '@lf39.03/antd';
+import { ConfigProvider, TreeSelect } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -37,12 +35,10 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
-
-展示业务里最常见的类型、状态或组合形态。
+## 可勾选
 
 ```tsx
-import { ConfigProvider, TreeSelect, Space } from '@lf39.03/antd';
+import { ConfigProvider, TreeSelect } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
@@ -66,95 +62,71 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
-
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
+## 可搜索
 
 ```tsx
-import { ConfigProvider, TreeSelect, Space, Card, Typography } from '@lf39.03/antd';
+import { ConfigProvider, TreeSelect } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <TreeSelect
-          style={{ width: 280 }}
-          placeholder="请选择组织"
-          treeData={[
-            { title: '总部', value: 'hq', children: [{ title: '财富管理部', value: 'wealth' }] },
-          ]}
-        />
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
+    <TreeSelect
+      showSearch
+      style={{ width: 280 }}
+      placeholder="搜索组织"
+      treeData={[
+        { title: '总部', value: 'hq', children: [{ title: '上海分行', value: 'shanghai' }] },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
 
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
+## 多选
 
 ```tsx
-import { ConfigProvider, TreeSelect, Space, Card } from '@lf39.03/antd';
+import { ConfigProvider, TreeSelect } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <TreeSelect
-        treeCheckable
-        showCheckedStrategy={TreeSelect.SHOW_PARENT}
-        style={{ width: 320 }}
-        placeholder="请选择组织"
-        treeData={[
-          {
-            title: '总部',
-            value: 'hq',
-            children: [
-              { title: '财富管理部', value: 'wealth' },
-              { title: '运营部', value: 'ops' },
-            ],
-          },
-        ]}
-      />
-    </Card>
+    <TreeSelect
+      multiple
+      style={{ width: 320 }}
+      placeholder="请选择多个组织"
+      treeData={[
+        {
+          title: '总部',
+          value: 'hq',
+          children: [
+            { title: '上海分行', value: 'shanghai' },
+            { title: '北京分行', value: 'beijing' },
+          ],
+        },
+      ]}
+    />
   </ConfigProvider>
 );
 ```
 
-## 筛选表单
-
-放入查询条件区域，体现与表单标签、按钮的组合方式。
+## 禁用节点
 
 ```tsx
-import { ConfigProvider, TreeSelect, Space, Button, Form } from '@lf39.03/antd';
+import { ConfigProvider, TreeSelect } from '@lf39.03/antd';
 
 export default () => (
   <ConfigProvider>
-    <Form layout="inline">
-      <Form.Item label="查询条件">
-        <TreeSelect
-          style={{ width: 280 }}
-          placeholder="请选择组织"
-          treeData={[
-            { title: '总部', value: 'hq', children: [{ title: '财富管理部', value: 'wealth' }] },
-          ]}
-        />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary">查询</Button>
-      </Form.Item>
-    </Form>
+    <TreeSelect
+      style={{ width: 280 }}
+      placeholder="请选择组织"
+      treeData={[
+        {
+          title: '总部',
+          value: 'hq',
+          children: [{ title: '停用机构', value: 'disabled', disabled: true }],
+        },
+      ]}
+    />
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { TreeSelectProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型

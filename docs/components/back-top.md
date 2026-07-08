@@ -15,9 +15,9 @@ order: 142
 - 自定义可见高度
 - 自定义位置
 
-## 基础用法
+## 基础回顶
 
-最小可用示例，适合快速确认组件默认样式和主题效果。
+展示 BackTop 回到顶部 的默认样式和企业主题效果。
 
 ```tsx
 import { ConfigProvider, FloatButton } from '@lf39.03/antd';
@@ -35,9 +35,9 @@ export default () => (
 );
 ```
 
-## 常用类型与状态
+## 自定义可见高度 / 自定义位置
 
-展示业务里最常见的类型、状态或组合形态。
+展示 BackTop 回到顶部 的常用配置、状态或组合形态。
 
 ```tsx
 import { ConfigProvider, FloatButton } from '@lf39.03/antd';
@@ -55,56 +55,9 @@ export default () => (
 );
 ```
 
-## 业务卡片场景
+## 页面导航
 
-放入企业后台常见的信息卡片，检查与周边内容的间距和层级。
-
-```tsx
-import { ConfigProvider, FloatButton, Card, Typography, Space } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card title="客户经营概览" style={{ maxWidth: 520 }}>
-      <Space direction="vertical" size={16} style={{ width: '100%' }}>
-        <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
-          <div style={{ height: 360, padding: 16 }}>滚动区域示例</div>
-          <FloatButton.BackTop
-            visibilityHeight={0}
-            style={{ position: 'absolute', right: 24, bottom: 24 }}
-          />
-        </div>
-        <Typography.Text type="secondary">用于承载客户、审批、资产等业务信息。</Typography.Text>
-      </Space>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 紧凑布局
-
-在较窄容器内使用组件，验证密集页面和弹窗内容区的表现。
-
-```tsx
-import { ConfigProvider, FloatButton, Card } from '@lf39.03/antd';
-
-export default () => (
-  <ConfigProvider>
-    <Card size="small" title="紧凑信息区" style={{ width: 360 }}>
-      <div style={{ position: 'relative', height: 160, overflow: 'auto', background: '#f4f6f8' }}>
-        <div style={{ height: 360, padding: 16 }}>向下滚动后可返回顶部</div>
-        <FloatButton.BackTop
-          visibilityHeight={0}
-          style={{ position: 'absolute', right: 24, bottom: 24 }}
-        />
-      </div>
-    </Card>
-  </ConfigProvider>
-);
-```
-
-## 页面导航区
-
-放入页面顶部或内容导航区域，验证导航组件在业务页面中的层级。
+在页面导航区域中使用，观察与内容标题和操作入口的组合效果。
 
 ```tsx
 import { ConfigProvider, FloatButton, Card } from '@lf39.03/antd';
@@ -122,14 +75,6 @@ export default () => (
     </Card>
   </ConfigProvider>
 );
-```
-
-## 类型导入
-
-组件 Props 类型可直接从包入口导入，方便业务代码保持 antd 兼容写法。
-
-```tsx | pure
-import type { FloatButtonProps } from '@lf39.03/antd';
 ```
 
 ## API 与类型
