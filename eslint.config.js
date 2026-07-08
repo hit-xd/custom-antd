@@ -7,7 +7,11 @@ import reactHooks from 'eslint-plugin-react-hooks';
 export default [
   {
     ignores: [
+      '.agents/**',
+      '.codebuddy/**',
+      '.codex/**',
       '.dumi/**',
+      '.workbuddy/**',
       '.pack-check/**',
       'dist/**',
       'docs-dist/**',
